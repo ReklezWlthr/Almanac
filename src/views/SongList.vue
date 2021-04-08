@@ -1,9 +1,9 @@
 <template>
   <div class="navButton">Total Songs: {{ songList.length }}</div>
   <div class="flex flex-wrap">
-  <div v-for="song in songList" :key="song.id">
-    <song-thumbnail :song="song" @like-song="editSong" />
-  </div>
+    <div v-for="song in filteredSongs" :key="song.id">
+      <song-thumbnail :song="song" @like-song="editSong" />
+    </div>
   </div>
 </template>
 
@@ -18,6 +18,7 @@ export default {
       songList: [],
     };
   },
+  props: ["forwardSearch"],
   methods: {
     async fetchSongs() {
       const res = await fetch(this.url);
@@ -34,7 +35,28 @@ export default {
         body: JSON.stringify(newSong),
       });
       const data = await res.json();
-      this.songList = this.songList.map(song => song.id == data.id ? data : song);
+      this.songList = this.songList.map((song) =>
+        song.id == data.id ? data : song
+      );
+    },
+  },
+  computed: {
+    filteredSongs() {
+      if (this.forwardSearch == "") {
+        return this.songList;
+      } else {
+        const fs = this.songList.filter(
+          (song) =>
+            song.name.toLowerCase().includes(this.forwardSearch.toLowerCase()) ||
+            song.album.toLowerCase().includes(this.forwardSearch.toLowerCase()) ||
+            song.artist.toLowerCase().includes(this.forwardSearch.toLowerCase())
+        );
+        if (fs.length == 0) {
+          return null;
+        } else {
+          return fs;
+        }
+      }
     },
   },
   async created() {
