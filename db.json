@@ -1,7 +1,22 @@
 {
-    "data": [
+    "songLists": [
         {
-            "id": 1
+            "id": 1,
+            "name": "Newsong",
+            "artist": "tacica",
+            "albumArtist": "tacica",
+            "album": "Newsong E.P.",
+            "year": 2012,
+            "genre": "Pop"
+        },
+        {
+            "id": 2,
+            "name": "Newsong",
+            "artist": "tacica",
+            "albumArtist": "tacica",
+            "album": "Newsong E.P.",
+            "year": 2012,
+            "genre": "Pop"
         }
     ]
 }
