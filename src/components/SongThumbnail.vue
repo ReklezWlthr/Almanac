@@ -1,17 +1,17 @@
 <template>
-  <div class="flex py-3 px-6">
+  <div class="w-thumb flex py-3 px-6">
     <div>
       <img
-        class="rounded-3xl w-36"
-        :src="require(`../assets/albumArts/${song.artist}-${song.name}.jpg`)"
+        class="rounded-3xl w-36 h-36"
+        :src="require(`../assets/albumArts/${song.album}.jpg`)"
       />
     </div>
     <div class="pl-3 pt-2">
         <ul class="text-paleViolet">
-          <li class="font-semibold text-2xl">{{ song.name }}</li>
+          <li class="font-semibold text-lg">{{ song.name }}</li>
           <li>{{ song.artist }}</li>
           <li>{{ song.album }}</li>
-          <li @click="like(song)"><i :class="song.liked ? likeClass : dislikeClass "></i></li>
+          <li><i @click="like(song)" class="cursor-pointer" :class="song.liked ? likeClass : dislikeClass "></i></li>
         </ul>
     </div>
   </div>

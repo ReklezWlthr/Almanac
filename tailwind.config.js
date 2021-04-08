@@ -8,6 +8,9 @@ module.exports = {
         vividDark: '#22212B',
         warmGray: '#C9C9C9',
         paleViolet: '#FBF8FF'
+      },
+      width:{
+        thumb: '23rem'
       }
     },
   },

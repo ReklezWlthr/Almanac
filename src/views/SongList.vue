@@ -1,7 +1,9 @@
 <template>
   <div class="navButton">Total Songs: {{ songList.length }}</div>
-  <div class="w-full flex" v-for="song in songList" :key="song.id">
+  <div class="flex flex-wrap">
+  <div v-for="song in songList" :key="song.id">
     <song-thumbnail :song="song" @like-song="editSong" />
+  </div>
   </div>
 </template>
 
