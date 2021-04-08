@@ -1,26 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="flex flex-wrap content-center w-full h-16 bg-darkViolet px-4">
+    <div class="font-bold text-3xl px-2 py-1 text-white">
+      Kashikami
+    </div>
+    <div class="navButton"><router-link to="/"> Song List </router-link></div>
+    <div class="navButton"><router-link to="/upload"> Upload </router-link></div>
+    <div><input placeholder="SEARCH FOR SONGS" class="rounded-full w-80 bg-paleViolet focus:outline-none text-base text-darkViolet font-semibold px-4 py-2" v-model="search"></div>
+  </div>
+  <router-view></router-view>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data(){
+    return {
+      search: ''
+    }
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-family: 'Dosis', sans-serif;
 }
 </style>
