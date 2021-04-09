@@ -63,10 +63,10 @@ export default {
   data() {
     return {
       newSongInfo: {
-        name: "",
+        title: "",
         artist: "",
-        albumArtist: "",
         album: "",
+        albumArtist: "",
         year: null,
         genre: "",
       },

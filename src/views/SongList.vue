@@ -38,6 +38,18 @@ export default {
         song.id == data.id ? data : song
       );
     },
+    compare(a, b) {
+      const titleA = a.title.toUpperCase();
+      const titleB = b.title.toUpperCase();
+
+      let comparison = 0;
+      if (titleA > titleB) {
+        comparison = 1;
+      } else if (titleA < titleB) {
+        comparison = -1;
+      }
+      return comparison;
+    },
   },
   computed: {
     filteredSongs() {
@@ -59,6 +71,7 @@ export default {
   },
   async created() {
     this.songList = await this.fetchSongs();
+    this.songList.sort(this.compare);
   },
 };
 </script>
