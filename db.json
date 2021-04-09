@@ -8,7 +8,7 @@
       "album": "Newsong E.P.",
       "year": 2012,
       "genre": "Pop",
-      "liked": false
+      "liked": true
     },
     {
       "id": 2,
@@ -18,7 +18,7 @@
       "album": "Suspect - Single",
       "year": 2021,
       "genre": "Electrotics",
-      "liked": false
+      "liked": true
     },
     {
       "id": 3,
@@ -28,7 +28,7 @@
       "album": "OK ORCHESTRA",
       "year": 2021,
       "genre": "",
-      "liked": false
+      "liked": true
     },
     {
       "id": 4,
@@ -58,7 +58,7 @@
       "album": "THE BOOK",
       "year": 2021,
       "genre": "J-Pop",
-      "liked": false
+      "liked": true
     },
     {
       "id": 8,

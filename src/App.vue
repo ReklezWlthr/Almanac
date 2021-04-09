@@ -8,8 +8,8 @@
     </div>
     <div>
       <input
-        placeholder="SEARCH FOR SONGS, ARTIST OR ALBUM"
-        class="rounded-full w-80 bg-paleViolet focus:outline-none text-base text-darkViolet font-semibold px-4 py-2"
+        placeholder="SEARCH FOR SONGS, ARTISTS OR ALBUMS"
+        class="input"
         v-model="search"
       />
     </div>

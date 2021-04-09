@@ -11,6 +11,9 @@ module.exports = {
       },
       width:{
         thumb: '23rem'
+      },
+      height:{
+        lyrics: '28rem'
       }
     },
   },

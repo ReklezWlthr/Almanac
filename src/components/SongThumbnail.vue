@@ -2,7 +2,7 @@
   <div class="w-thumb flex py-3 px-6">
     <div>
       <img
-        class="rounded-3xl w-36 h-36"
+        class="rounded-3xl w-36 h-36 cursor-pointer"
         :src="require(`../assets/albumArts/${song.album}.jpg`)"
       />
     </div>
@@ -11,7 +11,7 @@
           <li class="font-semibold text-lg">{{ song.name }}</li>
           <li>{{ song.artist }}</li>
           <li>{{ song.album }}</li>
-          <li><i @click="like(song)" class="cursor-pointer" :class="song.liked ? likeClass : dislikeClass "></i></li>
+          <li><i @click="like(song)" class="transition duration-150 cursor-pointer fas fa-heart text-2xl pt-2" :class="song.liked ? 'text-red-500' : 'text-red-200 opacity-25'"></i></li>
         </ul>
     </div>
   </div>
@@ -21,8 +21,7 @@
 export default {
     data(){
         return {
-            likeClass: "fas fa-heart text-red-500 text-2xl pt-2",
-            dislikeClass: "fas fa-heart text-red-200 text-2xl pt-2 opacity-25"
+
         }
     },
   props: ["song"],

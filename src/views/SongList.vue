@@ -1,5 +1,5 @@
 <template>
-  <div class="navButton">Total Songs: {{ songList.length }}</div>
+  <div class="navButton">Total Songs: {{ filteredSongs.length }}</div>
   <div class="flex flex-wrap">
     <div v-for="song in filteredSongs" :key="song.id">
       <song-thumbnail :song="song" @like-song="editSong" />
@@ -23,7 +23,6 @@ export default {
     async fetchSongs() {
       const res = await fetch(this.url);
       const data = await res.json();
-      // parses JSON response into native JavaScript objects
       return data;
     },
     async editSong(newSong) {
@@ -45,17 +44,16 @@ export default {
       if (this.forwardSearch == "") {
         return this.songList;
       } else {
-        const fs = this.songList.filter(
+        return this.songList.filter(
           (song) =>
-            song.name.toLowerCase().includes(this.forwardSearch.toLowerCase()) ||
-            song.album.toLowerCase().includes(this.forwardSearch.toLowerCase()) ||
+            song.name
+              .toLowerCase()
+              .includes(this.forwardSearch.toLowerCase()) ||
+            song.album
+              .toLowerCase()
+              .includes(this.forwardSearch.toLowerCase()) ||
             song.artist.toLowerCase().includes(this.forwardSearch.toLowerCase())
         );
-        if (fs.length == 0) {
-          return null;
-        } else {
-          return fs;
-        }
       }
     },
   },
