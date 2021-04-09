@@ -86,8 +86,8 @@
       "albumArtist": "YOASOBI",
       "album": "THE BOOK",
       "year": "2021",
-      "genre": "",
-      "liked": false,
+      "genre": "J-Pop",
+      "liked": true,
       "id": 9
     }
   ]

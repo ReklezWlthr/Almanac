@@ -46,7 +46,7 @@ export default {
       } else {
         return this.songList.filter(
           (song) =>
-            song.name
+            song.title
               .toLowerCase()
               .includes(this.forwardSearch.toLowerCase()) ||
             song.album
@@ -59,9 +59,6 @@ export default {
   },
   async created() {
     this.songList = await this.fetchSongs();
-    for (const song in this.$songList) {
-      console.log(song.name);
-    }
   },
 };
 </script>

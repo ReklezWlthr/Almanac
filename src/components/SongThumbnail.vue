@@ -3,7 +3,7 @@
     <div>
       <img
         class="rounded-3xl w-36 h-36 cursor-pointer"
-        :src="require(`../assets/albumArts/${song.album}.jpg`)"
+        :src="src"
       />
     </div>
     <div class="pl-3 pt-2">
@@ -30,6 +30,15 @@ export default {
       like(song){
           song.liked = !song.liked;
           this.$emit("like-song", song);
+      }
+  },
+  computed: {
+      src(){
+          try{
+              return require(`../assets/albumArts/${this.song.album}.jpg`)
+          } catch {
+              return require(`../assets/albumArts/default.jpg`)
+          }
       }
   }
 };

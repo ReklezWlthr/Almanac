@@ -4,13 +4,10 @@
   </div>
   <div class="flex justify-center gap-x-12">
     <div class="mt-10">
-      <img
-        src="../assets/albumArts/default.jpg"
-        class="rounded-3xl w-56 h-56"
-      />
+      <img :src="src" class="rounded-3xl w-56 h-56" />
       <div class="ml-48 -mt-8 relative">
         <input
-          @change="upload"
+          @change="uploadCover"
           type="file"
           id="myFile"
           class="inputFile hidden"
@@ -22,6 +19,11 @@
           style="border-width: 1.8rem"
           ><i class="fas fa-sync-alt text-2xl"></i
         ></label>
+      </div>
+      <div class="w-60 text-paleViolet italic text-sm">
+        **The upload feature is still a dummy. Uploaded photo will be shown but
+        will NOT be uploaded to the server. Album cover that already existed
+        will be automatically used; otherwise, default cover will be used.**
       </div>
     </div>
     <div class="w-1/4 mt-5 ml-12">
@@ -69,14 +71,17 @@ export default {
         genre: "",
       },
       url: "http://localhost:5000/songLists",
+      src: "/img/default.bc1ffa9c.jpg",
     };
   },
+  props: ["forwardSearch"],
   methods: {
     updateValue(value, key) {
       eval(`this.newSongInfo.${key}='${value}';`);
     },
-    upload() {
-      this.newSongInfo.liked = false;
+    async upload() {
+      const newSongBuffer = JSON.parse(JSON.stringify(this.newSongInfo));
+      newSongBuffer.liked = false;
       fetch(this.url, {
         method: "POST",
         headers: {
@@ -84,6 +89,18 @@ export default {
         },
         body: JSON.stringify(this.newSongInfo),
       }).then(window.location.replace("/"));
+    },
+    uploadCover(e) {
+      var file = e.target.files[0];
+      if (file.type.includes("image")) {
+        var reader = new FileReader();
+        reader.onload = (e) => {
+          this.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        alert("This file is not an image file.");
+      }
     },
   },
 };
