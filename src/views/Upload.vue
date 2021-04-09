@@ -32,7 +32,7 @@
           key
             .replace(/([A-Z])/g, '$1')
             .charAt(0)
-            .toUpperCase() + key.replace(/([A-Z])/g, '$1').slice(1)
+            .toUpperCase() + key.slice(1)
         "
         @forward-value="updateValue($event, key)"
       />
@@ -46,6 +46,7 @@
   </div>
   <div class="w-full flex mt-4">
     <button
+      @click="upload"
       class="font-bold bg-darkViolet text-paleViolet text-xl px-5 py-3 focus:outline-none rounded-full mx-auto"
     >
       Upload
@@ -60,18 +61,29 @@ export default {
   data() {
     return {
       newSongInfo: {
-        title: "",
+        name: "",
         artist: "",
         albumArtist: "",
         album: "",
         year: null,
         genre: "",
       },
+      url: "http://localhost:5000/songLists",
     };
   },
   methods: {
     updateValue(value, key) {
       eval(`this.newSongInfo.${key}='${value}';`);
+    },
+    upload() {
+      this.newSongInfo.liked = false;
+      fetch(this.url, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(this.newSongInfo),
+      }).then(window.location.replace("/"));
     },
   },
 };

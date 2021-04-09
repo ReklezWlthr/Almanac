@@ -2,7 +2,7 @@
   "songLists": [
     {
       "id": 1,
-      "name": "Newsong",
+      "title": "Newsong",
       "artist": "tacica",
       "albumArtist": "tacica",
       "album": "Newsong E.P.",
@@ -12,7 +12,7 @@
     },
     {
       "id": 2,
-      "name": "Suspect",
+      "title": "Suspect",
       "artist": "hololive IDOL PROJECT",
       "albumArtist": "hololive IDOL PROJECT",
       "album": "Suspect - Single",
@@ -22,7 +22,7 @@
     },
     {
       "id": 3,
-      "name": "World's Smallest Violin",
+      "title": "World's Smallest Violin",
       "artist": "AJR",
       "albumArtist": "AJR",
       "album": "OK ORCHESTRA",
@@ -32,7 +32,17 @@
     },
     {
       "id": 4,
-      "name": "Undercover Martyn",
+      "title": "Undercover Martyn",
+      "artist": "Two Door Cinema Club",
+      "albumArtist": "Two Door Cinema Club",
+      "album": "Tourist History",
+      "year": 2010,
+      "genre": "Alternative",
+      "liked": false
+    },
+    {
+      "id": 5,
+      "title": "What You Know",
       "artist": "Two Door Cinema Club",
       "albumArtist": "Two Door Cinema Club",
       "album": "Tourist History",
@@ -42,17 +52,7 @@
     },
     {
       "id": 6,
-      "name": "What You Know",
-      "artist": "Two Door Cinema Club",
-      "albumArtist": "Two Door Cinema Club",
-      "album": "Tourist History",
-      "year": 2010,
-      "genre": "Alternative",
-      "liked": false
-    },
-    {
-      "id": 7,
-      "name": "群青",
+      "title": "群青",
       "artist": "YOASOBI",
       "albumArtist": "YOASOBI",
       "album": "THE BOOK",
@@ -61,8 +61,8 @@
       "liked": true
     },
     {
-      "id": 8,
-      "name": "ハルカ",
+      "id": 7,
+      "title": "ハルカ",
       "artist": "YOASOBI",
       "albumArtist": "YOASOBI",
       "album": "THE BOOK",
@@ -71,14 +71,24 @@
       "liked": false
     },
     {
-      "id": 9,
-      "name": "Level of Concern",
+      "id": 8,
+      "title": "Level of Concern",
       "artist": "Twenty One Pilots",
       "albumArtist": "Twenty One Pilots",
       "album": "Level of Concern - Single",
       "year": 2020,
       "genre": "Alternative",
       "liked": false
+    },
+    {
+      "title": "アンコール",
+      "artist": "YOASOBI",
+      "albumArtist": "YOASOBI",
+      "album": "THE BOOK",
+      "year": "2021",
+      "genre": "",
+      "liked": false,
+      "id": 9
     }
   ]
 }
