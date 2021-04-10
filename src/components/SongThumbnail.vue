@@ -41,7 +41,7 @@ export default {
   async created() {
     this.coverId = `/img/loading.729f0a14.gif`;
     const res = await fetch(
-      `http://musicbrainz.org/ws/2/release/?fmt=json&query=${this.song.album}%20AND%20artist:${this.song.artist}`
+      `http://musicbrainz.org/ws/2/release/?fmt=json&query=${this.song.album}%20AND%20artist:${this.song.artist}%20AND%20(format:digitalmedia%20OR%20format:cd)`
     );
     const data = await res.json();
     const albumId = data.releases[0].id;

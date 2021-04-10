@@ -90,7 +90,7 @@ export default {
     // console.log(this.songId);
     this.coverId = `/img/loading.729f0a14.gif`;
     const res = await fetch(
-      `http://musicbrainz.org/ws/2/release/?fmt=json&query=${this.currentSong.album}%20AND%20artist:${this.currentSong.artist}`
+      `http://musicbrainz.org/ws/2/release/?fmt=json&query=${this.currentSong.album}%20AND%20artist:${this.currentSong.artist}%20AND%20(format:digitalmedia%20OR%20format:cd)`
     );
     const data = await res.json();
     const albumId = data.releases[0].id;

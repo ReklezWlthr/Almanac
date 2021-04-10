@@ -87,12 +87,13 @@ export default {
       })
       const data = res.json();
       this.$emit("upload-song", data);
+      window.location.replace("/");
     },
     async reloadCover() {
         this.src = `/img/loading.729f0a14.gif`;
       try {
         const res = await fetch(
-          `http://musicbrainz.org/ws/2/release/?fmt=json&query=${this.newSongInfo.album}%20AND%20artist:${this.newSongInfo.artist}`
+          `http://musicbrainz.org/ws/2/release/?fmt=json&query=${this.newSongInfo.album}%20AND%20artist:${this.newSongInfo.artist}%20AND%20(format:digitalmedia%20OR%20format:cd)`
         );
         const data = await res.json();
         if (data.releases[0]) {
