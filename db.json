@@ -15,7 +15,7 @@
       "title": "Suspect",
       "artist": "hololive IDOL PROJECT",
       "albumArtist": "hololive IDOL PROJECT",
-      "album": "Suspect - Single",
+      "album": "Suspect",
       "year": 2021,
       "genre": "Electrotics",
       "liked": true
@@ -75,7 +75,7 @@
       "title": "Level of Concern",
       "artist": "Twenty One Pilots",
       "albumArtist": "Twenty One Pilots",
-      "album": "Level of Concern - Single",
+      "album": "Level of Concern",
       "year": 2020,
       "genre": "Alternative",
       "liked": false
@@ -94,10 +94,30 @@
       "title": "Run",
       "artist": "Joji",
       "albumArtist": "Joji",
-      "album": "Run - Single",
+      "album": "Run",
       "year": "2020",
       "genre": "Alternative",
       "id": 10
+    },
+    {
+      "title": "All Over",
+      "artist": "CRUISR",
+      "album": "All Over",
+      "albumArtist": "CRUISR",
+      "year": "2014",
+      "genre": "Alternative",
+      "id": 11,
+      "liked": true
+    },
+    {
+      "title": "False Confidence",
+      "artist": "Noah Kahan",
+      "album": "Busyhead",
+      "albumArtist": "Noah Kahan",
+      "year": 2019,
+      "genre": "",
+      "id": 12,
+      "liked": true
     }
   ]
 }
