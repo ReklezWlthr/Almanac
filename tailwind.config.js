@@ -13,7 +13,8 @@ module.exports = {
         thumb: '23rem'
       },
       height:{
-        lyrics: '28rem'
+        lyrics: '28rem',
+        showCase: '33rem'
       }
     },
   },

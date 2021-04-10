@@ -1,8 +1,20 @@
 <template>
-  <div class="navButton">Total Songs: {{ filteredSongs.length }}</div>
+  <div class="navButton">
+    <input
+      placeholder="SEARCH FOR SONGS, ARTISTS OR ALBUMS"
+      class="input mt-3 mr-3 ml-4"
+      v-model="search"
+    />
+    Total Songs: {{ filteredSongs.length }}
+  </div>
   <div class="flex flex-wrap">
     <div v-for="song in filteredSongs" :key="song.id">
-      <song-thumbnail :song="song" @like-song="editSong" />
+      <song-thumbnail
+        :song="song"
+        :likeable="true"
+        @like-song="editSong"
+        @show-song="showSong"
+      />
     </div>
   </div>
 </template>
@@ -14,17 +26,12 @@ export default {
   components: { SongThumbnail },
   data() {
     return {
-      url: "http://localhost:5000/songLists",
-      songList: [],
+      search: "",
     };
   },
-  props: ["forwardSearch"],
+  emits: ["edit-song", "upload-song", "display-song"],
+  props: ["songList", "url"],
   methods: {
-    async fetchSongs() {
-      const res = await fetch(this.url);
-      const data = await res.json();
-      return data;
-    },
     async editSong(newSong) {
       const res = await fetch(`${this.url}/${newSong.id}`, {
         method: "PUT",
@@ -34,9 +41,10 @@ export default {
         body: JSON.stringify(newSong),
       });
       const data = await res.json();
-      this.songList = this.songList.map((song) =>
-        song.id == data.id ? data : song
-      );
+      this.$emit("edit-song", data);
+    },
+    showSong(id) {
+      this.$emit("display-song", id);
     },
     compare(a, b) {
       const titleA = a.title.toUpperCase();
@@ -53,25 +61,18 @@ export default {
   },
   computed: {
     filteredSongs() {
-      if (this.forwardSearch == "") {
-        return this.songList;
+      const listBuffer = JSON.parse(JSON.stringify(this.songList));
+      if (this.search == "") {
+        return listBuffer.sort(this.compare);
       } else {
-        return this.songList.filter(
+        return listBuffer.filter(
           (song) =>
-            song.title
-              .toLowerCase()
-              .includes(this.forwardSearch.toLowerCase()) ||
-            song.album
-              .toLowerCase()
-              .includes(this.forwardSearch.toLowerCase()) ||
-            song.artist.toLowerCase().includes(this.forwardSearch.toLowerCase())
-        );
+            song.title.toLowerCase().includes(this.search.toLowerCase()) ||
+            song.album.toLowerCase().includes(this.search.toLowerCase()) ||
+            song.artist.toLowerCase().includes(this.search.toLowerCase())
+        ).sort(this.compare);
       }
     },
-  },
-  async created() {
-    this.songList = await this.fetchSongs();
-    this.songList.sort(this.compare);
   },
 };
 </script>

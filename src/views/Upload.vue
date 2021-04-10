@@ -15,10 +15,8 @@
           <i class="fas fa-sync-alt text-2xl"></i>
         </div>
       </div>
-      <div class="w-60 text-paleViolet italic text-sm">
-        **The upload feature is still a dummy. Uploaded photo will be shown but
-        will NOT be uploaded to the server. Album cover that already existed
-        will be automatically used; otherwise, default cover will be used.**
+      <div class="w-60 text-paleViolet italic text-sm mt-2">
+        CLICK TO FIND COVER IMAGE FROM ARCHIVE
       </div>
     </div>
     <div class="w-1/4 mt-5 ml-12">
@@ -36,7 +34,7 @@
     </div>
     <div class="mt-4">
       <div class="text-lg font-bold text-paleViolet">Lyrics</div>
-      <textarea
+      <textarea v-model="lyrics"
         class="rounded-3xl w-96 bg-paleViolet focus:outline-none text-base text-darkViolet font-semibold px-5 h-lyrics resize-none py-4"
       ></textarea>
     </div>
@@ -55,6 +53,7 @@
 import InputBox from "../components/InputBox.vue";
 export default {
   components: { InputBox },
+  emits:['edit-song', 'upload-song', 'display-song'],
   data() {
     return {
       newSongInfo: {
@@ -65,40 +64,51 @@ export default {
         year: null,
         genre: "",
       },
-      url: "http://localhost:5000/songLists",
+      lyrics: "",
       src: "/img/default.bc1ffa9c.jpg",
     };
   },
-  props: ["forwardSearch"],
+  props: ["forwardSearch", 'songList', 'url'],
   methods: {
     updateValue(value, key) {
       eval(`this.newSongInfo.${key}='${value}';`);
     },
     async upload() {
       const newSongBuffer = JSON.parse(JSON.stringify(this.newSongInfo));
+      console.log(newSongBuffer)
       newSongBuffer.liked = false;
-      fetch(this.url, {
+      newSongBuffer.lyrics = encodeURIComponent(this.lyrics);
+      const res = await fetch(this.url, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify(this.newSongInfo),
-      }).then(window.location.replace("/"));
+        body: JSON.stringify(newSongBuffer),
+      })
+      const data = res.json();
+      this.$emit("upload-song", data);
     },
     async reloadCover() {
+        this.src = `/img/loading.729f0a14.gif`;
+      try {
         const res = await fetch(
-      `http://musicbrainz.org/ws/2/release/?fmt=json&query=${this.newSongInfo.album}%20AND%20artist:${this.newSongInfo.artist}`
-    );
-    const data = await res.json();
-    if(data.releases[0]){
-        const albumId = data.releases[0].id;
-        const res2 = await fetch(`http://coverartarchive.org/release/${albumId}`)
-        const data2 = await res2.json();
-        console.log(data2.images[0])
-        this.src = data2.images[0].thumbnails.small;
-    } else {
+          `http://musicbrainz.org/ws/2/release/?fmt=json&query=${this.newSongInfo.album}%20AND%20artist:${this.newSongInfo.artist}`
+        );
+        const data = await res.json();
+        if (data.releases[0]) {
+          const albumId = data.releases[0].id;
+          const res2 = await fetch(
+            `http://coverartarchive.org/release/${albumId}`
+          );
+          const data2 = await res2.json();
+          this.src = data2.images[0].thumbnails.small;
+        } else {
+          this.src = `/img/default.bc1ffa9c.jpg`;
+        }
+      } catch {
         this.src = `/img/default.bc1ffa9c.jpg`;
-    }
+        alert("Album Cover Not Found");
+      }
     },
   },
 };
