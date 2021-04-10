@@ -5,7 +5,7 @@
     </div>
     <div class="navButton">
       <router-link to="/upload"> Upload </router-link>
-      <router-link :to="`/show/${id}`" id="routerShow">AAA</router-link>
+      <router-link :to="`/show/${id ? id : '1'}`" id="routerShow"></router-link>
     </div>
   </div>
   <router-view

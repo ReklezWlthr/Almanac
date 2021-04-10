@@ -24,9 +24,15 @@
       </div>
     </div>
     <div>
-      <div class="text-paleViolet text-2xl font-bold mb-5">More Songs</div>
+      <div class="text-paleViolet text-2xl font-bold mb-5">
+        More Songs<input
+          placeholder="SEARCH FOR SONGS, ARTISTS OR ALBUMS"
+          class="input mt-3 mr-3 ml-4"
+          v-model="search"
+        />
+      </div>
       <div class="h-showCase overflow-auto bg-darkViolet rounded-xl">
-        <div v-for="song in sortedSongs" :key="song.id">
+        <div v-for="song in filteredSongs" :key="song.id">
           <song-thumbnail
             :song="song"
             :likeable="false"
@@ -45,6 +51,7 @@ export default {
   components: { SongThumbnail },
   data() {
     return {
+      search: "",
       coverId: "",
       songId: this.$route.params.id,
       currentSong: null,
@@ -93,12 +100,22 @@ export default {
   },
   computed: {
     decodedLyrics() {
-      return decodeURIComponent(this.currentSong.lyrics);
+      const decoded = decodeURIComponent(this.currentSong.lyrics);
+      return decoded === "undefined" ? "No Lyrics Available" : decoded;
     },
-    sortedSongs() {
+    filteredSongs() {
       const listBuffer = JSON.parse(JSON.stringify(this.songArray));
-      return listBuffer.sort(this.compare);
-    },
+      if (this.search == "") {
+        return listBuffer.sort(this.compare);
+      } else {
+        return listBuffer.filter(
+          (song) =>
+            song.title.toLowerCase().includes(this.search.toLowerCase()) ||
+            song.album.toLowerCase().includes(this.search.toLowerCase()) ||
+            song.artist.toLowerCase().includes(this.search.toLowerCase())
+        ).sort(this.compare);
+      }
+    }
   },
 };
 </script>
