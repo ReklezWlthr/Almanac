@@ -6,19 +6,14 @@
     <div class="mt-10">
       <img :src="src" class="rounded-3xl w-56 h-56" />
       <div class="ml-48 -mt-8 relative">
-        <input
-          @change="uploadCover"
-          type="file"
-          id="myFile"
-          class="inputFile hidden"
-        />
-        <label
-          for="myFile"
+        <div
+          @click="reloadCover"
           id="spin"
           class="h-14 w-14 rounded-full flex flex-wrap justify-center content-center border-darkViolet text-paleViolet cursor-pointer"
           style="border-width: 1.8rem"
-          ><i class="fas fa-sync-alt text-2xl"></i
-        ></label>
+        >
+          <i class="fas fa-sync-alt text-2xl"></i>
+        </div>
       </div>
       <div class="w-60 text-paleViolet italic text-sm">
         **The upload feature is still a dummy. Uploaded photo will be shown but
@@ -90,17 +85,20 @@ export default {
         body: JSON.stringify(this.newSongInfo),
       }).then(window.location.replace("/"));
     },
-    uploadCover(e) {
-      var file = e.target.files[0];
-      if (file.type.includes("image")) {
-        var reader = new FileReader();
-        reader.onload = (e) => {
-          this.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      } else {
-        alert("This file is not an image file.");
-      }
+    async reloadCover() {
+        const res = await fetch(
+      `http://musicbrainz.org/ws/2/release/?fmt=json&query=${this.newSongInfo.album}%20AND%20artist:${this.newSongInfo.artist}`
+    );
+    const data = await res.json();
+    if(data.releases[0]){
+        const albumId = data.releases[0].id;
+        const res2 = await fetch(`http://coverartarchive.org/release/${albumId}`)
+        const data2 = await res2.json();
+        console.log(data2.images[0])
+        this.src = data2.images[0].thumbnails.small;
+    } else {
+        this.src = `/img/default.bc1ffa9c.jpg`;
+    }
     },
   },
 };
