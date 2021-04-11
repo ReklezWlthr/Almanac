@@ -56,7 +56,7 @@ export default {
       });
       const data = await res.json();
       this.$emit("edit-song", data);
-      window.location.replace("/");
+      window.location.replace(`/show/${this.songId}`);
     },
     async fetchCurrentSong() {
       const res = await fetch(`${this.url}/${this.songId}`);
