@@ -19,7 +19,8 @@ module.exports = {
       },
       height:{
         lyrics: '28rem',
-        showCase: '33rem'
+        showCase: '33rem',
+        more: '18rem'
       }
     },
   },

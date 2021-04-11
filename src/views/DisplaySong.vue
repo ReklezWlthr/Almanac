@@ -22,18 +22,9 @@
         <li class="text-paleViolet text-xl">
           <span class="font-bold">Genre:</span> {{ currentSong.genre }}
         </li>
-        <li class="flex gap-x-2 mt-2">
-          <button
-            class="displayButton"
-            @click="editSong"
-          >
-            Edit</button
-          ><button
-            class="displayButton"
-            @click="deleteSong"
-          >
-            Delete
-          </button>
+        <li class="flex gap-x-1 mt-5">
+          <button class="displayButton" @click="editSong">Edit</button
+          ><button class="displayButton" @click="deleteSong">Delete</button>
         </li>
       </ul>
     </div>
@@ -46,19 +37,21 @@
       </div>
     </div>
     <div>
-      <div class="text-paleViolet text-2xl font-bold mb-5">
+        <div>
+        <iframe :src="ytlink" class="w-full h-52" allowFullScreen></iframe>
+      </div>
+      <div class="text-paleViolet text-2xl font-bold mt-5 mb-5">
         More Songs<input
           placeholder="SEARCH FOR SONGS, ARTISTS OR ALBUMS"
           class="input ml-4"
           v-model="search"
         />
       </div>
-      <div class="flex flex-col h-showCase overflow-auto bg-darkViolet rounded-xl py-3">
+      <div
+        class="flex flex-col h-more overflow-auto bg-darkViolet rounded-xl py-3"
+      >
         <div v-for="song in filteredSongs" :key="song.id" class="mx-auto">
-          <small-thumb
-            :song="song"
-            @show-song="showSong"
-          />
+          <small-thumb :song="song" @show-song="showSong" />
         </div>
       </div>
     </div>
@@ -77,13 +70,15 @@ export default {
       songId: this.$route.params.id,
       currentSong: null,
       songArray: [],
-      urls: "http://localhost:5000/songLists",
+      url: "http://localhost:5000/songLists",
+      ytlink: "",
+      key: "AIzaSyCVEbopy7N_HkrhmroLZJBd_mWQisDKxHY",
       loaded: false,
     };
   },
   methods: {
     async fetchSongs() {
-      const res = await fetch(this.urls);
+      const res = await fetch(this.url);
       const data = await res.json();
       return data;
     },
@@ -96,7 +91,7 @@ export default {
     async deleteSong() {
       const con = confirm("Are you sure that you want to delete this song?");
       if (con) {
-        const res = await fetch(`${this.urls}/${this.songId}`, {
+        const res = await fetch(`${this.url}/${this.songId}`, {
           method: "DELETE",
         });
         if (res.status === 200) {
@@ -126,6 +121,13 @@ export default {
       if (song.id == this.songId) {
         this.currentSong = song;
       }
+    }
+    const ytCode = await fetch(
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${this.currentSong.title} - ${this.currentSong.artist}&type=video&key=AIzaSyCVEbopy7N_HkrhmroLZJBd_mWQisDKxHY`
+    );
+    const ytData = await ytCode.json();
+    if (ytData.items[0]) {
+      this.ytlink = `https://www.youtube.com/embed/${ytData.items[0].id.videoId}`;
     }
     this.loaded = true;
     // console.log(this.currentSong);
