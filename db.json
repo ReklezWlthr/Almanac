@@ -84,9 +84,9 @@
       "albumArtist": "CRUISR",
       "year": "2014",
       "genre": "Alternative",
-      "id": 8,
-      "liked": true,
-      "lyrics": ""
+      "liked": false,
+      "lyrics": "",
+      "id": 8
     },
     {
       "title": "False Confidence",

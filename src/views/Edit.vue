@@ -1,45 +1,12 @@
 <template>
   <div class="text-5xl font-bold ml-10 mt-8 text-paleViolet">Edit Song</div>
-  <div v-if="loaded" class="flex justify-center gap-x-12">
-    <div class="mt-10">
-      <img :src="src" class="rounded-3xl w-56 h-56" />
-      <div class="ml-48 -mt-8 relative">
-        <div
-          @click="reloadCover"
-          id="spin"
-          class="h-14 w-14 rounded-full flex flex-wrap justify-center content-center border-darkViolet text-paleViolet cursor-pointer"
-          style="border-width: 1.8rem"
-        >
-          <i class="fas fa-sync-alt text-2xl"></i>
-        </div>
-      </div>
-      <div class="w-60 text-paleViolet italic text-sm mt-2 text-center">
-        CLICK TO FIND COVER IMAGE FROM ARCHIVE<br />
-        BY MUSICBRAINZ &amp; COVER ART ARCHIVE
-      </div>
-    </div>
-    <div class="w-1/4 mt-5 ml-12">
-      <input-box
-        v-for="(value, key) in newSongInfo"
-        :key="key"
-        :valueIn="value"
-        :header="
-          key
-            .replace(/([A-Z])/g, '$1')
-            .charAt(0)
-            .toUpperCase() + key.slice(1)
-        "
-        @forward-value="updateValue($event, key)"
-      />
-    </div>
-    <div class="mt-4">
-      <div class="text-lg font-bold text-paleViolet">Lyrics</div>
-      <textarea
-        v-model="lyrics"
-        class="rounded-3xl w-96 bg-paleViolet focus:outline-none text-base text-darkViolet font-semibold px-5 h-lyrics resize-none py-4"
-      ></textarea>
-    </div>
-  </div>
+  <edit-form v-if="loaded"
+    :new-song-info="newSongInfo"
+    :src="src"
+    :lyrics="lyrics"
+    @reload-cover="reloadCover"
+    @forward-value="updateValue"
+  />
   <div v-if="loaded" class="w-full flex mt-4">
     <button
       @click="editSong"
@@ -51,10 +18,14 @@
 </template>
 
 <script>
-import InputBox from "../components/InputBox.vue";
 export default {
-  components: { InputBox },
-  emits: ["edit-song", "upload-song", "display-song", "launch-edit-page", 'delete-song'],
+  emits: [
+    "edit-song",
+    "upload-song",
+    "display-song",
+    "launch-edit-page",
+    "delete-song",
+  ],
   data() {
     return {
       songId: this.$route.params.id,
@@ -65,15 +36,16 @@ export default {
       loaded: false,
     };
   },
-  props: ["forwardSearch", "songList", "url"],
+  props: ["songList", "url"],
   methods: {
-    updateValue(value, key) {
-      eval(`this.newSongInfo.${key}='${value}';`);
+    updateValue(lyrics) {
+      this.lyrics = lyrics;
     },
     async editSong() {
       const newSongBuffer = JSON.parse(JSON.stringify(this.newSongInfo));
       console.log(newSongBuffer);
       newSongBuffer.liked = false;
+      console.log(this.lyrics)
       newSongBuffer.lyrics = encodeURIComponent(this.lyrics);
       const res = await fetch(`${this.url}/${this.songId}`, {
         method: "PUT",
