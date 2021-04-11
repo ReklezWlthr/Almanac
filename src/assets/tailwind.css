@@ -19,3 +19,7 @@
 .input {
     @apply rounded-3xl w-80 bg-paleViolet focus:outline-none text-base text-darkViolet font-semibold px-4 py-2
 }
+
+.displayButton{
+    @apply font-bold bg-darkViolet text-paleViolet text-xl px-5 py-2 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100
+}

@@ -11,7 +11,6 @@
     <div v-for="song in filteredSongs" :key="song.id">
       <song-thumbnail
         :song="song"
-        :likeable="true"
         @like-song="editSong"
         @show-song="showSong"
       />

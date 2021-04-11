@@ -24,12 +24,12 @@
         </li>
         <li class="flex gap-x-2 mt-2">
           <button
-            class="font-bold bg-darkViolet text-paleViolet text-xl px-5 py-2 focus:outline-none rounded-full mx-auto"
+            class="displayButton"
             @click="editSong"
           >
             Edit</button
           ><button
-            class="font-bold bg-darkViolet text-paleViolet text-xl px-5 py-2 focus:outline-none rounded-full mx-auto"
+            class="displayButton"
             @click="deleteSong"
           >
             Delete
@@ -53,11 +53,10 @@
           v-model="search"
         />
       </div>
-      <div class="h-showCase overflow-auto bg-darkViolet rounded-xl py-3">
-        <div v-for="song in filteredSongs" :key="song.id">
-          <song-thumbnail
+      <div class="flex flex-col h-showCase overflow-auto bg-darkViolet rounded-xl py-3">
+        <div v-for="song in filteredSongs" :key="song.id" class="mx-auto">
+          <small-thumb
             :song="song"
-            :likeable="false"
             @show-song="showSong"
           />
         </div>
@@ -67,10 +66,10 @@
 </template>
 
 <script>
-import SongThumbnail from "../components/SongThumbnail.vue";
+import SmallThumb from "../components/SmallThumb.vue";
 
 export default {
-  components: { SongThumbnail },
+  components: { SmallThumb },
   data() {
     return {
       search: "",
