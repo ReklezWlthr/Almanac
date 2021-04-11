@@ -72,7 +72,6 @@ export default {
       songArray: [],
       url: "http://localhost:5000/songLists",
       ytlink: "",
-      key: "AIzaSyCVEbopy7N_HkrhmroLZJBd_mWQisDKxHY",
       loaded: false,
     };
   },
@@ -122,35 +121,17 @@ export default {
         this.currentSong = song;
       }
     }
-    const ytCode = await fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${this.currentSong.title} - ${this.currentSong.artist}&type=video&key=AIzaSyCVEbopy7N_HkrhmroLZJBd_mWQisDKxHY`
-    );
-    const ytData = await ytCode.json();
-    if (ytData.items[0]) {
-      this.ytlink = `https://www.youtube.com/embed/${ytData.items[0].id.videoId}`;
-    }
+      this.ytlink = `https://www.youtube.com/embed/${this.currentSong.ytCode}`;
     this.loaded = true;
     // console.log(this.currentSong);
     // console.log(this.songId);
     this.coverId = `/img/loading.729f0a14.gif`;
-    const res = await fetch(
-      `http://musicbrainz.org/ws/2/release/?fmt=json&query=${this.currentSong.album}%20AND%20artist:${this.currentSong.artist}%20AND%20(format:digitalmedia%20OR%20format:cd)`
+    const res2 = await fetch(
+      `http://coverartarchive.org/release/${this.currentSong.coverCode}`
     );
-    const data = await res.json();
-    if (data.releases[0]) {
-      for (let release of data.releases) {
-        const albumId = release.id;
-        const res2 = await fetch(
-          `http://coverartarchive.org/release/${albumId}`
-        );
-        if (res2.ok) {
-          const data2 = await res2.json();
-          this.coverId = data2.images[0].thumbnails.small;
-          break;
-        }
-      }
-    } else {
-      this.coverId = `/img/default.bc1ffa9c.jpg`;
+    if (res2.ok) {
+      const data2 = await res2.json();
+      this.coverId = data2.images[0].thumbnails.small;
     }
   },
   computed: {

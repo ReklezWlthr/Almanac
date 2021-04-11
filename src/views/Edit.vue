@@ -1,6 +1,7 @@
 <template>
   <div class="text-5xl font-bold ml-10 mt-8 text-paleViolet">Edit Song</div>
-  <edit-form v-if="loaded"
+  <edit-form
+    v-if="loaded"
     :new-song-info="newSongInfo"
     :src="src"
     :lyrics="lyrics"
@@ -34,6 +35,9 @@ export default {
       lyrics: "",
       src: "/img/default.bc1ffa9c.jpg",
       loaded: false,
+      coverCode: "",
+      ytlink: "",
+      key: "AIzaSyCx2yo5A-dlAKHgJhr_X2Z_Oej4x8vxu6E",
     };
   },
   props: ["songList", "url"],
@@ -42,11 +46,25 @@ export default {
       this.lyrics = lyrics;
     },
     async editSong() {
+      if (
+        this.currentSong.title.toLowerCase() !=
+          this.newSongInfo.title.toLowerCase() ||
+        this.currentSong.artist.toLowerCase() !=
+          this.newSongInfo.artist.toLowerCase()
+      ) {
+        const ytCode = await fetch(
+          `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${this.currentSong.title} - ${this.currentSong.artist}&type=video&key=${this.key}`
+        );
+        const ytData = await ytCode.json();
+        if (ytData.items[0]) {
+          this.ytlink = ytData.items[0].id.videoId;
+        }
+      }
       const newSongBuffer = JSON.parse(JSON.stringify(this.newSongInfo));
-      console.log(newSongBuffer);
-      newSongBuffer.liked = false;
-      console.log(this.lyrics)
+      newSongBuffer.liked = this.currentSong.liked;
       newSongBuffer.lyrics = encodeURIComponent(this.lyrics);
+      newSongBuffer.coverCode = this.coverCode;
+      newSongBuffer.ytCode = this.ytlink;
       const res = await fetch(`${this.url}/${this.songId}`, {
         method: "PUT",
         headers: {
@@ -78,6 +96,7 @@ export default {
             );
             if (res2.ok) {
               const data2 = await res2.json();
+              this.coverCode = release.id;
               this.src = data2.images[0].thumbnails.small;
               break;
             }
@@ -100,6 +119,7 @@ export default {
     this.newSongInfo.year = this.currentSong.year;
     this.newSongInfo.genre = this.currentSong.genre;
     this.lyrics = decodeURIComponent(this.currentSong.lyrics);
+    this.ytlink = this.currentSong.ytCode;
     console.log(this.newSongInfo);
     this.reloadCover();
     this.loaded = true;

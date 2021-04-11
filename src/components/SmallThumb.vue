@@ -29,24 +29,12 @@ export default {
   },
   async created() {
     this.coverId = `/img/loading.729f0a14.gif`;
-    const res = await fetch(
-      `http://musicbrainz.org/ws/2/release/?fmt=json&query=${this.song.album}%20AND%20artist:${this.song.artist}%20AND%20(format:digitalmedia%20OR%20format:cd)`
+    const res2 = await fetch(
+      `http://coverartarchive.org/release/${this.song.coverCode}`
     );
-    const data = await res.json();
-    if (data.releases[0]) {
-      for (let release of data.releases) {
-        const albumId = release.id;
-        const res2 = await fetch(
-          `http://coverartarchive.org/release/${albumId}`
-        );
-        if (res2.ok) {
-          const data2 = await res2.json();
-          this.coverId = data2.images[0].thumbnails.small;
-          break;
-        }
-      }
-    } else {
-      this.coverId = `/img/default.bc1ffa9c.jpg`;
+    if (res2.ok) {
+      const data2 = await res2.json();
+      this.coverId = data2.images[0].thumbnails.small;
     }
   },
 };

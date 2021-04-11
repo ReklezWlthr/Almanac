@@ -40,6 +40,9 @@ export default {
       },
       lyrics: "",
       src: "/img/default.bc1ffa9c.jpg",
+      coverCode: "",
+      ytlink: "",
+      key: "AIzaSyCx2yo5A-dlAKHgJhr_X2Z_Oej4x8vxu6E",
     };
   },
   props: ["songList", "url"],
@@ -48,20 +51,32 @@ export default {
       this.lyrics = lyrics;
     },
     async upload() {
-      const newSongBuffer = JSON.parse(JSON.stringify(this.newSongInfo));
-      console.log(newSongBuffer);
-      newSongBuffer.liked = false;
-      newSongBuffer.lyrics = encodeURIComponent(this.lyrics);
-      const res = await fetch(this.url, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(newSongBuffer),
-      });
-      const data = res.json();
-      this.$emit("upload-song", data);
-      window.location.replace("/");
+      await this.reloadCover();
+      // const ytCode = await fetch(
+      //   `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${this.currentSong.title} - ${this.currentSong.artist}&type=video&key=${this.key}`
+      // );
+      // const ytData = await ytCode.json();
+      // if (ytData.items[0]) {
+      //   this.ytlink = ytData.items[0].id.videoId;
+      // }
+      setTimeout(async () => {
+        const newSongBuffer = JSON.parse(JSON.stringify(this.newSongInfo));
+        console.log(newSongBuffer);
+        newSongBuffer.liked = false;
+        newSongBuffer.lyrics = encodeURIComponent(this.lyrics);
+        newSongBuffer.coverCode = this.coverCode;
+        newSongBuffer.ytCode = this.ytlink;
+        const res = await fetch(this.url, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(newSongBuffer),
+        });
+        const data = res.json();
+        this.$emit("upload-song", data);
+        window.location.replace("/");
+      }, 1);
     },
     async reloadCover() {
       this.src = `/img/loading.729f0a14.gif`;
@@ -78,7 +93,9 @@ export default {
             );
             if (res2.ok) {
               const data2 = await res2.json();
+              this.coverCode = release.id;
               this.src = data2.images[0].thumbnails.small;
+              console.log(this.coverCode);
               break;
             }
           }
@@ -88,6 +105,7 @@ export default {
         }
       } catch {
         this.src = `/img/default.bc1ffa9c.jpg`;
+        alert("Album Cover Fetch Error!");
       }
     },
   },
