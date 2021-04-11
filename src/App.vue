@@ -67,6 +67,6 @@ export default {
 
 <style>
 #app {
-  font-family: "Dosis", sans-serif;
+  font-family: "Dosis", "Athiti", "M PLUS Rounded 1c";
 }
 </style>
