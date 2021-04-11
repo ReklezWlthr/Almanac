@@ -6,14 +6,17 @@
     <div class="navButton">
       <router-link to="/upload"> Upload </router-link>
       <router-link :to="`/show/${id ? id : '1'}`" id="routerShow"></router-link>
+      <router-link :to="`/edit/${id ? id : '1'}`" id="routerEdit"></router-link>
     </div>
   </div>
   <router-view
     :song-list="songList"
     :url="url"
     @edit-song="editSong"
+    @launch-edit-page="launchEditPage"
     @upload-song="uploadSong"
     @display-song="displaySong"
+    @delete-song="deleteSong"
   ></router-view>
 </template>
 
@@ -41,9 +44,16 @@ export default {
     uploadSong(data){
       this.songList.push(data);
     },
+    deleteSong(id){
+      this.songList = this.songList.filter(song => song.id != id);
+    },
     displaySong(id){
       this.setPath(id);
       setTimeout(function(){document.getElementById("routerShow").click();},1);
+    },
+    launchEditPage(id){
+      this.setPath(id);
+      setTimeout(function(){document.getElementById("routerEdit").click();},1);
     },
     setPath(id){
       this.id = id;

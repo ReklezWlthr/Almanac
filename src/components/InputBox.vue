@@ -16,15 +16,15 @@
 export default {
     data(){
         return{
-            value: ''
+            value: this.valueIn
         }
     },
-    props:['header'],
+    props:['header', 'valueIn'],
     emits:['forward-value'],
     methods:{
         forwardValue(){
             this.$emit('forward-value', this.value);
         }
-    }
+    },
 }
 </script>

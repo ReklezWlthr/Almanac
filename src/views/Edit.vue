@@ -1,8 +1,6 @@
 <template>
-  <div class="text-5xl font-bold ml-10 mt-8 text-paleViolet">
-    Upload New Song
-  </div>
-  <div class="flex justify-center gap-x-12">
+  <div class="text-5xl font-bold ml-10 mt-8 text-paleViolet">Edit Song</div>
+  <div v-if="loaded" class="flex justify-center gap-x-12">
     <div class="mt-10">
       <img :src="src" class="rounded-3xl w-56 h-56" />
       <div class="ml-48 -mt-8 relative">
@@ -42,12 +40,12 @@
       ></textarea>
     </div>
   </div>
-  <div class="w-full flex mt-4">
+  <div v-if="loaded" class="w-full flex mt-4">
     <button
-      @click="upload"
+      @click="editSong"
       class="font-bold bg-darkViolet text-paleViolet text-xl px-5 py-3 focus:outline-none rounded-full mx-auto"
     >
-      Upload
+      Save
     </button>
   </div>
 </template>
@@ -56,25 +54,15 @@
 import InputBox from "../components/InputBox.vue";
 export default {
   components: { InputBox },
-  emits: [
-    "edit-song",
-    "upload-song",
-    "display-song",
-    "launch-edit-page",
-    "delete-song",
-  ],
+  emits: ["edit-song", "upload-song", "display-song", "launch-edit-page", 'delete-song'],
   data() {
     return {
-      newSongInfo: {
-        title: "",
-        artist: "",
-        album: "",
-        albumArtist: "",
-        year: null,
-        genre: "",
-      },
+      songId: this.$route.params.id,
+      currentSong: {},
+      newSongInfo: {},
       lyrics: "",
       src: "/img/default.bc1ffa9c.jpg",
+      loaded: false,
     };
   },
   props: ["forwardSearch", "songList", "url"],
@@ -82,21 +70,26 @@ export default {
     updateValue(value, key) {
       eval(`this.newSongInfo.${key}='${value}';`);
     },
-    async upload() {
+    async editSong() {
       const newSongBuffer = JSON.parse(JSON.stringify(this.newSongInfo));
       console.log(newSongBuffer);
       newSongBuffer.liked = false;
       newSongBuffer.lyrics = encodeURIComponent(this.lyrics);
-      const res = await fetch(this.url, {
-        method: "POST",
+      const res = await fetch(`${this.url}/${this.songId}`, {
+        method: "PUT",
         headers: {
           "Content-type": "application/json",
         },
         body: JSON.stringify(newSongBuffer),
       });
-      const data = res.json();
-      this.$emit("upload-song", data);
+      const data = await res.json();
+      this.$emit("edit-song", data);
       window.location.replace("/");
+    },
+    async fetchCurrentSong() {
+      const res = await fetch(`${this.url}/${this.songId}`);
+      const data = await res.json();
+      return data;
     },
     async reloadCover() {
       this.src = `/img/loading.729f0a14.gif`;
@@ -124,6 +117,19 @@ export default {
         this.src = `/img/default.bc1ffa9c.jpg`;
       }
     },
+  },
+  async created() {
+    this.currentSong = await this.fetchCurrentSong();
+    this.newSongInfo.title = this.currentSong.title;
+    this.newSongInfo.artist = this.currentSong.artist;
+    this.newSongInfo.album = this.currentSong.album;
+    this.newSongInfo.albumArtist = this.currentSong.albumArtist;
+    this.newSongInfo.year = this.currentSong.year;
+    this.newSongInfo.genre = this.currentSong.genre;
+    this.lyrics = decodeURIComponent(this.currentSong.lyrics);
+    console.log(this.newSongInfo);
+    this.reloadCover();
+    this.loaded = true;
   },
 };
 </script>

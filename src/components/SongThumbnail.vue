@@ -44,10 +44,14 @@ export default {
       `http://musicbrainz.org/ws/2/release/?fmt=json&query=${this.song.album}%20AND%20artist:${this.song.artist}%20AND%20(format:digitalmedia%20OR%20format:cd)`
     );
     const data = await res.json();
+    if(data.releases[0]){
     const albumId = data.releases[0].id;
     const res2 = await fetch(`http://coverartarchive.org/release/${albumId}`);
     const data2 = await res2.json();
     this.coverId = data2.images[0].thumbnails.small;
+    } else {
+        this.coverId = `/img/default.bc1ffa9c.jpg`;
+    }
   },
 };
 </script>

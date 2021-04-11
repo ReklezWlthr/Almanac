@@ -29,7 +29,7 @@ export default {
       search: "",
     };
   },
-  emits: ["edit-song", "upload-song", "display-song"],
+  emits: ["edit-song", "upload-song", "display-song", "launch-edit-page", "delete-song"],
   props: ["songList", "url"],
   methods: {
     async editSong(newSong) {
