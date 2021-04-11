@@ -3,16 +3,25 @@
     <div>
       <img class="rounded-3xl w-56 h-56 mb-7" :src="coverId" />
       <ul v-if="loaded">
-        <li class="text-paleViolet text-xl">Title: {{ currentSong.title }}</li>
         <li class="text-paleViolet text-xl">
-          Artist: {{ currentSong.artist }}
+          <span class="font-bold">Title:</span> {{ currentSong.title }}
         </li>
-        <li class="text-paleViolet text-xl">Album: {{ currentSong.album }}</li>
         <li class="text-paleViolet text-xl">
-          Album Artist: {{ currentSong.albumArtist }}
+          <span class="font-bold">Artist:</span> {{ currentSong.artist }}
         </li>
-        <li class="text-paleViolet text-xl">Year: {{ currentSong.year }}</li>
-        <li class="text-paleViolet text-xl">Genre: {{ currentSong.genre }}</li>
+        <li class="text-paleViolet text-xl">
+          <span class="font-bold">Album:</span> {{ currentSong.album }}
+        </li>
+        <li class="text-paleViolet text-xl">
+          <span class="font-bold">Album Artist:</span>
+          {{ currentSong.albumArtist }}
+        </li>
+        <li class="text-paleViolet text-xl">
+          <span class="font-bold">Year:</span> {{ currentSong.year }}
+        </li>
+        <li class="text-paleViolet text-xl">
+          <span class="font-bold">Genre:</span> {{ currentSong.genre }}
+        </li>
         <li class="flex gap-x-2 mt-2">
           <button
             class="font-bold bg-darkViolet text-paleViolet text-xl px-5 py-2 focus:outline-none rounded-full mx-auto"
@@ -82,8 +91,8 @@ export default {
     showSong(id) {
       this.$emit("display-song", id);
     },
-    editSong(){
-        this.$emit("launch-edit-page", this.songId);
+    editSong() {
+      this.$emit("launch-edit-page", this.songId);
     },
     async deleteSong() {
       const con = confirm("Are you sure that you want to delete this song?");
@@ -93,7 +102,7 @@ export default {
         });
         if (res.status === 200) {
           this.$emit("delete-song", this.songId - 1);
-          window.location.replace('/');
+          window.location.replace("/");
         } else {
           alert("Failed to delete song");
         }
@@ -114,10 +123,10 @@ export default {
   },
   async created() {
     this.songArray = await this.fetchSongs();
-    for(let song of this.songArray){
-        if(song.id == this.songId){
-            this.currentSong = song;
-        }
+    for (let song of this.songArray) {
+      if (song.id == this.songId) {
+        this.currentSong = song;
+      }
     }
     this.loaded = true;
     // console.log(this.currentSong);
@@ -127,13 +136,20 @@ export default {
       `http://musicbrainz.org/ws/2/release/?fmt=json&query=${this.currentSong.album}%20AND%20artist:${this.currentSong.artist}%20AND%20(format:digitalmedia%20OR%20format:cd)`
     );
     const data = await res.json();
-    if(data.releases[0]){
-    const albumId = data.releases[0].id;
-    const res2 = await fetch(`http://coverartarchive.org/release/${albumId}`);
-    const data2 = await res2.json();
-    this.coverId = data2.images[0].thumbnails.small;
+    if (data.releases[0]) {
+      for (let release of data.releases) {
+        const albumId = release.id;
+        const res2 = await fetch(
+          `http://coverartarchive.org/release/${albumId}`
+        );
+        if (res2.ok) {
+          const data2 = await res2.json();
+          this.coverId = data2.images[0].thumbnails.small;
+          break;
+        }
+      }
     } else {
-        this.coverId = `/img/default.bc1ffa9c.jpg`;
+      this.coverId = `/img/default.bc1ffa9c.jpg`;
     }
   },
   computed: {

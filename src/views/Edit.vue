@@ -71,16 +71,17 @@ export default {
         );
         const data = await res.json();
         if (data.releases[0]) {
-          const albumId = data.releases[0].id;
-          //   this.newSongInfo.artist = data.releases[0]["artist-credit"][0].name;
-          //   this.newSongInfo.album = data.releases[0].title;
-          //   this.newSongInfo.year = data.releases[0].date.slice(0,4);
-          //   console.log(this.newSongInfo)
-          const res2 = await fetch(
-            `http://coverartarchive.org/release/${albumId}`
-          );
-          const data2 = await res2.json();
-          this.src = data2.images[0].thumbnails.small;
+          for (let release of data.releases) {
+            const albumId = release.id;
+            const res2 = await fetch(
+              `http://coverartarchive.org/release/${albumId}`
+            );
+            if (res2.ok) {
+              const data2 = await res2.json();
+              this.src = data2.images[0].thumbnails.small;
+              break;
+            }
+          }
         } else {
           this.src = `/img/default.bc1ffa9c.jpg`;
           alert("Album Cover Not Found");
