@@ -21,12 +21,8 @@ export default {
     };
   },
   props: ["song"],
-  emits: ["like-song", 'show-song'],
+  emits: ['show-song'],
   methods: {
-    like(song) {
-      song.liked = !song.liked;
-      this.$emit("like-song", song);
-    },
     showSong(){
         this.$emit("show-song", this.song.id);
     }
