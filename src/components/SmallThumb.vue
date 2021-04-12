@@ -5,9 +5,9 @@
     </div>
     <div class="pl-3 pt-2">
       <ul class="text-paleViolet">
-        <li class="font-semibold text-lg">{{ song.title }}</li>
-        <li>{{ song.artist }}</li>
-        <li>{{ song.album }}</li>
+        <li class="font-semibold text-lg">{{ song.title.length >= 25 ? song.title.slice(0,25) + `...` : song.title }}</li>
+        <li>{{ song.artist.length >= 25 ? song.artist.slice(0,25) + `...` : song.artist }}</li>
+        <li>{{ song.album.length >= 25 ? song.album.slice(0,25) + `...` : song.album }}</li>
       </ul>
     </div>
   </div>
@@ -35,6 +35,8 @@ export default {
     if (res2.ok) {
       const data2 = await res2.json();
       this.coverId = data2.images[0].thumbnails.small;
+    } else {
+        this.coverId = `/img/default.bc1ffa9c.jpg`;
     }
   },
 };

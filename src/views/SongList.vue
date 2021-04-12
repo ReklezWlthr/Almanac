@@ -7,7 +7,7 @@
     />
     Total Songs: {{ filteredSongs.length }}
   </div>
-  <div class="flex flex-wrap">
+  <div class="flex flex-wrap mb-5">
     <div v-for="song in filteredSongs" :key="song.id">
       <song-thumbnail
         :song="song"

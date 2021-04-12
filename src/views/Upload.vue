@@ -51,14 +51,13 @@ export default {
       this.lyrics = lyrics;
     },
     async upload() {
-      await this.reloadCover();
-      // const ytCode = await fetch(
-      //   `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${this.currentSong.title} - ${this.currentSong.artist}&type=video&key=${this.key}`
-      // );
-      // const ytData = await ytCode.json();
-      // if (ytData.items[0]) {
-      //   this.ytlink = ytData.items[0].id.videoId;
-      // }
+      const ytCode = await fetch(
+        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${this.newSongInfo.title} - ${this.newSongInfo.artist}&type=video&key=${this.key}`
+      );
+      const ytData = await ytCode.json();
+      if (ytData.items[0]) {
+        this.ytlink = ytData.items[0].id.videoId;
+      }
       setTimeout(async () => {
         const newSongBuffer = JSON.parse(JSON.stringify(this.newSongInfo));
         console.log(newSongBuffer);
@@ -94,7 +93,7 @@ export default {
             if (res2.ok) {
               const data2 = await res2.json();
               this.coverCode = release.id;
-              this.src = data2.images[0].thumbnails.small;
+              this.src = data2.images[0].thumbnails.large;
               console.log(this.coverCode);
               break;
             }

@@ -97,7 +97,7 @@ export default {
             if (res2.ok) {
               const data2 = await res2.json();
               this.coverCode = release.id;
-              this.src = data2.images[0].thumbnails.small;
+              this.src = data2.images[0].thumbnails.large;
               break;
             }
           }
@@ -111,6 +111,7 @@ export default {
     },
   },
   async created() {
+    this.src = `/img/loading.729f0a14.gif`;
     this.currentSong = await this.fetchCurrentSong();
     this.newSongInfo.title = this.currentSong.title;
     this.newSongInfo.artist = this.currentSong.artist;
@@ -121,7 +122,22 @@ export default {
     this.lyrics = decodeURIComponent(this.currentSong.lyrics);
     this.ytlink = this.currentSong.ytCode;
     console.log(this.newSongInfo);
-    this.reloadCover();
+    this.coverCode = this.currentSong.coverCode;
+    if (this.coverCode === "") {
+      this.src = `/img/default.bc1ffa9c.jpg`;
+    } else {
+      try {
+        const res2 = await fetch(
+          `http://coverartarchive.org/release/${this.coverCode}`
+        );
+        if (res2.ok) {
+          const data2 = await res2.json();
+          this.src = data2.images[0].thumbnails.large;
+        }
+      } catch {
+        this.src = `/img/default.bc1ffa9c.jpg`;
+      }
+    }
     this.loaded = true;
   },
 };

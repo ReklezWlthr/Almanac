@@ -1,7 +1,9 @@
 <template>
   <div class="w-full flex justify-center gap-x-20 mt-10">
     <div>
-      <img class="rounded-3xl w-56 h-56 mb-7" :src="coverId" />
+      <div class="w-full flex justify-center">
+        <img class="rounded-3xl w-56 h-56 mb-7" :src="coverId" />
+      </div>
       <ul v-if="loaded">
         <li class="text-paleViolet text-xl">
           <span class="font-bold">Title:</span> {{ currentSong.title }}
@@ -37,7 +39,7 @@
       </div>
     </div>
     <div>
-        <div>
+      <div>
         <iframe :src="ytlink" class="w-full h-52" allowFullScreen></iframe>
       </div>
       <div class="text-paleViolet text-2xl font-bold mt-5 mb-5">
@@ -121,7 +123,7 @@ export default {
         this.currentSong = song;
       }
     }
-      this.ytlink = `https://www.youtube.com/embed/${this.currentSong.ytCode}`;
+    this.ytlink =  `https://www.youtube.com/embed/${this.currentSong.ytCode}`;
     this.loaded = true;
     // console.log(this.currentSong);
     // console.log(this.songId);
@@ -131,7 +133,7 @@ export default {
     );
     if (res2.ok) {
       const data2 = await res2.json();
-      this.coverId = data2.images[0].thumbnails.small;
+      this.coverId = data2.images[0].thumbnails.large;
     }
   },
   computed: {
