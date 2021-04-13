@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center gap-x-12">
     <div class="mt-10">
-      <img :src="src" class="rounded-3xl w-56 h-56" />
+      <img :src="src" class="rounded-3xl w-56 h-56 object-cover object-center" />
       <div class="ml-48 -mt-8 relative">
         <div
           @click="reloadCover"

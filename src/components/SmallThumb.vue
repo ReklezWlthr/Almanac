@@ -1,7 +1,7 @@
 <template>
   <div @click="showSong" class="w-thumb flex py-3 px-6 cursor-pointer hover:bg-darkPB rounded-lg transition duration-100">
     <div>
-      <img class="rounded-3xl w-24 h-24" :src="coverId" />
+      <img class="rounded-3xl w-24 h-24 object-cover object-center" :src="coverId" />
     </div>
     <div class="pl-3 pt-2">
       <ul class="text-paleViolet">

@@ -3,7 +3,7 @@
     <div>
       <img
         @click="showSong"
-        class="rounded-3xl w-36 h-36 cursor-pointer"
+        class="rounded-3xl w-36 h-36 cursor-pointer object-cover object-center"
         :src="coverId"
       />
     </div>

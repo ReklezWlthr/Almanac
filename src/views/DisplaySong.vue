@@ -2,7 +2,7 @@
   <div class="w-full flex justify-center gap-x-20 mt-10">
     <div>
       <div class="w-full flex justify-center">
-        <img class="rounded-3xl w-56 h-56 mb-7" :src="coverId" />
+        <img class="rounded-3xl w-56 h-56 mb-7 object-cover object-center" :src="coverId" />
       </div>
       <ul v-if="loaded">
         <li class="text-paleViolet text-xl">
