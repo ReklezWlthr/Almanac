@@ -127,13 +127,15 @@ export default {
     this.loaded = true;
     // console.log(this.currentSong);
     // console.log(this.songId);
-    this.coverId = `/img/loading.729f0a14.gif`;
+    this.coverId = require(`../assets/loading.gif`);
     const res2 = await fetch(
       `http://coverartarchive.org/release/${this.currentSong.coverCode}`
     );
     if (res2.ok) {
       const data2 = await res2.json();
       this.coverId = data2.images[0].thumbnails.large;
+    } else {
+      this.coverId = require(`../assets/default.jpg`);
     }
   },
   computed: {

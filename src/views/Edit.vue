@@ -82,7 +82,7 @@ export default {
       return data;
     },
     async reloadCover() {
-      this.src = `/img/loading.729f0a14.gif`;
+      this.src = require(`../assets/loading.gif`);
       try {
         const res = await fetch(
           `http://musicbrainz.org/ws/2/release/?fmt=json&query=${this.newSongInfo.album}%20AND%20artist:${this.newSongInfo.artist}%20AND%20(format:digitalmedia%20OR%20format:cd)`
@@ -111,7 +111,7 @@ export default {
     },
   },
   async created() {
-    this.src = `/img/loading.729f0a14.gif`;
+    this.src = require(`../assets/loading.gif`);
     this.currentSong = await this.fetchCurrentSong();
     this.newSongInfo.title = this.currentSong.title;
     this.newSongInfo.artist = this.currentSong.artist;

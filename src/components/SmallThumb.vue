@@ -28,7 +28,7 @@ export default {
     }
   },
   async created() {
-    this.coverId = `/img/loading.729f0a14.gif`;
+    this.coverId = require(`../assets/loading.gif`);
     const res2 = await fetch(
       `http://coverartarchive.org/release/${this.song.coverCode}`
     );
@@ -36,7 +36,7 @@ export default {
       const data2 = await res2.json();
       this.coverId = data2.images[0].thumbnails.small;
     } else {
-        this.coverId = `/img/default.bc1ffa9c.jpg`;
+        this.coverId = require(`../assets/default.jpg`);
     }
   },
 };

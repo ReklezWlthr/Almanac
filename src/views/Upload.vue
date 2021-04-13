@@ -78,7 +78,7 @@ export default {
       }, 1);
     },
     async reloadCover() {
-      this.src = `/img/loading.729f0a14.gif`;
+      this.src = require(`../assets/loading.gif`);
       try {
         const res = await fetch(
           `http://musicbrainz.org/ws/2/release/?fmt=json&query=${this.newSongInfo.album}%20AND%20artist:${this.newSongInfo.artist}%20AND%20(format:digitalmedia%20OR%20format:cd)`
@@ -99,11 +99,11 @@ export default {
             }
           }
         } else {
-          this.src = `/img/default.bc1ffa9c.jpg`;
+          this.src = require(`../assets/default.jpg`);
           alert("Album Cover Not Found");
         }
       } catch {
-        this.src = `/img/default.bc1ffa9c.jpg`;
+        this.src = require(`../assets/default.jpg`);
         alert("Album Cover Fetch Error!");
       }
     },
