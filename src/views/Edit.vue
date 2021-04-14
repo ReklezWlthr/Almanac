@@ -33,7 +33,7 @@ export default {
       currentSong: {},
       newSongInfo: {},
       lyrics: "",
-      src: "/img/default.bc1ffa9c.jpg",
+      src: require(`../assets/default.jpg`),
       loaded: false,
       coverCode: "",
       ytlink: "",
@@ -102,11 +102,11 @@ export default {
             }
           }
         } else {
-          this.src = `/img/default.bc1ffa9c.jpg`;
+          this.src = require(`../assets/default.jpg`);
           alert("Album Cover Not Found");
         }
       } catch {
-        this.src = `/img/default.bc1ffa9c.jpg`;
+        this.src = require(`../assets/default.jpg`);
       }
     },
   },
@@ -124,7 +124,7 @@ export default {
     console.log(this.newSongInfo);
     this.coverCode = this.currentSong.coverCode;
     if (this.coverCode === "") {
-      this.src = `/img/default.bc1ffa9c.jpg`;
+      this.src = require(`../assets/default.jpg`);
     } else {
       try {
         const res2 = await fetch(
@@ -135,7 +135,7 @@ export default {
           this.src = data2.images[0].thumbnails.large;
         }
       } catch {
-        this.src = `/img/default.bc1ffa9c.jpg`;
+        this.src = require(`../assets/default.jpg`);
       }
     }
     this.loaded = true;
