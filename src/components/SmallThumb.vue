@@ -6,8 +6,8 @@
     <div class="pl-3 pt-2">
       <ul class="text-paleViolet">
         <li class="font-semibold text-lg">{{ song.title.length >= 25 ? song.title.slice(0,25) + `...` : song.title }}</li>
-        <li>{{ song.artist.length >= 25 ? song.artist.slice(0,25) + `...` : song.artist }}</li>
-        <li>{{ song.album.length >= 25 ? song.album.slice(0,25) + `...` : song.album }}</li>
+        <li>{{ song.artist === "" ? "Unknown Artist" : (song.artist.length >= 25 ? song.artist.slice(0,25) + `...` : song.artist) }}</li>
+        <li>{{ song.album === "" ? "Unknown Album" : (song.album.length >= 25 ? song.album.slice(0,25) + `...` : song.album) }}</li>
       </ul>
     </div>
   </div>

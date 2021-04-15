@@ -1,7 +1,10 @@
 <template>
   <div class="flex justify-center gap-x-12">
     <div class="mt-10">
-      <img :src="src" class="rounded-3xl w-56 h-56 object-cover object-center" />
+      <img
+        :src="src"
+        class="rounded-3xl w-56 h-56 object-cover object-center"
+      />
       <div class="ml-48 -mt-8 relative">
         <div
           @click="reloadCover"
@@ -18,20 +21,18 @@
       </div>
     </div>
     <div class="w-1/4 mt-5 ml-12">
-      <div v-for="(value, key) in songInfo"
-            :key="key" class="row">
+      <div v-for="(value, key) in songInfo" :key="key" class="row">
         <div>
-          <div
-            class="text-lg font-bold text-paleViolet"
-          >
+          <div class="text-lg font-bold text-paleViolet">
             {{
               key
                 .replace(/([A-Z])/g, "$1")
                 .charAt(0)
                 .toUpperCase() + key.slice(1)
             }}
+            <span class="ml-28 text-lightViolet font-medium" v-if="key == 'title' && invalidTitle">Title cannot be empty.</span>
           </div>
-          <input v-model.trim="songInfo[key]" class="input" />
+          <input @input="validate" v-model.trim="songInfo[key]" class="input" />
         </div>
       </div>
     </div>
@@ -48,22 +49,26 @@
 
 <script>
 export default {
-    props:['newSongInfo', 'src', 'lyrics'],
-    data(){
-        return{
-            songInfo: this.newSongInfo,
-            lyricsInfo: this.lyrics
-        }
+  props: ["newSongInfo", "src", "lyrics"],
+  data() {
+    return {
+      songInfo: this.newSongInfo,
+      lyricsInfo: this.lyrics,
+      invalidTitle: false
+    };
+  },
+  methods: {
+    reloadCover() {
+      this.$emit("reload-cover");
     },
-    methods:{
-        reloadCover(){
-            this.$emit("reload-cover");
-        },
-        forwardValue(){
-            this.$emit('forward-value', this.lyricsInfo);
-        }
+    forwardValue() {
+      this.$emit("forward-value", this.lyricsInfo);
+    },
+    validate(){
+      this.invalidTitle = this.songInfo.title === "";
     }
-}
+  }
+};
 </script>
 
 <style scoped>

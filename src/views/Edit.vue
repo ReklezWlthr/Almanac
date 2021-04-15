@@ -46,35 +46,39 @@ export default {
       this.lyrics = lyrics;
     },
     async editSong() {
-      if (
-        this.currentSong.title.toLowerCase() !=
-          this.newSongInfo.title.toLowerCase() ||
-        this.currentSong.artist.toLowerCase() !=
-          this.newSongInfo.artist.toLowerCase()
-      ) {
-        const ytCode = await fetch(
-          `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${this.currentSong.title} - ${this.currentSong.artist}&type=video&key=${this.key}`
-        );
-        const ytData = await ytCode.json();
-        if (ytData.items[0]) {
-          this.ytlink = ytData.items[0].id.videoId;
+      if (this.newSongInfo.title !== "") {
+        if (
+          this.currentSong.title.toLowerCase() !=
+            this.newSongInfo.title.toLowerCase() ||
+          this.currentSong.artist.toLowerCase() !=
+            this.newSongInfo.artist.toLowerCase()
+        ) {
+          const ytCode = await fetch(
+            `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${this.currentSong.title} - ${this.currentSong.artist}&type=video&key=${this.key}`
+          );
+          const ytData = await ytCode.json();
+          if (ytData.items[0]) {
+            this.ytlink = ytData.items[0].id.videoId;
+          }
         }
+        const newSongBuffer = JSON.parse(JSON.stringify(this.newSongInfo));
+        newSongBuffer.liked = this.currentSong.liked;
+        newSongBuffer.lyrics = encodeURIComponent(this.lyrics);
+        newSongBuffer.coverCode = this.coverCode;
+        newSongBuffer.ytCode = this.ytlink;
+        const res = await fetch(`${this.url}/${this.songId}`, {
+          method: "PUT",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(newSongBuffer),
+        });
+        const data = await res.json();
+        this.$emit("edit-song", data);
+        window.location.replace(`/show/${this.songId}`);
+      } else {
+        alert("Title cannot be empty")
       }
-      const newSongBuffer = JSON.parse(JSON.stringify(this.newSongInfo));
-      newSongBuffer.liked = this.currentSong.liked;
-      newSongBuffer.lyrics = encodeURIComponent(this.lyrics);
-      newSongBuffer.coverCode = this.coverCode;
-      newSongBuffer.ytCode = this.ytlink;
-      const res = await fetch(`${this.url}/${this.songId}`, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(newSongBuffer),
-      });
-      const data = await res.json();
-      this.$emit("edit-song", data);
-      window.location.replace(`/show/${this.songId}`);
     },
     async fetchCurrentSong() {
       const res = await fetch(`${this.url}/${this.songId}`);

@@ -51,31 +51,35 @@ export default {
       this.lyrics = lyrics;
     },
     async upload() {
-      const ytCode = await fetch(
-        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${this.newSongInfo.title} - ${this.newSongInfo.artist}&type=video&key=${this.key}`
-      );
-      const ytData = await ytCode.json();
-      if (ytData.items[0]) {
-        this.ytlink = ytData.items[0].id.videoId;
+      if (this.newSongInfo.title !== "") {
+        const ytCode = await fetch(
+          `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${this.newSongInfo.title} - ${this.newSongInfo.artist}&type=video&key=${this.key}`
+        );
+        const ytData = await ytCode.json();
+        if (ytData.items[0]) {
+          this.ytlink = ytData.items[0].id.videoId;
+        }
+        setTimeout(async () => {
+          const newSongBuffer = JSON.parse(JSON.stringify(this.newSongInfo));
+          console.log(newSongBuffer);
+          newSongBuffer.liked = false;
+          newSongBuffer.lyrics = encodeURIComponent(this.lyrics);
+          newSongBuffer.coverCode = this.coverCode;
+          newSongBuffer.ytCode = this.ytlink;
+          const res = await fetch(this.url, {
+            method: "POST",
+            headers: {
+              "Content-type": "application/json",
+            },
+            body: JSON.stringify(newSongBuffer),
+          });
+          const data = res.json();
+          this.$emit("upload-song", data);
+          window.location.replace("/");
+        }, 1);
+      } else {
+        alert("Title cannot be empty");
       }
-      setTimeout(async () => {
-        const newSongBuffer = JSON.parse(JSON.stringify(this.newSongInfo));
-        console.log(newSongBuffer);
-        newSongBuffer.liked = false;
-        newSongBuffer.lyrics = encodeURIComponent(this.lyrics);
-        newSongBuffer.coverCode = this.coverCode;
-        newSongBuffer.ytCode = this.ytlink;
-        const res = await fetch(this.url, {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(newSongBuffer),
-        });
-        const data = res.json();
-        this.$emit("upload-song", data);
-        window.location.replace("/");
-      }, 1);
     },
     async reloadCover() {
       this.src = require(`../assets/loading.gif`);
