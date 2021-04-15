@@ -5,6 +5,15 @@
       class="input mt-3 mr-3 ml-4"
       v-model="search"
     />
+    <button
+      @click="likeOnly = !likeOnly"
+      class="bg-darkPB px-2 rounded-full focus:outline-none mr-2"
+    >
+      <i
+        class="transition duration-150 cursor-pointer fas fa-heart text-2xl pt-1.5 pb-0.5"
+        :class="likeOnly ? 'text-red-500' : 'text-red-200 opacity-25'"
+      ></i>
+    </button>
     Total Songs: {{ filteredSongs.length }}
   </div>
   <div class="flex flex-wrap mb-5">
@@ -26,9 +35,16 @@ export default {
   data() {
     return {
       search: "",
+      likeOnly: false,
     };
   },
-  emits: ["edit-song", "upload-song", "display-song", "launch-edit-page", "delete-song"],
+  emits: [
+    "edit-song",
+    "upload-song",
+    "display-song",
+    "launch-edit-page",
+    "delete-song",
+  ],
   props: ["songList", "url"],
   methods: {
     async editSong(newSong) {
@@ -60,16 +76,21 @@ export default {
   },
   computed: {
     filteredSongs() {
-      const listBuffer = JSON.parse(JSON.stringify(this.songList));
+      let listBuffer = JSON.parse(JSON.stringify(this.songList));
+      if (this.likeOnly) {
+        listBuffer = listBuffer.filter((song) => song.liked);
+      }
       if (this.search == "") {
         return listBuffer.sort(this.compare);
       } else {
-        return listBuffer.filter(
-          (song) =>
-            song.title.toLowerCase().includes(this.search.toLowerCase()) ||
-            song.album.toLowerCase().includes(this.search.toLowerCase()) ||
-            song.artist.toLowerCase().includes(this.search.toLowerCase())
-        ).sort(this.compare);
+        return listBuffer
+          .filter(
+            (song) =>
+              song.title.toLowerCase().includes(this.search.toLowerCase()) ||
+              song.album.toLowerCase().includes(this.search.toLowerCase()) ||
+              song.artist.toLowerCase().includes(this.search.toLowerCase())
+          )
+          .sort(this.compare);
       }
     },
   },
