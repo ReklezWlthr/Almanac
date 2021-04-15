@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-wrap content-center w-full h-16 bg-darkViolet px-4">
+  <div class="flex flex-wrap content-center w-full h-16 bg-darkViolet px-4 sticky top-0 z-50">
     <div class="font-bold text-3xl px-2 py-1 text-white">
       <router-link to="/"> Kashigami </router-link>
     </div>
