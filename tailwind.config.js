@@ -15,7 +15,8 @@ module.exports = {
         palePB: '#B2B0C1'
       },
       width:{
-        thumb: '23rem'
+        thumb: '23rem',
+        42: '10.5rem'
       },
       height:{
         lyrics: '28rem',

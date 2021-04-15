@@ -23,3 +23,7 @@
 .displayButton{
     @apply font-bold bg-darkViolet text-paleViolet text-xl px-5 py-2 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100
 }
+
+.preventOverflow{
+    @apply whitespace-nowrap overflow-hidden overflow-ellipsis
+}

@@ -9,9 +9,17 @@
     </div>
     <div class="pl-3 pt-2">
       <ul class="text-paleViolet">
-        <li class="font-semibold text-lg">{{ song.title.length >= 25 ? song.title.slice(0,20) + `...` : song.title }}</li>
-        <li>{{ song.artist === "" ? "Unknown Artist" : (song.artist.length >= 25 ? song.artist.slice(0,20) + `...` : song.artist) }}</li>
-        <li>{{ song.album === "" ? "Unknown Album" : (song.album.length >= 25 ? song.album.slice(0,20) + `...` : song.album) }}</li>
+        <li
+          class="font-semibold text-lg w-42 preventOverflow"
+        >
+          {{ song.title }}
+        </li>
+        <li class="w-42 preventOverflow">
+          {{ song.artist === "" ? "Unknown Artist" : song.artist }}
+        </li>
+        <li class="w-42 preventOverflow">
+          {{ song.album === "" ? "Unknown Artist" : song.album }}
+        </li>
         <li>
           <i
             @click="like(song)"
@@ -51,7 +59,7 @@ export default {
       const data2 = await res2.json();
       this.coverId = data2.images[0].thumbnails.small;
     } else {
-        this.coverId = require(`../assets/default.jpg`);
+      this.coverId = require(`../assets/default.jpg`);
     }
   },
 };
