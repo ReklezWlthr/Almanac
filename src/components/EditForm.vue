@@ -32,7 +32,8 @@
             }}
             <span class="ml-28 text-lightViolet font-medium" v-if="key == 'title' && invalidTitle">Title cannot be empty.</span>
           </div>
-          <input @input="validate" v-model.trim="songInfo[key]" class="input" />
+          <input v-if="key == 'title'" @input="validate" v-model.trim="songInfo[key]" class="input" />
+          <input v-else v-model.trim="songInfo[key]" class="input" />
         </div>
       </div>
     </div>
