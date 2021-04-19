@@ -75,7 +75,7 @@ export default {
           });
           const data = res.json();
           this.$emit("upload-song", data);
-          window.location.replace("/");
+          window.location.href = '/';
         }, 1);
       } else {
         alert("Title cannot be empty");

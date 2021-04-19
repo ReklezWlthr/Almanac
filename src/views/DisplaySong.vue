@@ -24,11 +24,11 @@
         <li class="text-paleViolet text-xl">
           <span class="font-bold">Genre:</span> {{ currentSong.genre }}
         </li>
-        <li class="flex gap-x-1 mt-5">
+      </ul>
+      <div class="w-56 mx-auto flex justify-center mt-5">
           <button class="displayButton" @click="editSong">Edit</button
           ><button class="displayButton" @click="deleteSong">Delete</button>
-        </li>
-      </ul>
+      </div>
     </div>
     <div v-if="loaded">
       <div class="text-paleViolet text-2xl font-bold mb-5">Lyrics</div>
@@ -97,7 +97,7 @@ export default {
         });
         if (res.status === 200) {
           this.$emit("delete-song", this.songId - 1);
-          window.location.replace("/");
+          window.location.href = '/';
         } else {
           alert("Failed to delete song");
         }

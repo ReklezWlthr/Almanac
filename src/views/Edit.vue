@@ -75,7 +75,7 @@ export default {
         });
         const data = await res.json();
         this.$emit("edit-song", data);
-        window.location.replace(`/show/${this.songId}`);
+        window.location.href = `/show/${this.songId}`;
       } else {
         alert("Title cannot be empty")
       }
