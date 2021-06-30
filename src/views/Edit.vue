@@ -9,8 +9,17 @@
   />
   <div v-if="loaded" class="w-full flex mt-4">
     <button
-      @click="editSong"
-      class="font-bold bg-darkViolet text-paleViolet text-xl px-5 py-3 focus:outline-none rounded-full mx-auto"
+      @click="edit"
+      class="
+        font-bold
+        bg-darkViolet
+        text-paleViolet text-xl
+        px-5
+        py-3
+        focus:outline-none
+        rounded-full
+        mx-auto
+      "
     >
       Save
     </button>
@@ -30,12 +39,8 @@ export default {
     return {
       heroId: this.$route.params.id,
       currentHero: {},
-      lyrics: "",
       src: require(`../assets/default.jpg`),
       loaded: false,
-      coverCode: "",
-      ytlink: "",
-      key: "AIzaSyCx2yo5A-dlAKHgJhr_X2Z_Oej4x8vxu6E",
     };
   },
   props: ["songList", "url"],
@@ -43,40 +48,42 @@ export default {
     updateValue(lyrics) {
       this.lyrics = lyrics;
     },
-    async editSong() {
-      if (this.newSongInfo.title !== "") {
-        if (
-          this.currentSong.title.toLowerCase() !=
-            this.newSongInfo.title.toLowerCase() ||
-          this.currentSong.artist.toLowerCase() !=
-            this.newSongInfo.artist.toLowerCase()
-        ) {
-          const ytCode = await fetch(
-            `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${this.currentSong.title} - ${this.currentSong.artist}&type=video&key=${this.key}`
-          );
-          const ytData = await ytCode.json();
-          if (ytData.items[0]) {
-            this.ytlink = ytData.items[0].id.videoId;
+    async edit() {
+      const newHeroBuffer = JSON.parse(JSON.stringify(this.currentHero));
+      for (let ability of newHeroBuffer.abilities) {
+        ability.desc = encodeURIComponent(ability.desc);
+        for (let head in ability.header) {
+          ability.header[head] = ability.header[head].toUpperCase();
+        }
+        if (ability.scaling) {
+          for (let item of ability.scaling) {
+            item.key = item.key.toUpperCase();
+            item.value = encodeURIComponent(item.value);
           }
         }
-        const newSongBuffer = JSON.parse(JSON.stringify(this.newSongInfo));
-        newSongBuffer.liked = this.currentSong.liked;
-        newSongBuffer.lyrics = encodeURIComponent(this.lyrics);
-        newSongBuffer.coverCode = this.coverCode;
-        newSongBuffer.ytCode = this.ytlink;
-        const res = await fetch(`${this.url}/${this.songId}`, {
-          method: "PUT",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(newSongBuffer),
-        });
-        const data = await res.json();
-        this.$emit("edit-song", data);
-        window.location.href = `/show/${this.songId}`;
-      } else {
-        alert("Title cannot be empty")
+        if(ability.slot != 'P'){
+        ability.subAbility.desc = encodeURIComponent(ability.subAbility.desc);
+        for (let head in ability.subAbility.header) {
+          ability.subAbility.header[head] = ability.subAbility.header[head].toUpperCase();
+        }
+        if (ability.subAbility.scaling) {
+          for (let item of ability.subAbility.scaling) {
+            item.key = item.key.toUpperCase();
+            item.value = encodeURIComponent(item.value);
+          }
+        }
+        }
       }
+      const res = await fetch(`${this.url}/${this.heroId}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(newHeroBuffer),
+      });
+      const data = await res.json();
+      this.$emit("edit-hero", data);
+      window.location.href = `/show/${this.heroId}`;
     },
     async fetchCurrentHero() {
       const res = await fetch(`${this.url}/${this.heroId}`);

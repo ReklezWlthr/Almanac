@@ -32,14 +32,25 @@
       <div class="relative whitespace-pre-wrap text-paleViolet bg-darkViolet p-5 rounded-xl w-ability overflow-auto mb-5" v-for="ability in currentHero.abilities" :key="ability.name">
         <span class="absolute z-10 text-8xl font-black opacity-20 italic right-4 -top-3">{{ ability.slot }}</span>
         <div class="flex pb-2">
-          <div class="font-bold text-2xl pr-6">{{ ability.name }}</div>
+          <div class="font-bold text-2xl pr-6 whitespace-nowrap">{{ ability.name }}</div>
           <div class="flex flex-wrap"><span v-for="(desc, head) in ability.header" :key="head" class="uppercase text-sm whitespace-nowrap"><span class="px-2" v-if="desc"><span class="font-bold">{{ head }}</span>: {{ desc }}</span></span></div>
         </div>
         <div class="py-2 border-t-2" v-html="decodeURIComponent(ability.desc)"></div>
-        <div class="pt-2 border-t-2" v-if="ability.scaling">
-          <div v-for="(desc, head) in ability.scaling" :key="head">
-            <div class="uppercase font-bold">{{ head }}</div>
-            <div v-html="decodeURIComponent(desc)"></div>
+        <div class="py-2 border-t-2 flex flex-wrap text-sm gap-y-3" v-if="ability.scaling">
+          <div v-for="item in ability.scaling" :key="item" class="w-1/2 px-1">
+            <div class="uppercase font-bold">{{ item.key }}</div>
+            <div v-html="decodeURIComponent(item.value)"></div>
+          </div>
+        </div>
+        <div class="flex py-2" v-if="ability.slot != 'P' && ability.subAbility.name">
+          <div class="font-bold text-2xl pr-6 whitespace-nowrap">{{ ability.subAbility.name }}</div>
+          <div class="flex flex-wrap"><span v-for="(desc, head) in ability.subAbility.header" :key="head" class="uppercase text-sm whitespace-nowrap"><span class="px-2" v-if="desc"><span class="font-bold">{{ head }}</span>: {{ desc }}</span></span></div>
+        </div>
+        <div class="py-2 border-t-2" v-if="ability.slot != 'P' && ability.subAbility.desc" v-html="decodeURIComponent(ability.subAbility.desc)"></div>
+        <div class="pt-2 border-t-2 flex flex-wrap text-sm gap-y-3" v-if="ability.slot != 'P' && ability.subAbility.scaling.length">
+          <div v-for="item in ability.subAbility.scaling" :key="item" class="w-1/2 px-1">
+            <div class="uppercase font-bold">{{ item.key }}</div>
+            <div v-html="decodeURIComponent(item.value)"></div>
           </div>
         </div>
       </div>
@@ -49,9 +60,11 @@
       <div
         class="flex flex-wrap gap-y-1 h-56 overflow-auto bg-darkViolet rounded-xl py-3"
       >
-        <div v-for="stat in currentHero.stats" :key="stat" class="text-paleViolet text-sm uppercase w-1/2 flex flex-wrap px-4 py-2">
+        <div v-for="stat in currentHero.stats" :key="stat" class="text-paleViolet text-sm uppercase" :class="{'w-1/2': stat.base != null}">
+        <div v-if="stat.base != null" class="flex px-4 py-2">
         <img :src="getIcon(stat.name)" class="w-4 h-4 mr-2"/>
               <div class="preventOverflow w-1/2 font-bold">{{ stat.name }}</div>: {{ stat.base }} {{ stat.growth ? ' - ' + (stat.base + (stat.growth * 17)) : '' }}
+        </div>
         </div>
       </div>
       <div class="text-paleViolet text-2xl font-bold my-5"><img :src="getIcon('Attack Speed')" class="inline w-5 h-5 mr-3 -mt-1"/>Attack Speed</div>

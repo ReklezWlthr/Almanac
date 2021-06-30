@@ -12,7 +12,7 @@
   <router-view
     :hero-list="heroList"
     :url="url"
-    @edit-song="editSong"
+    @edit-hero="editHero"
     @launch-edit-page="launchEditPage"
     @upload-song="uploadSong"
     @display-hero="displayHero"
@@ -36,9 +36,9 @@ export default {
       const data = await res.json();
       return data;
     },
-    editSong(data) {
-      this.heroList = this.heroList.map((song) =>
-        song.id == data.id ? data : song
+    editHero(data) {
+      this.heroList = this.heroList.map((hero) =>
+        hero.id == data.id ? data : hero
       );
     },
     uploadSong(data){
