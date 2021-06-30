@@ -1,8 +1,7 @@
 <template>
-  <div class="text-5xl font-bold ml-10 mt-8 text-paleViolet">Edit Song</div>
   <edit-form
     v-if="loaded"
-    :new-song-info="newSongInfo"
+    :new-hero-info="currentHero"
     :src="src"
     :lyrics="lyrics"
     @reload-cover="reloadCover"
@@ -29,9 +28,8 @@ export default {
   ],
   data() {
     return {
-      songId: this.$route.params.id,
-      currentSong: {},
-      newSongInfo: {},
+      heroId: this.$route.params.id,
+      currentHero: {},
       lyrics: "",
       src: require(`../assets/default.jpg`),
       loaded: false,
@@ -80,68 +78,43 @@ export default {
         alert("Title cannot be empty")
       }
     },
-    async fetchCurrentSong() {
-      const res = await fetch(`${this.url}/${this.songId}`);
+    async fetchCurrentHero() {
+      const res = await fetch(`${this.url}/${this.heroId}`);
       const data = await res.json();
       return data;
     },
-    async reloadCover() {
-      this.src = require(`../assets/loading.gif`);
-      try {
-        const res = await fetch(
-          `http://musicbrainz.org/ws/2/release/?fmt=json&query=${this.newSongInfo.album}%20AND%20artist:${this.newSongInfo.artist}%20AND%20(format:digitalmedia%20OR%20format:cd)`
-        );
-        const data = await res.json();
-        if (data.releases[0]) {
-          for (let release of data.releases) {
-            const albumId = release.id;
-            const res2 = await fetch(
-              `http://coverartarchive.org/release/${albumId}`
-            );
-            if (res2.ok) {
-              const data2 = await res2.json();
-              this.coverCode = release.id;
-              this.src = data2.images[0].thumbnails.large;
-              break;
-            }
-          }
-        } else {
-          this.src = require(`../assets/default.jpg`);
-          alert("Album Cover Not Found");
-        }
-      } catch {
-        this.src = require(`../assets/default.jpg`);
-      }
-    },
+    // async reloadCover() {
+    //   this.src = require(`../assets/loading.gif`);
+    //   try {
+    //     const res = await fetch(
+    //       `http://musicbrainz.org/ws/2/release/?fmt=json&query=${this.newSongInfo.album}%20AND%20artist:${this.newSongInfo.artist}%20AND%20(format:digitalmedia%20OR%20format:cd)`
+    //     );
+    //     const data = await res.json();
+    //     if (data.releases[0]) {
+    //       for (let release of data.releases) {
+    //         const albumId = release.id;
+    //         const res2 = await fetch(
+    //           `http://coverartarchive.org/release/${albumId}`
+    //         );
+    //         if (res2.ok) {
+    //           const data2 = await res2.json();
+    //           this.coverCode = release.id;
+    //           this.src = data2.images[0].thumbnails.large;
+    //           break;
+    //         }
+    //       }
+    //     } else {
+    //       this.src = require(`../assets/default.jpg`);
+    //       alert("Album Cover Not Found");
+    //     }
+    //   } catch {
+    //     this.src = require(`../assets/default.jpg`);
+    //   }
+    // },
   },
   async created() {
-    this.src = require(`../assets/loading.gif`);
-    this.currentSong = await this.fetchCurrentSong();
-    this.newSongInfo.title = this.currentSong.title;
-    this.newSongInfo.artist = this.currentSong.artist;
-    this.newSongInfo.album = this.currentSong.album;
-    this.newSongInfo.albumArtist = this.currentSong.albumArtist;
-    this.newSongInfo.year = this.currentSong.year;
-    this.newSongInfo.genre = this.currentSong.genre;
-    this.lyrics = decodeURIComponent(this.currentSong.lyrics);
-    this.ytlink = this.currentSong.ytCode;
-    console.log(this.newSongInfo);
-    this.coverCode = this.currentSong.coverCode;
-    if (this.coverCode === "") {
-      this.src = require(`../assets/default.jpg`);
-    } else {
-      try {
-        const res2 = await fetch(
-          `http://coverartarchive.org/release/${this.coverCode}`
-        );
-        if (res2.ok) {
-          const data2 = await res2.json();
-          this.src = data2.images[0].thumbnails.large;
-        }
-      } catch {
-        this.src = require(`../assets/default.jpg`);
-      }
-    }
+    this.currentHero = await this.fetchCurrentHero();
+    console.log(this.newHeroInfo);
     this.loaded = true;
   },
 };

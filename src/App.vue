@@ -10,12 +10,12 @@
     </div>
   </div>
   <router-view
-    :song-list="songList"
+    :hero-list="heroList"
     :url="url"
     @edit-song="editSong"
     @launch-edit-page="launchEditPage"
     @upload-song="uploadSong"
-    @display-song="displaySong"
+    @display-hero="displayHero"
     @delete-song="deleteSong"
   ></router-view>
 </template>
@@ -25,8 +25,8 @@ export default {
   name: "App",
   data() {
     return {
-      songList: [],
-      url: "http://localhost:5000/songLists",
+      heroList: [],
+      url: "http://localhost:5000/heroes",
       id: ''
     };
   },
@@ -37,17 +37,17 @@ export default {
       return data;
     },
     editSong(data) {
-      this.songList = this.songList.map((song) =>
+      this.heroList = this.heroList.map((song) =>
         song.id == data.id ? data : song
       );
     },
     uploadSong(data){
-      this.songList.push(data);
+      this.heroList.push(data);
     },
     deleteSong(id){
-      this.songList = this.songList.filter(song => song.id != id);
+      this.heroList = this.heroList.filter(song => song.id != id);
     },
-    displaySong(id){
+    displayHero(id){
       this.setPath(id);
       setTimeout(function(){document.getElementById("routerShow").click();},1);
     },
@@ -60,7 +60,7 @@ export default {
     },
   },
   async created() {
-    this.songList = await this.fetchSongs();
+    this.heroList = await this.fetchSongs();
   },
 };
 </script>

@@ -1,7 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import SongList from '../views/SongList.vue'
+import HeroList from '../views/HeroList.vue'
 import Upload from '../views/Upload.vue'
-import Show from '../views/DisplaySong.vue'
+import Show from '../views/DisplayHero.vue'
 import Edit from '../views/Edit.vue'
 
 Show.watch = {$route(to, from) { if(to !== from){ location.reload(); } } }
@@ -9,8 +9,8 @@ Show.watch = {$route(to, from) { if(to !== from){ location.reload(); } } }
 const routes = [
     {
         path: '/',
-        name: 'SongList',
-        component: SongList
+        name: 'HeroList',
+        component: HeroList
     },
     {
         path: '/upload',

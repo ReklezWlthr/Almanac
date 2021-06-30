@@ -1,7 +1,4 @@
 <template>
-  <div class="text-5xl font-bold ml-10 mt-8 text-paleViolet">
-    Upload New Song
-  </div>
   <edit-form
     :new-song-info="newSongInfo"
     :src="src"
@@ -12,7 +9,16 @@
   <div class="w-full flex mt-4">
     <button
       @click="upload"
-      class="font-bold bg-darkViolet text-paleViolet text-xl px-5 py-3 focus:outline-none rounded-full mx-auto"
+      class="
+        font-bold
+        bg-darkViolet
+        text-paleViolet text-xl
+        px-5
+        py-3
+        focus:outline-none
+        rounded-full
+        mx-auto
+      "
     >
       Upload
     </button>
@@ -41,8 +47,6 @@ export default {
       lyrics: "",
       src: "/img/default.bc1ffa9c.jpg",
       coverCode: "",
-      ytlink: "",
-      key: "AIzaSyCx2yo5A-dlAKHgJhr_X2Z_Oej4x8vxu6E",
     };
   },
   props: ["songList", "url"],
@@ -51,35 +55,22 @@ export default {
       this.lyrics = lyrics;
     },
     async upload() {
-      if (this.newSongInfo.title !== "") {
-        const ytCode = await fetch(
-          `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${this.newSongInfo.title} - ${this.newSongInfo.artist}&type=video&key=${this.key}`
-        );
-        const ytData = await ytCode.json();
-        if (ytData.items[0]) {
-          this.ytlink = ytData.items[0].id.videoId;
-        }
-        setTimeout(async () => {
-          const newSongBuffer = JSON.parse(JSON.stringify(this.newSongInfo));
-          console.log(newSongBuffer);
-          newSongBuffer.liked = false;
-          newSongBuffer.lyrics = encodeURIComponent(this.lyrics);
-          newSongBuffer.coverCode = this.coverCode;
-          newSongBuffer.ytCode = this.ytlink;
-          const res = await fetch(this.url, {
-            method: "POST",
-            headers: {
-              "Content-type": "application/json",
-            },
-            body: JSON.stringify(newSongBuffer),
-          });
-          const data = res.json();
-          this.$emit("upload-song", data);
-          window.location.href = '/';
-        }, 1);
-      } else {
-        alert("Title cannot be empty");
-      }
+        const newSongBuffer = JSON.parse(JSON.stringify(this.newSongInfo));
+        console.log(newSongBuffer);
+        newSongBuffer.liked = false;
+        newSongBuffer.lyrics = encodeURIComponent(this.lyrics);
+        newSongBuffer.coverCode = this.coverCode;
+        newSongBuffer.ytCode = this.ytlink;
+        const res = await fetch(this.url, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(newSongBuffer),
+        });
+        const data = res.json();
+        this.$emit("upload-song", data);
+        window.location.href = "/";
     },
     async reloadCover() {
       this.src = require(`../assets/loading.gif`);
