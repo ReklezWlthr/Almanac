@@ -2359,13 +2359,13 @@
       "stats": [
         {
           "name": "Health",
-          "base": "",
-          "growth": ""
+          "base": "600",
+          "growth": "90"
         },
         {
           "name": "Mana",
-          "base": "",
-          "growth": ""
+          "base": "415",
+          "growth": "42"
         },
         {
           "name": "Stamina",
@@ -2374,13 +2374,13 @@
         },
         {
           "name": "Health Regeneration",
-          "base": "",
-          "growth": ""
+          "base": "7",
+          "growth": "0.5"
         },
         {
           "name": "Mana Regeneration",
-          "base": "",
-          "growth": ""
+          "base": "8",
+          "growth": "1"
         },
         {
           "name": "Stamina Regeneration",
@@ -2393,18 +2393,18 @@
         },
         {
           "name": "Armor",
-          "base": "",
-          "growth": ""
+          "base": "45",
+          "growth": "5"
         },
         {
           "name": "Attack Damage",
-          "base": "",
-          "growth": ""
+          "base": "62",
+          "growth": "2"
         },
         {
           "name": "Magic Resistance",
-          "base": "",
-          "growth": ""
+          "base": "32",
+          "growth": "1.5"
         },
         {
           "name": "Critical Strike Damage",
@@ -2412,17 +2412,17 @@
         },
         {
           "name": "Movement Speed",
-          "base": ""
+          "base": "330"
         },
         {
           "name": "Range",
-          "base": ""
+          "base": "150"
         }
       ],
       "attackSpeed": [
         {
           "name": "Base Attack Speed",
-          "base": ""
+          "base": "0.667"
         },
         {
           "name": "Missile Speed",
@@ -2434,33 +2434,33 @@
         },
         {
           "name": "Bonus Attack Speed",
-          "base": ""
+          "base": "2.5"
         }
       ],
       "ratings": [
         {
           "name": "Damage",
-          "base": ""
+          "base": "3"
         },
         {
           "name": "Toughness",
-          "base": ""
+          "base": "1"
         },
         {
           "name": "Control",
-          "base": ""
+          "base": "1"
         },
         {
           "name": "Mobility",
-          "base": ""
+          "base": "2"
         },
         {
           "name": "Utility",
-          "base": ""
+          "base": "1"
         },
         {
           "name": "Difficulty",
-          "base": ""
+          "base": "2"
         }
       ],
       "abilities": [
@@ -2590,7 +2590,7 @@
           "scaling": [
             {
               "key": "DURATION",
-              "value": "%3Cp%3E%3Cspan%20class%3D%22ql-cursor%22%3E%EF%BB%BF%EF%BB%BF%EF%BB%BF%EF%BB%BF%EF%BB%BF%EF%BB%BF%3C%2Fspan%3E4%2F5%2F6%3C%2Fp%3E"
+              "value": "%3Cp%3E%3Cspan%20class%3D%22ql-cursor%22%3E%EF%BB%BF%EF%BB%BF%EF%BB%BF%EF%BB%BF%EF%BB%BF%EF%BB%BF%EF%BB%BF%3C%2Fspan%3E4%2F5%2F6%3C%2Fp%3E"
             },
             {
               "key": "FIXED HEALTH",
