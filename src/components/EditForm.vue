@@ -25,35 +25,35 @@
       </div>
       <div class="text-paleViolet text-xl">
         <span class="font-bold mr-2">Class:</span>
-        <select v-model="baseHeroInfo.class" class="text-darkViolet focus:outline-none rounded-3xl px-2 py-2 font-semibold text-base">
-          <option value="Assassin">Assassin</option>
-          <option value="Duelist">Duelist</option>
-          <option value="Berserker">Berserker</option>
-          <option value="Bruiser">Bruiser</option>
-          <option value="Burst">Burst</option>
-          <option value="Battlemage">Battlemage</option>
-          <option value="Arcanist">Arcanist</option>
-          <option value="Guardian">Guardian</option>
-          <option value="Warlord">Warlord</option>
-          <option value="Enchanter">Enchanter</option>
-          <option value="Controller">Controller</option>
-          <option value="Marksman">Marksman</option>
-          <option value="Specialist">Specialist</option>
+        <select v-model="baseHeroInfo.class" class="input">
+          <option class="text-darkViolet" value="Assassin">Assassin</option>
+          <option class="text-darkViolet" value="Duelist">Duelist</option>
+          <option class="text-darkViolet" value="Berserker">Berserker</option>
+          <option class="text-darkViolet" value="Bruiser">Bruiser</option>
+          <option class="text-darkViolet" value="Burst">Burst</option>
+          <option class="text-darkViolet" value="Battlemage">Battlemage</option>
+          <option class="text-darkViolet" value="Arcanist">Arcanist</option>
+          <option class="text-darkViolet" value="Guardian">Guardian</option>
+          <option class="text-darkViolet" value="Warlord">Warlord</option>
+          <option class="text-darkViolet" value="Enchanter">Enchanter</option>
+          <option class="text-darkViolet" value="Controller">Controller</option>
+          <option class="text-darkViolet" value="Marksman">Marksman</option>
+          <option class="text-darkViolet" value="Specialist">Specialist</option>
         </select>
       </div>
       <div class="text-paleViolet text-xl">
         <span class="font-bold mr-2">Resource:</span>
-        <select v-model="baseHeroInfo.resource" class="text-darkViolet focus:outline-none rounded-3xl px-2 py-2 font-semibold text-base">
-          <option value="Mana">Mana</option>
-          <option value="Stamina">Stamina</option>
-          <option value="N/A">N/A</option>
+        <select v-model="baseHeroInfo.resource" class="input">
+          <option class="text-darkViolet" value="Mana">Mana</option>
+          <option class="text-darkViolet" value="Stamina">Stamina</option>
+          <option class="text-darkViolet" value="N/A">N/A</option>
         </select>
       </div>
       <div class="text-paleViolet text-xl">
         <span class="font-bold mr-2">Range Type:</span>
-        <select v-model="baseHeroInfo.attackType" class="text-darkViolet focus:outline-none rounded-3xl px-2 py-2 font-semibold text-base">
-          <option value="Melee">Melee</option>
-          <option value="Range">Range</option>
+        <select v-model="baseHeroInfo.attackType" class="input">
+          <option class="text-darkViolet" value="Melee">Melee</option>
+          <option class="text-darkViolet" value="Range">Range</option>
         </select>
       </div>
     </div>

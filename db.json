@@ -575,13 +575,13 @@
       "stats": [
         {
           "name": "Health",
-          "base": "",
-          "growth": ""
+          "base": "589",
+          "growth": "86"
         },
         {
           "name": "Mana",
-          "base": "",
-          "growth": ""
+          "base": "282",
+          "growth": "40"
         },
         {
           "name": "Stamina",
@@ -590,13 +590,13 @@
         },
         {
           "name": "Health Regeneration",
-          "base": "",
-          "growth": ""
+          "base": "3.75",
+          "growth": "0.65"
         },
         {
           "name": "Mana Regeneration",
-          "base": "",
-          "growth": ""
+          "base": "6",
+          "growth": "0.8"
         },
         {
           "name": "Stamina Regeneration",
@@ -609,18 +609,18 @@
         },
         {
           "name": "Armor",
-          "base": "",
-          "growth": ""
+          "base": "36",
+          "growth": "3"
         },
         {
           "name": "Attack Damage",
-          "base": "",
-          "growth": ""
+          "base": "54",
+          "growth": "4.25"
         },
         {
           "name": "Magic Resistance",
-          "base": "",
-          "growth": ""
+          "base": "32.1",
+          "growth": "1.25"
         },
         {
           "name": "Critical Strike Damage",
@@ -628,17 +628,17 @@
         },
         {
           "name": "Movement Speed",
-          "base": ""
+          "base": "335"
         },
         {
           "name": "Range",
-          "base": ""
+          "base": "125"
         }
       ],
       "attackSpeed": [
         {
           "name": "Base Attack Speed",
-          "base": ""
+          "base": "0.625"
         },
         {
           "name": "Missile Speed",
@@ -650,33 +650,33 @@
         },
         {
           "name": "Bonus Attack Speed",
-          "base": ""
+          "base": "2"
         }
       ],
       "ratings": [
         {
           "name": "Damage",
-          "base": ""
+          "base": "1"
         },
         {
           "name": "Toughness",
-          "base": ""
+          "base": "2"
         },
         {
           "name": "Control",
-          "base": ""
+          "base": "3"
         },
         {
           "name": "Mobility",
-          "base": ""
+          "base": "1"
         },
         {
           "name": "Utility",
-          "base": ""
+          "base": "3"
         },
         {
           "name": "Difficulty",
-          "base": ""
+          "base": "2"
         }
       ],
       "abilities": [
