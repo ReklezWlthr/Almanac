@@ -6,14 +6,14 @@
     <div class="pl-3 pt-2">
       <ul class="text-paleViolet">
         <li
-          class="font-semibold text-lg w-42 preventOverflow"
+          class="font-semibold text-lg w-36 preventOverflow"
         >
           {{ hero.name }}
         </li>
-        <li class="w-42 preventOverflow">
+        <li class="w-36 preventOverflow">
           {{ hero.title }}
         </li>
-        <li class="w-42 preventOverflow">
+        <li class="w-36 preventOverflow">
           {{ hero.class }} &#8226; {{ hero.attackType }}
         </li>
       </ul>

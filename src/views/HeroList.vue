@@ -7,7 +7,7 @@
     />
     Total Heroes: {{ filteredHeroes.length }}
   </div>
-  <div class="flex flex-wrap mb-5">
+  <div class="grid grid-cols-5 mb-5">
     <div v-for="hero in filteredHeroes" :key="hero.id">
       <hero-thumbnail
         :hero="hero"
