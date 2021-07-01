@@ -17,7 +17,7 @@
 }
 
 .input {
-    @apply rounded-3xl w-44 bg-paleViolet focus:outline-none text-base text-darkViolet font-semibold px-4 py-2
+    @apply bg-lightPB bg-opacity-10 rounded-lg focus:outline-none text-base font-semibold px-2 py-1 w-44
 }
 
 .displayButton{

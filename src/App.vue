@@ -69,4 +69,8 @@ export default {
 #app {
   font-family: "Dosis", "Athiti", "M PLUS Rounded 1c";
 }
+
+.ql-bubble .ql-tooltip {
+  z-index: 100 !important;
+}
 </style>

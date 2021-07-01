@@ -187,25 +187,7 @@ export default {
           "name": "",
           "desc": "",
           "scaling": [],
-          "subAbility": {
-            "header": {
-              "range": "",
-              "target range": "",
-              "effect radius": "",
-              "tether radius": "",
-              "width": "",
-              "angle": "",
-              "speed": "",
-              "cast time": "",
-              "cost": "",
-              "cooldown": "",
-              "static cooldown": "",
-              "target immunity": ""
-            },
-            "name": "",
-            "desc": "",
-            "scaling": []
-          }
+          "subAbility": []
         },
         {
           "slot": "W",
@@ -226,25 +208,7 @@ export default {
           "name": "",
           "desc": "",
           "scaling": [],
-          "subAbility": {
-            "header": {
-              "range": "",
-              "target range": "",
-              "effect radius": "",
-              "tether radius": "",
-              "width": "",
-              "angle": "",
-              "speed": "",
-              "cast time": "",
-              "cost": "",
-              "cooldown": "",
-              "static cooldown": "",
-              "target immunity": ""
-            },
-            "name": "",
-            "desc": "",
-            "scaling": []
-          }
+          "subAbility": []
         },
         {
           "slot": "E",
@@ -265,25 +229,7 @@ export default {
           "name": "",
           "desc": "",
           "scaling": [],
-          "subAbility": {
-            "header": {
-              "range": "",
-              "target range": "",
-              "effect radius": "",
-              "tether radius": "",
-              "width": "",
-              "angle": "",
-              "speed": "",
-              "cast time": "",
-              "cost": "",
-              "cooldown": "",
-              "static cooldown": "",
-              "target immunity": ""
-            },
-            "name": "",
-            "desc": "",
-            "scaling": []
-          }
+          "subAbility": []
         },
         {
           "slot": "R",
@@ -304,25 +250,7 @@ export default {
           "name": "",
           "desc": "",
           "scaling": [],
-          "subAbility": {
-            "header": {
-              "range": "",
-              "target range": "",
-              "effect radius": "",
-              "tether radius": "",
-              "width": "",
-              "angle": "",
-              "speed": "",
-              "cast time": "",
-              "cost": "",
-              "cooldown": "",
-              "static cooldown": "",
-              "target immunity": ""
-            },
-            "name": "",
-            "desc": "",
-            "scaling": []
-          }
+          "subAbility": []
         }
       ]
     },
@@ -337,12 +265,28 @@ export default {
         ability.desc = encodeURIComponent(ability.desc);
         for (let head in ability.header) {
           ability.header[head] = ability.header[head].toUpperCase();
+          ability.header[head] = encodeURIComponent(ability.header[head]);
         }
         if (ability.scaling) {
           for (let item of ability.scaling) {
             item.key = item.key.toUpperCase();
             item.value = encodeURIComponent(item.value);
           }
+        }
+        if(ability.slot != 'P'){
+        for(let subAbility of ability.subAbility){
+        subAbility.desc = encodeURIComponent(ability.subAbility.desc);
+        for (let head in subAbility.header) {
+          subAbility.header[head] = subAbility.header[head].toUpperCase();
+          subAbility.header[head] = encodeURIComponent(subAbility.header[head]);
+        }
+        if (subAbility.scaling) {
+          for (let item of subAbility.scaling) {
+            item.key = item.key.toUpperCase();
+            item.value = encodeURIComponent(item.value);
+          }
+        }
+        }
         }
       }
         const res = await fetch(this.url, {

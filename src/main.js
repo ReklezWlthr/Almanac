@@ -5,11 +5,11 @@ import EditForm from './components/EditForm.vue'
 import './assets/tailwind.css'
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 
 var toolbarOptions = [
-    ['bold', 'italic'],
     [{ 'script': 'super' }],
-    [{ 'color': ['#FBF8FF', '#ff9800', '#f44336', '#03a9f4', '#4caf50', '#ffeb3b', '#e930e9', '#1d87da', '#ff855f'] }],
+    [{ 'color': ['#ff9800', '#ffbd00', '#f44336', '#03a9f4', '#4caf50', '#ffeb3b', '#e930e9', '#1d87da', '#ff855f', '#687fff', '#a97b26', '#F3E5AB'] }],
     ['clean']
   ];
 
@@ -18,7 +18,7 @@ const globalOptions = {
     modules: {
       toolbar: toolbarOptions
     },
-    theme: 'snow'
+    theme: 'bubble'
   }
 
 QuillEditor.props.globalOptions.default = () => globalOptions

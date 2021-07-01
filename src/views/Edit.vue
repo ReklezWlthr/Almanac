@@ -54,6 +54,7 @@ export default {
         ability.desc = encodeURIComponent(ability.desc);
         for (let head in ability.header) {
           ability.header[head] = ability.header[head].toUpperCase();
+          ability.header[head] = encodeURIComponent(ability.header[head]);
         }
         if (ability.scaling) {
           for (let item of ability.scaling) {
@@ -62,15 +63,18 @@ export default {
           }
         }
         if(ability.slot != 'P'){
-        ability.subAbility.desc = encodeURIComponent(ability.subAbility.desc);
-        for (let head in ability.subAbility.header) {
-          ability.subAbility.header[head] = ability.subAbility.header[head].toUpperCase();
+        for(let subAbility of ability.subAbility){
+        subAbility.desc = encodeURIComponent(subAbility.desc);
+        for (let head in subAbility.header) {
+          subAbility.header[head] = subAbility.header[head].toUpperCase();
+          subAbility.header[head] = encodeURIComponent(subAbility.header[head]);
         }
-        if (ability.subAbility.scaling) {
-          for (let item of ability.subAbility.scaling) {
+        if (subAbility.scaling) {
+          for (let item of subAbility.scaling) {
             item.key = item.key.toUpperCase();
             item.value = encodeURIComponent(item.value);
           }
+        }
         }
         }
       }

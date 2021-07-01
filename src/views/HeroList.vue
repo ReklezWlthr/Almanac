@@ -1,11 +1,11 @@
 <template>
   <div class="navButton">
     <input
-      placeholder="SEARCH FOR SONGS, ARTISTS OR ALBUMS"
+      placeholder="SEARCH"
       class="input mt-3 mr-3 ml-4"
       v-model="search"
     />
-    Total Songs: {{ filteredHeroes.length }}
+    Total Heroes: {{ filteredHeroes.length }}
   </div>
   <div class="flex flex-wrap mb-5">
     <div v-for="hero in filteredHeroes" :key="hero.id">

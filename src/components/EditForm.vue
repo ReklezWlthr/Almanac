@@ -62,9 +62,9 @@
     <div class="w-1/4 mt-5 ml-12">
       <div class="text-paleViolet text-2xl font-bold mb-5">Abilities</div>
       <div
-        class="relative whitespace-pre-wrap text-paleViolet bg-darkViolet p-5 rounded-xl w-ability overflow-auto mb-5"
+        class="relative text-paleViolet bg-darkViolet p-5 rounded-xl w-ability overflow-visible mb-5"
         v-for="ability in baseHeroInfo.abilities"
-        :key="ability.name"
+        :key="ability"
       >
         <span
           class="absolute z-10 text-8xl font-black opacity-20 italic right-4 -top-3"
@@ -73,27 +73,37 @@
         <div class="flex flex-col pb-2">
           <div class="font-bold text-2xl pr-6">
             <div class="mb-4 mr-4 inline-block">Ability Name</div>
-            <input class="input" v-model="ability.name" />
+            <input type="text" class="input" v-model="ability.name" />
+            <button
+              v-if="ability.slot != 'P'"
+              class="ml-2 mb-2 font-bold bg-PB text-paleViolet text-base px-3 py-1 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100"
+              @click="addSubAbility(ability.slot)"
+            >
+              Add Sub Ability
+            </button>
           </div>
           <div class="flex flex-wrap">
-            <span
+            <div
               v-for="(desc, head) in ability.header"
               :key="head"
-              class="uppercase px-2 text-sm whitespace-nowrap py-1 inline-block w-1/2"
-              ><span class="font-bold inline-block w-1/2">{{ head }}</span
-              ><input
-                type="text"
-                class=" rounded-3xl w-2/5 bg-paleViolet focus:outline-none text-sm font-semibold text-darkViolet px-2 py-1"
-                v-model="ability.header[head]"
-            /></span>
+              class="uppercase px-2 text-sm whitespace-nowrap py-1 w-1/2"
+              ><div class="font-bold inline-block w-1/2">{{ head }}</div
+              ><QuillEditor
+              style="font-family: Dosis; font-size: 0.75rem; height: 2.65rem;"
+            class="text-paleViolet font-normal bg-lightPB bg-opacity-10 rounded-lg"
+            v-model:content="ability.header[head]"
+            contentType="html"
+            theme="bubble"
+          /></div>
           </div>
         </div>
         <div class="py-2 border-t-2">
           <QuillEditor
-            style="font-family: Dosis"
-            class="text-paleViolet"
+            style="font-family: Dosis; font-size: 1rem"
+            class="text-paleViolet bg-lightPB bg-opacity-10 rounded-lg"
             v-model:content="ability.desc"
             contentType="html"
+            theme="bubble"
           />
         </div>
         <div class="pt-2 border-t-2" v-if="ability.slot != 'P'">
@@ -106,67 +116,86 @@
               Add New Scaling
             </button>
           </div>
-          <div class="flex flex-wrap">
-          <div v-for="item in ability.scaling" :key="item" class="w-1/2 pb-3">
+          <div class="grid grid-cols-2 gap-x-5">
+          <div v-for="item in ability.scaling" :key="item" class="pb-3">
             <div class="uppercase font-bold pb-2">
               <div class="w-14 inline-block">Key</div>
-              <input type="text" class="rounded-3xl bg-paleViolet focus:outline-none text-sm font-semibold text-darkViolet px-2 py-1" v-model="item.key" />
+              <input type="text" class="input w-2/3 text-sm" v-model="item.key" />
             </div>
-            <div class="uppercase font-bold">
-              <div class="w-14 inline-block">Value</div>
-              <input type="text" class="rounded-3xl bg-paleViolet focus:outline-none text-sm font-semibold text-darkViolet px-2 py-1" v-model="item.value" />
+            <div class="font-bold">
+              <div class="uppercase w-14 inline-block mb-1">Value</div>
+              <QuillEditor
+              style="font-family: Dosis; font-size: 0.875rem"
+            class="text-paleViolet font-normal bg-lightPB bg-opacity-10 rounded-lg"
+            v-model:content="item.value"
+            contentType="html"
+            theme="bubble"
+          />
             </div>
           </div>
           </div>
         </div>
-        <div v-if="ability.slot != 'P'" class="flex flex-col py-2 border-t-2">
+        <div v-if="ability.slot != 'P'">
+        <div v-for="(subAbility, index) in ability.subAbility" :key="index">
+        <div class="flex flex-col py-2 border-t-2">
           <div class="font-bold text-2xl pr-6">
             <div class="mb-4 mr-4 inline-block">Sub Ability Name</div>
-            <input type="text" class="input" v-model="ability.subAbility.name" />
+            <input type="text" class="input" v-model="subAbility.name" />
           </div>
           <div class="flex flex-wrap">
-            <span
-              v-for="(desc, head) in ability.subAbility.header"
+            <div
+              v-for="(desc, head) in subAbility.header"
               :key="head"
-              class="uppercase px-2 text-sm whitespace-nowrap py-1 inline-block w-1/2"
-              ><span class="font-bold inline-block w-1/2">{{ head }}</span
-              ><input
-                type="text"
-                class=" rounded-3xl w-2/5 bg-paleViolet focus:outline-none text-sm font-semibold text-darkViolet px-2 py-1"
-                v-model="ability.subAbility.header[head]"
-            /></span>
+              class="uppercase px-2 text-sm whitespace-nowrap py-1 w-1/2"
+              ><div class="font-bold inline-block w-1/2">{{ head }}</div
+              ><QuillEditor
+              style="font-family: Dosis; font-size: 0.75rem; height: 2.65rem;"
+            class="text-paleViolet font-normal bg-lightPB bg-opacity-10 rounded-lg"
+            v-model:content="subAbility.header[head]"
+            contentType="html"
+            theme="bubble"
+          /></div>
           </div>
         </div>
-        <div v-if="ability.slot != 'P'" class="py-2 border-t-2">
+        <div class="py-2 border-t-2">
           <QuillEditor
-            style="font-family: Dosis"
-            class="text-paleViolet"
-            v-model:content="ability.subAbility.desc"
+          style="font-family: Dosis; font-size: 1rem"
+            class="text-paleViolet bg-lightPB bg-opacity-10 rounded-lg"
+            v-model:content="subAbility.desc"
             contentType="html"
+            theme="bubble"
           />
         </div>
-        <div class="pt-2 border-t-2" v-if="ability.slot != 'P'">
+        <div class="pt-2 border-t-2">
           <div class="font-bold text-xl pb-4">
             Scaling
             <button
               class="ml-2 font-bold bg-PB text-paleViolet text-lg px-3 py-1 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100"
-              @click="addSubAbilityScaling(ability.slot)"
+              @click="addSubAbilityScaling(ability.slot, index)"
             >
               Add New Scaling
             </button>
           </div>
-          <div class="flex flex-wrap">
-          <div v-for="item in ability.subAbility.scaling" :key="item" class="w-1/2 pb-3">
-            <div class="uppercase font-bold pb-2">
-              <div class="w-14 inline-block">Key</div>
-              <input type="text" class="rounded-3xl bg-paleViolet focus:outline-none text-sm font-semibold text-darkViolet px-2 py-1" v-model="item.key" />
+          <div class="grid grid-cols-2 gap-x-5">
+          <div v-for="item in subAbility.scaling" :key="item" class="pb-3">
+            <div class="font-bold pb-2">
+              <div class="uppercase w-14 inline-block">Key</div>
+              <input type="text" class="input w-2/3 text-sm" v-model="item.key" />
             </div>
             <div class="uppercase font-bold">
-              <div class="w-14 inline-block">Value</div>
-              <input type="text" class="rounded-3xl bg-paleViolet focus:outline-none text-sm font-semibold text-darkViolet px-2 py-1" v-model="item.value" />
+              <div class="w-14 inline-block mb-1">Value</div>
+              <QuillEditor
+              style="font-family: Dosis; font-size: 0.875rem"
+            class="text-paleViolet font-normal bg-lightPB bg-opacity-10 rounded-lg"
+            v-model:content="item.value"
+            contentType="html"
+            theme="bubble"
+          />
             </div>
           </div>
           </div>
+        </div>
+        </div>
         </div>
       </div>
     </div>
@@ -195,10 +224,36 @@ export default {
         }
       }
     },
-    addSubAbilityScaling(slot){
+    addSubAbility(slot){
       for(let ability of this.baseHeroInfo.abilities){
         if(ability.slot == slot){
-          ability.subAbility.scaling.push({key: "", value: ""});
+          ability.subAbility.push({
+            "header": {
+              "range": "",
+              "target range": "",
+              "effect radius": "",
+              "tether radius": "",
+              "width": "",
+              "angle": "",
+              "speed": "",
+              "cast time": "",
+              "cost": "",
+              "cooldown": "",
+              "static cooldown": "",
+              "target immunity": ""
+            },
+            "name": "",
+            "desc": "",
+            "scaling": []
+          });
+          console.log(ability)
+        }
+      }
+    },
+    addSubAbilityScaling(slot, index){
+      for(let ability of this.baseHeroInfo.abilities){
+        if(ability.slot == slot){
+          ability.subAbility[index].scaling.push({key: "", value: ""});
           console.log(ability.subAbility)
         }
       }
@@ -207,18 +262,28 @@ export default {
   created() {
     for (let ability of this.baseHeroInfo.abilities) {
       ability.desc = decodeURIComponent(ability.desc);
+      for (let head in ability.header) {
+        console.log(ability.header[head])
+          ability.header[head] = decodeURIComponent(ability.header[head]);
+        }
       if (ability.scaling) {
         for (let item of ability.scaling) {
           item.value = decodeURIComponent(item.value);
         }
       }
       if(ability.slot != 'P'){
-      ability.subAbility.desc = decodeURIComponent(ability.subAbility.desc);
-      if (ability.subAbility.scaling) {
-        for (let item of ability.subAbility.scaling) {
-          item.value = decodeURIComponent(item.value);
+        for(let subAbility of ability.subAbility){
+          subAbility.desc = decodeURIComponent(subAbility.desc);
+          for (let head in subAbility.header) {
+          subAbility.header[head] = decodeURIComponent(subAbility.header[head]);
         }
+          if (subAbility.scaling) {
+          for (let item of subAbility.scaling) {
+            item.value = decodeURIComponent(item.value);
+            console.log(item)
+          }
       }
+        }
       }
     }
   },
