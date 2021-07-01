@@ -26,6 +26,7 @@
           <option class="text-darkViolet" value="Melee">Melee</option>
           <option class="text-darkViolet" value="Range">Range</option>
     </select>
+    <button class="mr-3 font-bold bg-PB text-paleViolet text-base px-3 py-1 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100" @click="clear">Clear</button>
     Total Heroes: {{ filteredHeroes.length }}
   </div>
   <div class="grid grid-cols-5 mb-5">
@@ -75,6 +76,11 @@ export default {
       }
       return comparison;
     },
+    clear() {
+      this.search = "";
+      this.filterClass = "";
+      this.filterType = "";
+    }
   },
   computed: {
     filteredHeroes() {
