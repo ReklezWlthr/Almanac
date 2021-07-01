@@ -78,7 +78,7 @@
         <div v-for="stat in currentHero.stats" :key="stat" class="text-paleViolet text-sm uppercase" :class="{'w-1/2': stat.base}">
         <div v-if="stat.base && view" class="flex px-4 py-2">
         <img :src="getIcon(stat.name)" class="w-4 h-4 mr-2"/>
-              <div class="preventOverflow w-1/2 font-bold">{{ stat.name }}</div>: {{ stat.name == 'Crit Damage' || stat.name == 'Secondary Bar' || (stat.name == 'Mana' && currentHero.resource == 'N/A') ? stat.base : parseFloat(stat.base) }} {{ parseFloat(stat.growth) ? ' - ' + (parseFloat(stat.base) + (parseFloat(stat.growth) * 17)) : '' }}
+              <div class="preventOverflow w-1/2 font-bold">{{ stat.name }}</div>: {{ stat.name == 'Crit Damage' || stat.name == 'Secondary Bar' || (stat.name == 'Mana' && currentHero.resource == 'N/A') ? stat.base : parseFloat(stat.base) }} {{ parseFloat(stat.growth) ? ' - ' + (Math.round((parseFloat(stat.base) + (parseFloat(stat.growth) * 17)) * 100 ) / 100) : '' }}
         </div>
         <div v-if="stat.base && !view" class="flex px-4 py-2">
         <img :src="getIcon(stat.name)" class="w-4 h-4 mr-2"/>
@@ -91,7 +91,7 @@
         class="flex flex-wrap gap-y-1 h-26 overflow-auto bg-darkViolet rounded-xl py-3"
       >
         <div v-for="stat in currentHero.attackSpeed" :key="stat" class="text-paleViolet text-sm uppercase w-1/2 flex flex-wrap px-4 py-2">
-          <div class="font-bold">{{ stat.name }}</div>: {{ stat.name == 'Bonus Attack Speed' ? (view ? '0% - ' + (parseFloat(stat.base) * 17) + '%' : stat.base + '%' ) : stat.base }}
+          <div class="font-bold">{{ stat.name }}</div>: {{ stat.name == 'Bonus Attack Speed' ? (view ? '0% - ' + (Math.round((parseFloat(stat.base) * 17) * 100) / 100) + '%' : stat.base + '%' ) : stat.base }}
         </div>
       </div>
       <div class="text-paleViolet text-2xl font-bold my-5">Ratings</div>

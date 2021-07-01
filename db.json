@@ -1435,13 +1435,13 @@
       "stats": [
         {
           "name": "Health",
-          "base": "",
-          "growth": ""
+          "base": "530",
+          "growth": "88"
         },
         {
           "name": "Mana",
-          "base": "",
-          "growth": ""
+          "base": "349",
+          "growth": "38"
         },
         {
           "name": "Stamina",
@@ -1450,13 +1450,13 @@
         },
         {
           "name": "Health Regen",
-          "base": "",
-          "growth": ""
+          "base": "3.25",
+          "growth": "0.55"
         },
         {
           "name": "Mana Regen",
-          "base": "",
-          "growth": ""
+          "base": "8.18",
+          "growth": "0.7"
         },
         {
           "name": "Stamina Regen",
@@ -1469,18 +1469,18 @@
         },
         {
           "name": "Armor",
-          "base": "",
-          "growth": ""
+          "base": "26",
+          "growth": "3"
         },
         {
           "name": "Attack Damage",
-          "base": "",
-          "growth": ""
+          "base": "57",
+          "growth": "3"
         },
         {
           "name": "Magic Resist",
-          "base": "",
-          "growth": ""
+          "base": "30",
+          "growth": "0.5"
         },
         {
           "name": "Crit Damage",
@@ -1488,21 +1488,21 @@
         },
         {
           "name": "Move Speed",
-          "base": ""
+          "base": "335"
         },
         {
           "name": "Range",
-          "base": ""
+          "base": "500"
         }
       ],
       "attackSpeed": [
         {
           "name": "Base Attack Speed",
-          "base": ""
+          "base": "0.658"
         },
         {
           "name": "Missile Speed",
-          "base": "N/A"
+          "base": "2800"
         },
         {
           "name": "Attack Speed Ratio",
@@ -1510,33 +1510,33 @@
         },
         {
           "name": "Bonus Attack Speed",
-          "base": ""
+          "base": "3.3"
         }
       ],
       "ratings": [
         {
           "name": "Damage",
-          "base": ""
+          "base": "3"
         },
         {
           "name": "Toughness",
-          "base": ""
+          "base": "2"
         },
         {
           "name": "Control",
-          "base": ""
+          "base": "1"
         },
         {
           "name": "Mobility",
-          "base": ""
+          "base": "3"
         },
         {
           "name": "Utility",
-          "base": ""
+          "base": "1"
         },
         {
           "name": "Difficulty",
-          "base": ""
+          "base": "3"
         }
       ],
       "abilities": [
@@ -2083,13 +2083,13 @@
       "stats": [
         {
           "name": "Health",
-          "base": "",
-          "growth": ""
+          "base": "520",
+          "growth": "86"
         },
         {
           "name": "Mana",
-          "base": "",
-          "growth": ""
+          "base": "500",
+          "growth": "40"
         },
         {
           "name": "Stamina",
@@ -2098,13 +2098,13 @@
         },
         {
           "name": "Health Regen",
-          "base": "",
-          "growth": ""
+          "base": "5",
+          "growth": "0.8"
         },
         {
           "name": "Mana Regen",
-          "base": "",
-          "growth": ""
+          "base": "8.75",
+          "growth": "0.5"
         },
         {
           "name": "Stamina Regen",
@@ -2117,18 +2117,18 @@
         },
         {
           "name": "Armor",
-          "base": "",
-          "growth": ""
+          "base": "32",
+          "growth": "3.9"
         },
         {
           "name": "Attack Damage",
-          "base": "",
-          "growth": ""
+          "base": "62",
+          "growth": "3.5"
         },
         {
-          "name": "Magic Resistance",
-          "base": "",
-          "growth": ""
+          "name": "Magic Resist",
+          "base": "32.1",
+          "growth": "1.25"
         },
         {
           "name": "Crit Damage",
@@ -2136,17 +2136,17 @@
         },
         {
           "name": "Move Speed",
-          "base": ""
+          "base": "335"
         },
         {
           "name": "Range",
-          "base": ""
+          "base": "300"
         }
       ],
       "attackSpeed": [
         {
           "name": "Base Attack Speed",
-          "base": ""
+          "base": "0.635"
         },
         {
           "name": "Missile Speed",
@@ -2158,33 +2158,33 @@
         },
         {
           "name": "Bonus Attack Speed",
-          "base": ""
+          "base": "3"
         }
       ],
       "ratings": [
         {
           "name": "Damage",
-          "base": ""
+          "base": "2"
         },
         {
           "name": "Toughness",
-          "base": ""
+          "base": "2"
         },
         {
           "name": "Control",
-          "base": ""
+          "base": "3"
         },
         {
           "name": "Mobility",
-          "base": ""
+          "base": "1"
         },
         {
           "name": "Utility",
-          "base": ""
+          "base": "3"
         },
         {
           "name": "Difficulty",
-          "base": ""
+          "base": "3"
         }
       ],
       "abilities": [
