@@ -59,7 +59,7 @@ export default {
     "launch-edit-page",
     "delete-hero",
   ],
-  props: ["url"],
+  props: ["heroList", "url"],
   methods: {
     showHero(id) {
       this.$emit("display-hero", id);

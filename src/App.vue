@@ -10,6 +10,7 @@
     </div>
   </div>
   <router-view
+    :hero-list="heroList"
     :url="url"
     @edit-hero="editHero"
     @launch-edit-page="launchEditPage"
