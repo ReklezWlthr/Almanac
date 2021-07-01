@@ -50,22 +50,22 @@ export default {
           "growth": ""
         },
         {
-          "name": "Health Regeneration",
+          "name": "Health Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Mana Regeneration",
+          "name": "Mana Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Stamina Regeneration",
+          "name": "Stamina Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Secondary Resource",
+          "name": "Secondary Bar",
           "base": ""
         },
         {
@@ -79,16 +79,16 @@ export default {
           "growth": ""
         },
         {
-          "name": "Magic Resistance",
+          "name": "Magic Resist",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Critical Strike Damage",
+          "name": "Crit Damage",
           "base": "175%"
         },
         {
-          "name": "Movement Speed",
+          "name": "Move Speed",
           "base": ""
         },
         {
@@ -288,21 +288,21 @@ export default {
       }
       if(newHeroBuffer.resource == 'Mana'){
         for(let stat in newHeroBuffer.stats){
-          if(stat.name == 'Stamina' || stat.name == 'Stamina Regeneration' || stat.name == 'Secondary Resource'){
+          if(stat.name == 'Stamina' || stat.name == 'Stamina Regen' || stat.name == 'Secondary Bar'){
             stat.base = null;
             stat.growth = null;
           }
         }
       } else if(newHeroBuffer.resource == 'Stamina'){
         for(let stat in newHeroBuffer.stats){
-          if(stat.name == 'Mana' || stat.name == 'Mana Regeneration' || stat.name == 'Secondary Resource'){
+          if(stat.name == 'Mana' || stat.name == 'Mana Regen' || stat.name == 'Secondary Bar'){
             stat.base = null;
             stat.growth = null;
           }
         }
       } else if(newHeroBuffer.resource == 'Secondary Resource'){
         for(let stat in newHeroBuffer.stats){
-          if(stat.name == 'Stamina Regeneration' || stat.name == 'Mana Regeneration' || stat.name == 'Stamina'){
+          if(stat.name == 'Stamina Regen' || stat.name == 'Mana Regen' || stat.name == 'Stamina'){
             stat.base = null;
             stat.growth = null;
           }

@@ -78,11 +78,11 @@
         <div v-for="stat in currentHero.stats" :key="stat" class="text-paleViolet text-sm uppercase" :class="{'w-1/2': stat.base}">
         <div v-if="stat.base && view" class="flex px-4 py-2">
         <img :src="getIcon(stat.name)" class="w-4 h-4 mr-2"/>
-              <div class="preventOverflow w-1/2 font-bold">{{ stat.name }}</div>: {{ stat.name == 'Critical Strike Damage' || stat.name == 'Secondary Resource' || (stat.name == 'Mana' && currentHero.resource == 'N/A') ? stat.base : parseFloat(stat.base) }} {{ parseFloat(stat.growth) ? ' - ' + (parseFloat(stat.base) + (parseFloat(stat.growth) * 17)) : '' }}
+              <div class="preventOverflow w-1/2 font-bold">{{ stat.name }}</div>: {{ stat.name == 'Crit Damage' || stat.name == 'Secondary Bar' || (stat.name == 'Mana' && currentHero.resource == 'N/A') ? stat.base : parseFloat(stat.base) }} {{ parseFloat(stat.growth) ? ' - ' + (parseFloat(stat.base) + (parseFloat(stat.growth) * 17)) : '' }}
         </div>
         <div v-if="stat.base && !view" class="flex px-4 py-2">
         <img :src="getIcon(stat.name)" class="w-4 h-4 mr-2"/>
-              <div class="preventOverflow w-1/2 font-bold">{{ stat.name }}</div>: {{ stat.name == 'Critical Strike Damage' || stat.name == 'Secondary Resource' || (stat.name == 'Mana' && currentHero.resource == 'N/A') ? stat.base : parseFloat(stat.base) }} {{ parseFloat(stat.growth) ? ' (+' + parseFloat(stat.growth) + ')' : '' }}
+              <div class="preventOverflow w-1/2 font-bold">{{ stat.name }}</div>: {{ stat.name == 'Crit Damage' || stat.name == 'Secondary Bar' || (stat.name == 'Mana' && currentHero.resource == 'N/A') ? stat.base : parseFloat(stat.base) }} {{ parseFloat(stat.growth) ? ' (+' + parseFloat(stat.growth) + ')' : '' }}
         </div>
         </div>
       </div>
@@ -163,7 +163,7 @@ export default {
       return comparison;
     },
     getIcon(head){
-      return head == 'Secondary Resource' ? require(`../../public/icons/mana regeneration.png`) : require(`../../public/icons/${head.toLowerCase()}.png`);
+      return head == 'Secondary Bar' ? require(`../../public/icons/mana regen.png`) : require(`../../public/icons/${head.toLowerCase()}.png`);
     }
   },
   async created() {

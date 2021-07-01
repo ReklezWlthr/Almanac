@@ -23,22 +23,22 @@
           "growth": "0"
         },
         {
-          "name": "Health Regeneration",
+          "name": "Health Regen",
           "base": "8.5",
           "growth": "0.9"
         },
         {
-          "name": "Mana Regeneration",
+          "name": "Mana Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Stamina Regeneration",
+          "name": "Stamina Regen",
           "base": "50",
           "growth": "0"
         },
         {
-          "name": "Secondary Resource",
+          "name": "Secondary Bar",
           "base": ""
         },
         {
@@ -52,16 +52,16 @@
           "growth": "3.2"
         },
         {
-          "name": "Magic Resistance",
+          "name": "Magic Resist",
           "base": "32.1",
           "growth": "1.25"
         },
         {
-          "name": "Critical Strike Damage",
+          "name": "Crit Damage",
           "base": "175%"
         },
         {
-          "name": "Movement Speed",
+          "name": "Move Speed",
           "base": "345"
         },
         {
@@ -287,22 +287,22 @@
           "growth": ""
         },
         {
-          "name": "Health Regeneration",
+          "name": "Health Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Mana Regeneration",
+          "name": "Mana Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Stamina Regeneration",
+          "name": "Stamina Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Secondary Resource",
+          "name": "Secondary Bar",
           "base": ""
         },
         {
@@ -316,16 +316,16 @@
           "growth": ""
         },
         {
-          "name": "Magic Resistance",
+          "name": "Magic Resist",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Critical Strike Damage",
+          "name": "Crit Damage",
           "base": "175%"
         },
         {
-          "name": "Movement Speed",
+          "name": "Move Speed",
           "base": ""
         },
         {
@@ -589,22 +589,22 @@
           "growth": ""
         },
         {
-          "name": "Health Regeneration",
+          "name": "Health Regen",
           "base": "3.75",
           "growth": "0.65"
         },
         {
-          "name": "Mana Regeneration",
+          "name": "Mana Regen",
           "base": "6",
           "growth": "0.8"
         },
         {
-          "name": "Stamina Regeneration",
+          "name": "Stamina Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Secondary Resource",
+          "name": "Secondary Bar",
           "base": ""
         },
         {
@@ -618,16 +618,16 @@
           "growth": "4.25"
         },
         {
-          "name": "Magic Resistance",
+          "name": "Magic Resist",
           "base": "32.1",
           "growth": "1.25"
         },
         {
-          "name": "Critical Strike Damage",
+          "name": "Crit Damage",
           "base": "175%"
         },
         {
-          "name": "Movement Speed",
+          "name": "Move Speed",
           "base": "335"
         },
         {
@@ -861,22 +861,22 @@
           "growth": ""
         },
         {
-          "name": "Health Regeneration",
+          "name": "Health Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Mana Regeneration",
+          "name": "Mana Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Stamina Regeneration",
+          "name": "Stamina Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Secondary Resource",
+          "name": "Secondary Bar",
           "base": ""
         },
         {
@@ -890,16 +890,16 @@
           "growth": ""
         },
         {
-          "name": "Magic Resistance",
+          "name": "Magic Resist",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Critical Strike Damage",
+          "name": "Crit Damage",
           "base": "175%"
         },
         {
-          "name": "Movement Speed",
+          "name": "Move Speed",
           "base": ""
         },
         {
@@ -1165,22 +1165,22 @@
           "growth": "0"
         },
         {
-          "name": "Health Regeneration",
+          "name": "Health Regen",
           "base": "8.5",
           "growth": "0.65"
         },
         {
-          "name": "Mana Regeneration",
+          "name": "Mana Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Stamina Regeneration",
+          "name": "Stamina Regen",
           "base": "50",
           "growth": "0"
         },
         {
-          "name": "Secondary Resource",
+          "name": "Secondary Bar",
           "base": ""
         },
         {
@@ -1194,16 +1194,16 @@
           "growth": "3.2"
         },
         {
-          "name": "Magic Resistance",
+          "name": "Magic Resist",
           "base": "30",
           "growth": "1.25"
         },
         {
-          "name": "Critical Strike Damage",
+          "name": "Crit Damage",
           "base": "175%"
         },
         {
-          "name": "Movement Speed",
+          "name": "Move Speed",
           "base": "345"
         },
         {
@@ -1449,22 +1449,22 @@
           "growth": ""
         },
         {
-          "name": "Health Regeneration",
+          "name": "Health Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Mana Regeneration",
+          "name": "Mana Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Stamina Regeneration",
+          "name": "Stamina Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Secondary Resource",
+          "name": "Secondary Bar",
           "base": ""
         },
         {
@@ -1478,16 +1478,16 @@
           "growth": ""
         },
         {
-          "name": "Magic Resistance",
+          "name": "Magic Resist",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Critical Strike Damage",
+          "name": "Crit Damage",
           "base": "175%"
         },
         {
-          "name": "Movement Speed",
+          "name": "Move Speed",
           "base": ""
         },
         {
@@ -1825,22 +1825,22 @@
           "growth": ""
         },
         {
-          "name": "Health Regeneration",
+          "name": "Health Regen",
           "base": "8.5",
           "growth": "0.5"
         },
         {
-          "name": "Mana Regeneration",
+          "name": "Mana Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Stamina Regeneration",
+          "name": "Stamina Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Secondary Resource",
+          "name": "Secondary Bar",
           "base": "Reboot Sequence"
         },
         {
@@ -1854,16 +1854,16 @@
           "growth": "3"
         },
         {
-          "name": "Magic Resistance",
+          "name": "Magic Resist",
           "base": "32.1",
           "growth": "1.25"
         },
         {
-          "name": "Critical Strike Damage",
+          "name": "Crit Damage",
           "base": "175%"
         },
         {
-          "name": "Movement Speed",
+          "name": "Move Speed",
           "base": "340"
         },
         {
@@ -2097,22 +2097,22 @@
           "growth": ""
         },
         {
-          "name": "Health Regeneration",
+          "name": "Health Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Mana Regeneration",
+          "name": "Mana Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Stamina Regeneration",
+          "name": "Stamina Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Secondary Resource",
+          "name": "Secondary Bar",
           "base": ""
         },
         {
@@ -2131,11 +2131,11 @@
           "growth": ""
         },
         {
-          "name": "Critical Strike Damage",
+          "name": "Crit Damage",
           "base": "175%"
         },
         {
-          "name": "Movement Speed",
+          "name": "Move Speed",
           "base": ""
         },
         {
@@ -2373,22 +2373,22 @@
           "growth": ""
         },
         {
-          "name": "Health Regeneration",
+          "name": "Health Regen",
           "base": "7",
           "growth": "0.5"
         },
         {
-          "name": "Mana Regeneration",
+          "name": "Mana Regen",
           "base": "8",
           "growth": "1"
         },
         {
-          "name": "Stamina Regeneration",
+          "name": "Stamina Regen",
           "base": "",
           "growth": ""
         },
         {
-          "name": "Secondary Resource",
+          "name": "Secondary Bar",
           "base": ""
         },
         {
@@ -2402,16 +2402,16 @@
           "growth": "2"
         },
         {
-          "name": "Magic Resistance",
+          "name": "Magic Resist",
           "base": "32",
           "growth": "1.5"
         },
         {
-          "name": "Critical Strike Damage",
+          "name": "Crit Damage",
           "base": "175%"
         },
         {
-          "name": "Movement Speed",
+          "name": "Move Speed",
           "base": "330"
         },
         {

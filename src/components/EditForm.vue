@@ -205,14 +205,14 @@
       <div
         class="flex flex-wrap gap-y-1 overflow-auto bg-darkViolet rounded-xl py-3"
       >
-        <div v-for="stat in baseHeroInfo.stats" :key="stat" class="text-paleViolet text-sm uppercase" :class="{'w-1/2': !((baseHeroInfo.resource == 'Mana' && (stat.name == 'Stamina' || stat.name == 'Stamina Regeneration' || stat.name == 'Secondary Resource')) || (baseHeroInfo.resource == 'Stamina' && (stat.name == 'Mana' || stat.name == 'Mana Regeneration' || stat.name == 'Secondary Resource')) || (baseHeroInfo.resource == 'N/A' && (stat.name == 'Stamina' || stat.name == 'Stamina Regeneration' || stat.name == 'Mana Regeneration')))}">
+        <div v-for="stat in baseHeroInfo.stats" :key="stat" class="text-paleViolet text-sm uppercase" :class="{'w-1/2': !((baseHeroInfo.resource == 'Mana' && (stat.name == 'Stamina' || stat.name == 'Stamina Regen' || stat.name == 'Secondary Bar')) || (baseHeroInfo.resource == 'Stamina' && (stat.name == 'Mana' || stat.name == 'Mana Regen' || stat.name == 'Secondary Bar')) || (baseHeroInfo.resource == 'N/A' && (stat.name == 'Stamina' || stat.name == 'Stamina Regen' || stat.name == 'Mana Regen')))}">
         <div 
-        v-if="!((baseHeroInfo.resource == 'Mana' && (stat.name == 'Stamina' || stat.name == 'Stamina Regeneration' || stat.name == 'Secondary Resource')) || (baseHeroInfo.resource == 'Stamina' && (stat.name == 'Mana' || stat.name == 'Mana Regeneration' || stat.name == 'Secondary Resource')) || (baseHeroInfo.resource == 'N/A' && (stat.name == 'Stamina' || stat.name == 'Stamina Regeneration' || stat.name == 'Mana Regeneration')))"
+        v-if="!((baseHeroInfo.resource == 'Mana' && (stat.name == 'Stamina' || stat.name == 'Stamina Regen' || stat.name == 'Secondary Bar')) || (baseHeroInfo.resource == 'Stamina' && (stat.name == 'Mana' || stat.name == 'Mana Regen' || stat.name == 'Secondary Bar')) || (baseHeroInfo.resource == 'N/A' && (stat.name == 'Stamina' || stat.name == 'Stamina Regen' || stat.name == 'Mana Regen')))"
         class="flex flex-col gap-y-3 px-4 py-2 font-bold">
               <div class="flex"><img :src="getIcon(stat.name)" class="w-4 h-4 mr-2"/>{{ stat.name }}:</div>
               <div class="grid grid-cols-2 gap-x-3">
-              <div>Base: <input type="text" v-model="stat.base" class="input" :class="{'w-full': stat.name != 'Range' && stat.name != 'Movement Speed' && stat.name != 'Critical Strike Damage' && stat.name != 'Secondary Resource'}" /></div>
-              <div v-if="stat.name != 'Range' && stat.name != 'Movement Speed' && stat.name != 'Critical Strike Damage' && stat.name != 'Secondary Resource'">Growth: <input type="text" v-model="stat.growth" class="input w-full" /></div>
+              <div>Base: <input type="text" v-model="stat.base" class="input" :class="{'w-full': stat.name != 'Range' && stat.name != 'Move Speed' && stat.name != 'Crit Damage' && stat.name != 'Secondary Bar'}" /></div>
+              <div v-if="stat.name != 'Range' && stat.name != 'Move Speed' && stat.name != 'Crit Damage' && stat.name != 'Secondary Bar'">Growth: <input type="text" v-model="stat.growth" class="input w-full" /></div>
               </div>
         </div>
         </div>
@@ -299,7 +299,7 @@ export default {
       }
     },
     getIcon(head){
-      return head == 'Secondary Resource' ? require(`../../public/icons/mana regeneration.png`) : require(`../../public/icons/${head.toLowerCase()}.png`);
+      return head == 'Secondary Bar' ? require(`../../public/icons/mana regen.png`) : require(`../../public/icons/${head.toLowerCase()}.png`);
     }
   },
   created() {
