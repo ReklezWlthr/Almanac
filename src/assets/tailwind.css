@@ -17,7 +17,7 @@
 }
 
 .input {
-    @apply bg-lightPB bg-opacity-10 rounded-lg focus:outline-none text-base font-semibold px-2 py-1 w-44
+    @apply bg-lightPB bg-opacity-10 rounded-lg focus:outline-none text-base font-semibold px-2 py-1
 }
 
 .displayButton{

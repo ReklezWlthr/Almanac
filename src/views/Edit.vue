@@ -78,6 +78,28 @@ export default {
         }
         }
       }
+      if(newHeroBuffer.resource == 'Mana'){
+        for(let stat in newHeroBuffer.stats){
+          if(stat.name == 'Stamina' || stat.name == 'Stamina Regeneration' || stat.name == 'Secondary Resource'){
+            stat.base = "";
+            stat.growth = "";
+          }
+        }
+      } else if(newHeroBuffer.resource == 'Stamina'){
+        for(let stat in newHeroBuffer.stats){
+          if(stat.name == 'Mana' || stat.name == 'Mana Regeneration' || stat.name == 'Secondary Resource'){
+            stat.base = "";
+            stat.growth = "";
+          }
+        }
+      } else if(newHeroBuffer.resource == 'Secondary Resource'){
+        for(let stat in newHeroBuffer.stats){
+          if(stat.name == 'Stamina Regeneration' || stat.name == 'Mana Regeneration' || stat.name == 'Stamina'){
+            stat.base = "";
+            stat.growth = "";
+          }
+        }
+      }
       const res = await fetch(`${this.url}/${this.heroId}`, {
         method: "PUT",
         headers: {

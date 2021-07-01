@@ -43,53 +43,52 @@ export default {
       "stats": [
         {
           "name": "Health",
-          "base": null,
-          "growth": null
+          "base": "",
+          "growth": ""
         },
         {
           "name": "Mana",
-          "base": null,
-          "growth": null
+          "base": "",
+          "growth": ""
         },
         {
           "name": "Stamina",
-          "base": null,
-          "growth": null
+          "base": "",
+          "growth": ""
         },
         {
           "name": "Health Regeneration",
-          "base": null,
-          "growth": null
+          "base": "",
+          "growth": ""
         },
         {
           "name": "Mana Regeneration",
-          "base": null,
-          "growth": null
+          "base": "",
+          "growth": ""
         },
         {
           "name": "Stamina Regeneration",
-          "base": null,
-          "growth": null
+          "base": "",
+          "growth": ""
         },
         {
           "name": "Secondary Resource",
-          "base": null,
-          "growth": null
+          "base": ""
         },
         {
           "name": "Armor",
-          "base": null,
-          "growth": null
+          "base": "",
+          "growth": ""
         },
         {
           "name": "Attack Damage",
-          "base": null,
-          "growth": null
+          "base": "",
+          "growth": ""
         },
         {
           "name": "Magic Resistance",
-          "base": null,
-          "growth": null
+          "base": "",
+          "growth": ""
         },
         {
           "name": "Critical Strike Damage",
@@ -97,55 +96,55 @@ export default {
         },
         {
           "name": "Movement Speed",
-          "base": null
+          "base": ""
         },
         {
           "name": "Range",
-          "base": null
+          "base": ""
         }
       ],
       "attackSpeed": [
         {
           "name": "Base Attack Speed",
-          "base": null
+          "base": ""
         },
         {
           "name": "Missile Speed",
-          "base": ""
+          "base": "N/A"
         },
         {
           "name": "Attack Speed Ratio",
-          "base": ""
+          "base": "N/A"
         },
         {
           "name": "Bonus Attack Speed",
-          "base": null
+          "base": ""
         }
       ],
       "ratings": [
         {
           "name": "Damage",
-          "base": null
+          "base": ""
         },
         {
           "name": "Toughness",
-          "base": null
+          "base": ""
         },
         {
           "name": "Control",
-          "base": null
+          "base": ""
         },
         {
           "name": "Mobility",
-          "base": null
+          "base": ""
         },
         {
           "name": "Utility",
-          "base": null
+          "base": ""
         },
         {
           "name": "Difficulty",
-          "base": null
+          "base": ""
         }
       ],
       "abilities": [
@@ -287,6 +286,28 @@ export default {
           }
         }
         }
+        }
+      }
+      if(newHeroBuffer.resource == 'Mana'){
+        for(let stat in newHeroBuffer.stats){
+          if(stat.name == 'Stamina' || stat.name == 'Stamina Regeneration' || stat.name == 'Secondary Resource'){
+            stat.base = null;
+            stat.growth = null;
+          }
+        }
+      } else if(newHeroBuffer.resource == 'Stamina'){
+        for(let stat in newHeroBuffer.stats){
+          if(stat.name == 'Mana' || stat.name == 'Mana Regeneration' || stat.name == 'Secondary Resource'){
+            stat.base = null;
+            stat.growth = null;
+          }
+        }
+      } else if(newHeroBuffer.resource == 'Secondary Resource'){
+        for(let stat in newHeroBuffer.stats){
+          if(stat.name == 'Stamina Regeneration' || stat.name == 'Mana Regeneration' || stat.name == 'Stamina'){
+            stat.base = null;
+            stat.growth = null;
+          }
         }
       }
         const res = await fetch(this.url, {

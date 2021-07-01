@@ -58,8 +58,9 @@
       </div>
     </div>
   </div>
-  <div class="flex justify-center gap-x-12">
-    <div class="w-1/4 mt-5 ml-12">
+  <div class="flex justify-center gap-x-12 mt-10">
+    <div class="w-1/6"></div>
+    <div>
       <div class="text-paleViolet text-2xl font-bold mb-5">Abilities</div>
       <div
         class="relative text-paleViolet bg-darkViolet p-5 rounded-xl w-ability overflow-visible mb-5"
@@ -199,7 +200,46 @@
         </div>
       </div>
     </div>
-    <div class="mt-4">
+    <div class="w-stat">
+      <div class="text-paleViolet text-2xl font-bold mb-5">Base Statistics</div>
+      <div
+        class="flex flex-wrap gap-y-1 overflow-auto bg-darkViolet rounded-xl py-3"
+      >
+        <div v-for="stat in baseHeroInfo.stats" :key="stat" class="text-paleViolet text-sm uppercase" :class="{'w-1/2': !((baseHeroInfo.resource == 'Mana' && (stat.name == 'Stamina' || stat.name == 'Stamina Regeneration' || stat.name == 'Secondary Resource')) || (baseHeroInfo.resource == 'Stamina' && (stat.name == 'Mana' || stat.name == 'Mana Regeneration' || stat.name == 'Secondary Resource')) || (baseHeroInfo.resource == 'N/A' && (stat.name == 'Stamina' || stat.name == 'Stamina Regeneration' || stat.name == 'Mana Regeneration')))}">
+        <div 
+        v-if="!((baseHeroInfo.resource == 'Mana' && (stat.name == 'Stamina' || stat.name == 'Stamina Regeneration' || stat.name == 'Secondary Resource')) || (baseHeroInfo.resource == 'Stamina' && (stat.name == 'Mana' || stat.name == 'Mana Regeneration' || stat.name == 'Secondary Resource')) || (baseHeroInfo.resource == 'N/A' && (stat.name == 'Stamina' || stat.name == 'Stamina Regeneration' || stat.name == 'Mana Regeneration')))"
+        class="flex flex-col gap-y-3 px-4 py-2 font-bold">
+              <div class="flex"><img :src="getIcon(stat.name)" class="w-4 h-4 mr-2"/>{{ stat.name }}:</div>
+              <div class="grid grid-cols-2 gap-x-3">
+              <div>Base: <input type="text" v-model="stat.base" class="input" :class="{'w-full': stat.name != 'Range' && stat.name != 'Movement Speed' && stat.name != 'Critical Strike Damage' && stat.name != 'Secondary Resource'}" /></div>
+              <div v-if="stat.name != 'Range' && stat.name != 'Movement Speed' && stat.name != 'Critical Strike Damage' && stat.name != 'Secondary Resource'">Growth: <input type="text" v-model="stat.growth" class="input w-full" /></div>
+              </div>
+        </div>
+        </div>
+      </div>
+      <div class="text-paleViolet text-2xl font-bold my-5"><img :src="getIcon('Attack Speed')" class="inline w-5 h-5 mr-3 -mt-1"/>Attack Speed</div>
+      <div
+        class="flex flex-wrap gap-y-1 h-26 overflow-auto bg-darkViolet rounded-xl py-3"
+      >
+        <div v-for="stat in baseHeroInfo.attackSpeed" :key="stat" class="text-paleViolet text-sm uppercase w-1/2 flex flex-wrap px-4 py-2">
+          <div class="font-bold mb-1">{{ stat.name }}</div>: <input type="text" v-model="stat.base" class="input w-full"/>
+        </div>
+      </div>
+      <div class="text-paleViolet text-2xl font-bold my-5">Ratings</div>
+      <div
+        class="flex flex-wrap gap-y-1 justify-around h-26 overflow-auto bg-darkViolet rounded-xl py-3"
+      >
+        <div v-for="stat in baseHeroInfo.ratings" :key="stat" class="text-paleViolet w-1/10 font-bold text-sm uppercase -ml-4 py-2">
+          <div class="inline-block w-1/6">{{ stat.name }}</div>
+          <div>
+          <select v-model="stat.base" class="input">
+          <option class="text-darkViolet" value="1">1</option>
+          <option class="text-darkViolet" value="2">2</option>
+          <option class="text-darkViolet" value="3">3</option>
+        </select>
+        </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -257,6 +297,9 @@ export default {
           console.log(ability.subAbility)
         }
       }
+    },
+    getIcon(head){
+      return head == 'Secondary Resource' ? require(`../../public/icons/mana regeneration.png`) : require(`../../public/icons/${head.toLowerCase()}.png`);
     }
   },
   created() {
