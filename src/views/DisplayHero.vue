@@ -108,13 +108,18 @@
 
 <script>
 export default {
+  emits: ["edit-hero",
+    "upload-hero",
+    "display-hero",
+    "launch-edit-page",
+    "delete-hero",],
+    props: ['url'],
   data() {
     return {
       content: '',
       heroId: this.$route.params.id,
       currentHero: null,
       heroes: [],
-      url: "http://localhost:5000/heroes",
       loaded: false,
       view: true,
     };
@@ -134,11 +139,11 @@ export default {
     async deleteHero() {
       const con = confirm("Are you sure that you want to delete this hero?");
       if (con) {
-        const res = await fetch(`${this.url}/${this.heroId}`, {
+        const res = await fetch(`${this.url}/${this.currentHero.id}`, {
           method: "DELETE",
         });
         if (res.status === 200) {
-          this.$emit("delete-hero", this.heroId - 1);
+          this.$emit("delete-hero", this.currentHero.id);
           window.location.href = '/';
         } else {
           alert("Failed to delete hero");

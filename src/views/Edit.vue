@@ -28,13 +28,12 @@
 
 <script>
 export default {
-  emits: [
-    "edit-song",
-    "upload-song",
-    "display-song",
+  emits: ["edit-hero",
+    "upload-hero",
+    "display-hero",
     "launch-edit-page",
-    "delete-song",
-  ],
+    "delete-hero",],
+    props: ['url'],
   data() {
     return {
       heroId: this.$route.params.id,
@@ -43,11 +42,7 @@ export default {
       loaded: false,
     };
   },
-  props: ["songList", "url"],
   methods: {
-    updateValue(lyrics) {
-      this.lyrics = lyrics;
-    },
     async edit() {
       const newHeroBuffer = JSON.parse(JSON.stringify(this.currentHero));
       for (let ability of newHeroBuffer.abilities) {

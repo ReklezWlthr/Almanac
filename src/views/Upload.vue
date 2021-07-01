@@ -25,13 +25,6 @@
 
 <script>
 export default {
-  emits: [
-    "edit-song",
-    "upload-song",
-    "display-song",
-    "launch-edit-page",
-    "delete-song",
-  ],
   data() {
     return {
       newHero:     {
@@ -256,7 +249,12 @@ export default {
       src: require(`../assets/default.jpg`),
     };
   },
-  props: ["songList", "url"],
+  emits: ["edit-hero",
+    "upload-hero",
+    "display-hero",
+    "launch-edit-page",
+    "delete-hero",],
+    props: ['url'],
   methods: {
     async upload() {
         const newHeroBuffer = JSON.parse(JSON.stringify(this.newHero));

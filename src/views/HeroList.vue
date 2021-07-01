@@ -53,13 +53,13 @@ export default {
     };
   },
   emits: [
-    "edit-song",
-    "upload-song",
+    "edit-hero",
+    "upload-hero",
     "display-hero",
     "launch-edit-page",
-    "delete-song",
+    "delete-hero",
   ],
-  props: ["heroList", "url"],
+  props: ["url"],
   methods: {
     showHero(id) {
       this.$emit("display-hero", id);

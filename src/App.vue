@@ -10,13 +10,12 @@
     </div>
   </div>
   <router-view
-    :hero-list="heroList"
     :url="url"
     @edit-hero="editHero"
     @launch-edit-page="launchEditPage"
-    @upload-song="uploadSong"
+    @upload-hero="uploadHero"
     @display-hero="displayHero"
-    @delete-song="deleteSong"
+    @delete-hero="deleteHero"
   ></router-view>
 </template>
 
@@ -41,11 +40,11 @@ export default {
         hero.id == data.id ? data : hero
       );
     },
-    uploadSong(data){
+    uploadHero(data){
       this.heroList.push(data);
     },
-    deleteSong(id){
-      this.heroList = this.heroList.filter(song => song.id != id);
+    deleteHero(id){
+      this.heroList = this.heroList.filter(hero => hero.id != id);
     },
     displayHero(id){
       this.setPath(id);
