@@ -33,7 +33,7 @@
         <span class="absolute z-10 text-8xl font-black opacity-20 italic right-4 -top-3">{{ ability.slot }}</span>
         <div class="flex pb-2">
           <div class="font-bold text-2xl pr-6 whitespace-nowrap">{{ ability.name }}</div>
-          <div class="flex flex-wrap"><span v-for="(desc, head) in ability.header" :key="head" class="uppercase text-sm whitespace-nowrap"><span class="px-2" v-if="desc"><span class="font-bold">{{ head }}</span>: <span v-html="decodeURIComponent(desc).slice(3, -4)"></span></span></span></div>
+          <div class="flex flex-wrap"><span v-for="(desc, head) in ability.header" :key="head" class="uppercase text-sm whitespace-nowrap"><span class="px-2" v-if="decodeURIComponent(desc).slice(3, -4) !== '<BR>' && desc"><span class="font-bold">{{ head }}</span>: <span v-html="decodeURIComponent(desc).slice(3, -4)"></span></span></span></div>
         </div>
         <div class="py-2 border-t-2" v-html="decodeURIComponent(ability.desc)"></div>
         <div class="py-2 border-t-2 flex flex-wrap text-sm gap-y-3" v-if="ability.slot != 'P' && ability.scaling.length">
@@ -46,7 +46,7 @@
         <div v-for="subAbility in ability.subAbility" :key="subAbility">
         <div class="flex pb-2 pt-5">
           <div class="font-bold text-2xl pr-6 whitespace-nowrap">{{ subAbility.name }}</div>
-          <div class="flex flex-wrap"><span v-for="(desc, head) in subAbility.header" :key="head" class="uppercase text-sm whitespace-nowrap"><span class="px-2" v-if="desc"><span class="font-bold">{{ head }}</span>: <span v-html="decodeURIComponent(desc).slice(3, -4)"></span></span></span></div>
+          <div class="flex flex-wrap"><span v-for="(desc, head) in subAbility.header" :key="head" class="uppercase text-sm whitespace-nowrap"><span class="px-2" v-if="decodeURIComponent(desc).slice(3, -4) !== '<BR>' && desc"><span class="font-bold">{{ head }}</span>: <span v-html="decodeURIComponent(desc).slice(3, -4)"></span></span></span></div>
         </div>
         <div class="py-2 border-t-2" v-html="decodeURIComponent(subAbility.desc)"></div>
         <div class="pt-2 border-t-2 flex flex-wrap text-sm gap-y-3">

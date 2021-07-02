@@ -107,7 +107,7 @@
               ><div class="font-bold inline-block w-1/2">{{ head }}</div
               ><QuillEditor
               style="font-family: Dosis; font-size: 0.75rem; height: 2.65rem;"
-            class="text-paleViolet font-normal bg-lightPB bg-opacity-10 rounded-lg"
+            class="font-normal bg-lightPB bg-opacity-10 rounded-lg"
             v-model:content="ability.header[head]"
             contentType="html"
             theme="bubble"
@@ -171,7 +171,7 @@
               ><div class="font-bold inline-block w-1/2">{{ head }}</div
               ><QuillEditor
               style="font-family: Dosis; font-size: 0.75rem; height: 2.65rem;"
-            class="text-paleViolet font-normal bg-lightPB bg-opacity-10 rounded-lg"
+            class="text-paleViolet bg-lightPB bg-opacity-10 rounded-lg"
             v-model:content="subAbility.header[head]"
             contentType="html"
             theme="bubble"
@@ -295,6 +295,7 @@ export default {
             "header": {
               "range": "",
               "target range": "",
+              "collision radius": "",
               "effect radius": "",
               "tether radius": "",
               "width": "",
@@ -304,6 +305,7 @@ export default {
               "cost": "",
               "cooldown": "",
               "static cooldown": "",
+              "recharge": "",
               "target immunity": ""
             },
             "name": "",
@@ -380,7 +382,6 @@ export default {
     for (let ability of this.baseHeroInfo.abilities) {
       ability.desc = decodeURIComponent(ability.desc);
       for (let head in ability.header) {
-        console.log(ability.header[head])
           ability.header[head] = decodeURIComponent(ability.header[head]);
         }
       if (ability.scaling) {
@@ -397,7 +398,6 @@ export default {
           if (subAbility.scaling) {
           for (let item of subAbility.scaling) {
             item.value = decodeURIComponent(item.value);
-            console.log(item)
           }
       }
         }

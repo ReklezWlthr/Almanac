@@ -14,7 +14,7 @@ export default {
       newHero:     {
       "name": "",
       "title": "",
-      "resource": "",
+      "resource": "Mana",
       "attackType": "",
       "class": "",
       "stats": [
@@ -130,6 +130,7 @@ export default {
           "header": {
             "range": "",
             "target range": "",
+            "collision radius": "",
             "effect radius": "",
             "tether radius": "",
             "width": "",
@@ -139,6 +140,7 @@ export default {
             "cost": "",
             "cooldown": "",
             "static cooldown": "",
+            "recharge": "",
             "target immunity": ""
           },
           "name": "",
@@ -149,6 +151,7 @@ export default {
           "header": {
             "range": "",
             "target range": "",
+            "collision radius": "",
             "effect radius": "",
             "tether radius": "",
             "width": "",
@@ -158,6 +161,7 @@ export default {
             "cost": "",
             "cooldown": "",
             "static cooldown": "",
+            "recharge": "",
             "target immunity": ""
           },
           "name": "",
@@ -170,6 +174,7 @@ export default {
           "header": {
             "range": "",
             "target range": "",
+            "collision radius": "",
             "effect radius": "",
             "tether radius": "",
             "width": "",
@@ -179,6 +184,7 @@ export default {
             "cost": "",
             "cooldown": "",
             "static cooldown": "",
+            "recharge": "",
             "target immunity": ""
           },
           "name": "",
@@ -191,6 +197,7 @@ export default {
           "header": {
             "range": "",
             "target range": "",
+            "collision radius": "",
             "effect radius": "",
             "tether radius": "",
             "width": "",
@@ -200,6 +207,7 @@ export default {
             "cost": "",
             "cooldown": "",
             "static cooldown": "",
+            "recharge": "",
             "target immunity": ""
           },
           "name": "",
@@ -212,6 +220,7 @@ export default {
           "header": {
             "range": "",
             "target range": "",
+            "collision radius": "",
             "effect radius": "",
             "tether radius": "",
             "width": "",
@@ -221,6 +230,7 @@ export default {
             "cost": "",
             "cooldown": "",
             "static cooldown": "",
+            "recharge": "",
             "target immunity": ""
           },
           "name": "",
@@ -245,7 +255,6 @@ export default {
         for (let ability of newHeroBuffer.abilities) {
         ability.desc = encodeURIComponent(ability.desc);
         for (let head in ability.header) {
-          ability.header[head] = ability.header[head].toUpperCase();
           ability.header[head] = encodeURIComponent(ability.header[head]);
         }
         if (ability.scaling) {
@@ -258,7 +267,6 @@ export default {
         for(let subAbility of ability.subAbility){
         subAbility.desc = encodeURIComponent(ability.subAbility.desc);
         for (let head in subAbility.header) {
-          subAbility.header[head] = subAbility.header[head].toUpperCase();
           subAbility.header[head] = encodeURIComponent(subAbility.header[head]);
         }
         if (subAbility.scaling) {
