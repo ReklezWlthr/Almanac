@@ -56,6 +56,22 @@
           <option class="text-darkViolet" value="Range">Range</option>
         </select>
       </div>
+          <button
+      @click="$emit('save')"
+      class="
+        font-bold
+        bg-darkViolet
+        text-paleViolet text-xl
+        px-5
+        py-2
+        focus:outline-none
+        rounded-full
+        mx-auto
+        mt-2
+      "
+    >
+      Save
+    </button>
     </div>
   </div>
   <div class="flex justify-center gap-x-12 mt-10">
@@ -118,13 +134,17 @@
             </button>
           </div>
           <div class="grid grid-cols-2 gap-x-5">
-          <div v-for="item in ability.scaling" :key="item" class="pb-3">
+          <div v-for="(item, index) in ability.scaling" :key="item" class="pb-3">
             <div class="uppercase font-bold pb-2">
               <div class="w-14 inline-block">Key</div>
               <input type="text" class="input w-2/3 text-sm" v-model="item.key" />
             </div>
             <div class="font-bold">
-              <div class="uppercase w-14 inline-block mb-1">Value</div>
+              <div class="uppercase inline-block mb-1">Value
+                <i v-if="index > 0" class="fas fa-caret-left ml-2 cursor-pointer hover:text-lightViolet transition duration-200" @click="shiftLeft(ability.slot, index)"></i>
+                <i v-if="index < ability.scaling.length - 1" class="fas fa-caret-right ml-2 cursor-pointer hover:text-lightViolet transition duration-200"  @click="shiftRight(ability.slot, index)"></i>
+                <i class="fas fa-times cursor-pointer ml-2 hover:text-lightViolet transition duration-200"  @click="delScale(ability.slot, index)"></i>
+              </div>
               <QuillEditor
               style="font-family: Dosis; font-size: 0.875rem"
             class="text-paleViolet font-normal bg-lightPB bg-opacity-10 rounded-lg"
@@ -178,13 +198,17 @@
             </button>
           </div>
           <div class="grid grid-cols-2 gap-x-5">
-          <div v-for="item in subAbility.scaling" :key="item" class="pb-3">
+          <div v-for="(item, scaleIndex) in subAbility.scaling" :key="item" class="pb-3">
             <div class="font-bold pb-2">
               <div class="uppercase w-14 inline-block">Key</div>
               <input type="text" class="input w-2/3 text-sm" v-model="item.key" />
             </div>
             <div class="uppercase font-bold">
-              <div class="w-14 inline-block mb-1">Value</div>
+              <div class="inline-block mb-1">Value
+                <i v-if="scaleIndex > 0" class="fas fa-caret-left ml-2 cursor-pointer hover:text-lightViolet transition duration-200" @click="shiftLeftSub(ability.slot, index, scaleIndex)"></i>
+                <i v-if="scaleIndex < ability.scaling.length - 1" class="fas fa-caret-right ml-2 cursor-pointer hover:text-lightViolet transition duration-200"  @click="shiftRightSub(ability.slot, index, scaleIndex)"></i>
+                <i class="fas fa-times cursor-pointer ml-2 hover:text-lightViolet transition duration-200"  @click="delScaleSub(ability.slot, index, scaleIndex)"></i>
+              </div>
               <QuillEditor
               style="font-family: Dosis; font-size: 0.875rem"
             class="text-paleViolet font-normal bg-lightPB bg-opacity-10 rounded-lg"
@@ -300,6 +324,56 @@ export default {
     },
     getIcon(head){
       return head == 'Secondary Bar' ? require(`../../public/icons/mana regen.png`) : require(`../../public/icons/${head.toLowerCase()}.png`);
+    },
+    shiftLeft(slot, index) {
+      for(let ability of this.baseHeroInfo.abilities){
+        if(ability.slot == slot){
+          let buffer = ability.scaling[index];
+          ability.scaling[index] = ability.scaling[index - 1];
+          ability.scaling[index - 1] = buffer;
+        }
+      }
+    },
+    shiftRight(slot, index) {
+      for(let ability of this.baseHeroInfo.abilities){
+        if(ability.slot == slot){
+          let buffer = ability.scaling[index];
+          ability.scaling[index] = ability.scaling[index + 1];
+          ability.scaling[index + 1] = buffer;
+        }
+      }
+    },
+    delScale(slot, index){
+      for(let ability of this.baseHeroInfo.abilities){
+        if(ability.slot == slot){
+          ability.scaling.splice(index, 1);
+        }
+      }
+    },
+    shiftLeftSub(slot, index, scaleIndex) {
+      for(let ability of this.baseHeroInfo.abilities){
+        if(ability.slot == slot){
+          let buffer = ability.subAbility[index].scaling[scaleIndex];
+          ability.subAbility[index].scaling[scaleIndex] = ability.subAbility[index].scaling[scaleIndex - 1];
+          ability.subAbility[index].scaling[scaleIndex - 1] = buffer;
+        }
+      }
+    },
+    shiftRightSub(slot, index, scaleIndex) {
+      for(let ability of this.baseHeroInfo.abilities){
+        if(ability.slot == slot){
+          let buffer = ability.subAbility[index].scaling[scaleIndex];
+          ability.subAbility[index].scaling[scaleIndex] = ability.subAbility[index].scaling[scaleIndex + 1];
+          ability.subAbility[index].scaling[scaleIndex + 1] = buffer;
+        }
+      }
+    },
+    delScaleSub(slot, index, scaleIndex){
+      for(let ability of this.baseHeroInfo.abilities){
+        if(ability.slot == slot){
+          ability.subAbility[index].scaling.splice(scaleIndex, 1);
+        }
+      }
     }
   },
   created() {

@@ -3,27 +3,9 @@
     v-if="loaded"
     :new-hero-info="currentHero"
     :src="src"
-    :lyrics="lyrics"
     @reload-cover="reloadCover"
-    @forward-value="updateValue"
+    @save="edit"
   />
-  <div v-if="loaded" class="w-full flex mt-4">
-    <button
-      @click="edit"
-      class="
-        font-bold
-        bg-darkViolet
-        text-paleViolet text-xl
-        px-5
-        py-3
-        focus:outline-none
-        rounded-full
-        mx-auto
-      "
-    >
-      Save
-    </button>
-  </div>
 </template>
 
 <script>

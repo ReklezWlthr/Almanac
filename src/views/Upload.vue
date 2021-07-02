@@ -3,24 +3,8 @@
     :new-hero-info="newHero"
     :src="src"
     @reload-cover="reloadCover"
+    @save="upload"
   />
-  <div class="w-full flex mt-4">
-    <button
-      @click="upload"
-      class="
-        font-bold
-        bg-darkViolet
-        text-paleViolet text-xl
-        px-5
-        py-3
-        focus:outline-none
-        rounded-full
-        mx-auto
-      "
-    >
-      Upload
-    </button>
-  </div>
 </template>
 
 <script>
