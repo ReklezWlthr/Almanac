@@ -66,6 +66,10 @@ export default {
 </script>
 
 <style>
+html{
+  overflow: overlay;
+}
+
 #app {
   font-family: "Dosis", "Athiti", "M PLUS Rounded 1c";
 }
