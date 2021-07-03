@@ -9,7 +9,7 @@ import '@vueup/vue-quill/dist/vue-quill.bubble.css';
 
 var toolbarOptions = [
     [{ 'script': 'super' }],
-    [{ 'color': ['#ff9800', '#ffbd00', '#f44336', '#03a9f4', '#4caf50', '#ffeb3b', '#e930e9', '#1d87da', '#ff855f', '#687fff', '#e5662b', '#ff5119', '#F3E5AB', '#BE98D4'] }],
+    [{ 'color': ['#ff9800', '#ffbd00', '#f44336', '#03a9f4', '#4caf50', '#ffeb3b', '#e930e9', '#1d87da', '#ff855f', '#687fff', '#e5662b', '#ff5119', '#F3E5AB', '#BE98D4', '#7fd3f8', '#A19BDA'] }],
     ['clean']
   ];
 

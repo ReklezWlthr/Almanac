@@ -28,12 +28,20 @@
   <div class="w-full flex justify-center gap-x-16 mt-5">
     <div class="w-1/6"></div>
     <div v-if="loaded">
-      <div class="text-paleViolet text-2xl font-bold mb-5">Abilities</div>
-      <div class="relative whitespace-pre-wrap text-paleViolet bg-darkViolet p-5 rounded-xl w-ability overflow-auto mb-5" v-for="ability in currentHero.abilities" :key="ability.name">
+      <div class="text-paleViolet text-2xl font-bold mb-5">Abilities
+        <button
+              class="ml-2 mb-2 font-bold bg-PB text-paleViolet text-base px-5 py-1 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100"
+              @click="abilDis = ability.slot"
+              v-for="ability in currentHero.abilities"
+              :key="ability.name"
+            >{{ ability.slot }}</button>
+      </div>
+      <div v-for="ability in currentHero.abilities" :key="ability.name">
+        <div v-if="ability.slot == abilDis" class="relative whitespace-pre-wrap text-paleViolet bg-darkViolet p-5 rounded-xl w-ability overflow-auto mb-5" >
         <span class="absolute z-10 text-8xl font-black opacity-20 italic right-4 -top-3">{{ ability.slot }}</span>
         <div class="flex pb-2">
           <div class="font-bold text-2xl pr-6 whitespace-nowrap">{{ ability.name }}</div>
-          <div class="flex flex-wrap"><span v-for="(desc, head) in ability.header" :key="head" class="uppercase text-sm whitespace-nowrap"><span class="px-2" v-if="decodeURIComponent(desc).slice(3, -4) !== '<BR>' && desc"><span class="font-bold">{{ head }}</span>: <span v-html="decodeURIComponent(desc).slice(3, -4)"></span></span></span></div>
+          <div class="flex flex-wrap"><span v-for="(desc, head) in ability.header" :key="head" class="uppercase text-sm whitespace-nowrap"><span class="px-2" v-if="decodeURIComponent(desc).slice(3, -4) !== '<br>' && desc"><span class="font-bold">{{ head }}</span>: <span v-html="decodeURIComponent(desc).slice(3, -4)"></span></span></span></div>
         </div>
         <div class="py-2 border-t-2" v-html="decodeURIComponent(ability.desc)"></div>
         <div class="py-2 border-t-2 flex flex-wrap text-sm gap-y-3" v-if="ability.slot != 'P' && ability.scaling.length">
@@ -46,7 +54,7 @@
         <div v-for="subAbility in ability.subAbility" :key="subAbility">
         <div class="flex pb-2 pt-5">
           <div class="font-bold text-2xl pr-6 whitespace-nowrap">{{ subAbility.name }}</div>
-          <div class="flex flex-wrap"><span v-for="(desc, head) in subAbility.header" :key="head" class="uppercase text-sm whitespace-nowrap"><span class="px-2" v-if="decodeURIComponent(desc).slice(3, -4) !== '<BR>' && desc"><span class="font-bold">{{ head }}</span>: <span v-html="decodeURIComponent(desc).slice(3, -4)"></span></span></span></div>
+          <div class="flex flex-wrap"><span v-for="(desc, head) in subAbility.header" :key="head" class="uppercase text-sm whitespace-nowrap"><span class="px-2" v-if="decodeURIComponent(desc).slice(3, -4) !== '<br>' && desc"><span class="font-bold">{{ head }}</span>: <span v-html="decodeURIComponent(desc).slice(3, -4)"></span></span></span></div>
         </div>
         <div class="py-2 border-t-2" v-html="decodeURIComponent(subAbility.desc)"></div>
         <div class="pt-2 border-t-2 flex flex-wrap text-sm gap-y-3">
@@ -57,10 +65,11 @@
         </div>
         </div>
         </div>
+        </div>
       </div>
     </div>
     <div v-if="loaded" class="w-stat">
-      <div class="text-paleViolet text-2xl font-bold mb-5">Base Statistics
+      <div class="text-paleViolet text-2xl font-bold mb-3">Base Statistics
         <button
               v-if="view"
               class="ml-2 mb-2 font-bold bg-PB text-paleViolet text-base px-3 py-1 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100"
@@ -86,7 +95,7 @@
         </div>
         </div>
       </div>
-      <div class="text-paleViolet text-2xl font-bold my-5"><img :src="getIcon('Attack Speed')" class="inline w-5 h-5 mr-3 -mt-1"/>Attack Speed</div>
+      <div class="text-paleViolet text-2xl font-bold my-3"><img :src="getIcon('Attack Speed')" class="inline w-5 h-5 mr-3 -mt-1"/>Attack Speed</div>
       <div
         class="flex flex-wrap gap-y-1 h-26 overflow-auto bg-darkViolet rounded-xl py-3"
       >
@@ -94,12 +103,12 @@
           <div class="font-bold">{{ stat.name }}</div>: {{ stat.name == 'Bonus Attack Speed' ? (view ? '0% - ' + (Math.round((parseFloat(stat.base) * 17) * 100) / 100) + '%' : stat.base + '%' ) : stat.base }}
         </div>
       </div>
-      <div class="text-paleViolet text-2xl font-bold my-5">Ratings</div>
+      <div class="text-paleViolet text-2xl font-bold my-3">Ratings</div>
       <div
         class="flex flex-wrap gap-y-1 h-26 overflow-auto bg-darkViolet rounded-xl py-3"
       >
-        <div v-for="stat in currentHero.ratings" :key="stat" class="text-paleViolet w-full font-bold text-sm uppercase px-4 py-2">
-          <div class="inline-block w-1/6 ml-2">{{ stat.name }}</div><div class="bg-lightViolet w-4/6 inline-block rounded mx-3"><div class="bg-PB rounded text-right pr-2" :class="`w-${stat.base}/3`">{{ stat.base }}</div></div>
+        <div v-for="stat in currentHero.ratings" :key="stat" class="text-paleViolet w-1/2 font-bold text-sm uppercase px-4 py-2">
+          <div class="inline-block w-1/5 ml-2 mr-8">{{ stat.name }}</div><div class="bg-lightViolet w-2/5 inline-block rounded mx-3"><div class="bg-PB rounded text-right pr-2" :class="`w-${stat.base}/3`">{{ stat.base }}</div></div>
         </div>
       </div>
     </div>
@@ -122,6 +131,7 @@ export default {
       heroes: [],
       loaded: false,
       view: true,
+      abilDis: 'P'
     };
   },
   methods: {
@@ -164,7 +174,7 @@ export default {
     },
     getIcon(head){
       return head == 'Secondary Bar' ? require(`../../public/icons/mana regen.png`) : require(`../../public/icons/${head.toLowerCase()}.png`);
-    }
+    },
   },
   async created() {
     this.heroes = await this.fetchHeroes();
