@@ -54,21 +54,23 @@ export default {
         }
       }
       if(newHeroBuffer.resource == 'Mana'){
-        for(let stat in newHeroBuffer.stats){
+        for(let stat of newHeroBuffer.stats){
           if(stat.name == 'Stamina' || stat.name == 'Stamina Regen' || stat.name == 'Secondary Bar'){
             stat.base = "";
             stat.growth = "";
           }
         }
-      } else if(newHeroBuffer.resource == 'Stamina'){
-        for(let stat in newHeroBuffer.stats){
+      }
+      if(newHeroBuffer.resource == 'Stamina'){
+        for(let stat of newHeroBuffer.stats){
           if(stat.name == 'Mana' || stat.name == 'Mana Regen' || stat.name == 'Secondary Bar'){
             stat.base = "";
             stat.growth = "";
           }
         }
-      } else if(newHeroBuffer.resource == 'Secondary Resource'){
-        for(let stat in newHeroBuffer.stats){
+      }
+      if(newHeroBuffer.resource == 'N/A'){
+        for(let stat of newHeroBuffer.stats){
           if(stat.name == 'Stamina Regen' || stat.name == 'Mana Regen' || stat.name == 'Stamina'){
             stat.base = "";
             stat.growth = "";

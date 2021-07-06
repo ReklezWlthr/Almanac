@@ -53,7 +53,7 @@
         <span class="font-bold mr-2">Range Type:</span>
         <select v-model="baseHeroInfo.attackType" class="input">
           <option class="text-darkViolet" value="Melee">Melee</option>
-          <option class="text-darkViolet" value="Range">Range</option>
+          <option class="text-darkViolet" value="Ranged">Ranged</option>
         </select>
       </div>
           <button
@@ -77,12 +77,20 @@
   <div class="flex justify-center gap-x-12 mt-10">
     <div class="w-1/6"></div>
     <div>
-      <div class="text-paleViolet text-2xl font-bold mb-5">Abilities</div>
+      <div class="text-paleViolet text-2xl font-bold mb-5">Abilities
+        <button
+              class="ml-2 mb-2 font-bold text-base px-5 py-1 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100"
+              :class="ability.slot != abilDis ? 'bg-PB text-paleViolet' : 'bg-lightPB text-darkPB'"
+              @click="abilDis = ability.slot"
+              v-for="ability in baseHeroInfo.abilities"
+              :key="ability.name"
+            >{{ ability.slot }}</button>
+      </div>
       <div
-        class="relative text-paleViolet bg-darkViolet p-5 rounded-xl w-ability overflow-visible mb-5"
         v-for="ability in baseHeroInfo.abilities"
         :key="ability"
       >
+      <div v-if="ability.slot == abilDis" class="relative whitespace-pre-wrap text-paleViolet bg-darkViolet p-5 rounded-xl w-ability overflow-visible mb-5">
         <span
           class="absolute z-10 text-8xl font-black opacity-20 italic right-4 -top-3"
           >{{ ability.slot }}</span
@@ -137,7 +145,7 @@
           <div v-for="(item, index) in ability.scaling" :key="item" class="pb-3">
             <div class="uppercase font-bold pb-2">
               <div class="w-14 inline-block">Key</div>
-              <input type="text" class="input w-2/3 text-sm" v-model="item.key" />
+              <input type="text" class="input w-2/3 text-sm uppercase" v-model="item.key" />
             </div>
             <div class="font-bold">
               <div class="uppercase inline-block mb-1">Value
@@ -201,9 +209,9 @@
           <div v-for="(item, scaleIndex) in subAbility.scaling" :key="item" class="pb-3">
             <div class="font-bold pb-2">
               <div class="uppercase w-14 inline-block">Key</div>
-              <input type="text" class="input w-2/3 text-sm" v-model="item.key" />
+              <input type="text" class="input w-2/3 text-sm uppercase" v-model="item.key" />
             </div>
-            <div class="uppercase font-bold">
+            <div class="font-bold">
               <div class="inline-block mb-1">Value
                 <i v-if="scaleIndex > 0" class="fas fa-caret-left ml-2 cursor-pointer hover:text-lightViolet transition duration-200" @click="shiftLeftSub(ability.slot, index, scaleIndex)"></i>
                 <i v-if="scaleIndex < ability.scaling.length - 1" class="fas fa-caret-right ml-2 cursor-pointer hover:text-lightViolet transition duration-200"  @click="shiftRightSub(ability.slot, index, scaleIndex)"></i>
@@ -219,6 +227,7 @@
             </div>
           </div>
           </div>
+        </div>
         </div>
         </div>
         </div>
@@ -274,6 +283,7 @@ export default {
   data() {
     return {
       baseHeroInfo: this.newHeroInfo,
+      abilDis: 'P'
     };
   },
   methods: {

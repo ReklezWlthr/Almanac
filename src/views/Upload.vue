@@ -265,7 +265,7 @@ export default {
         }
         if(ability.slot != 'P'){
         for(let subAbility of ability.subAbility){
-        subAbility.desc = encodeURIComponent(ability.subAbility.desc);
+        subAbility.desc = encodeURIComponent(subAbility.desc);
         for (let head in subAbility.header) {
           subAbility.header[head] = encodeURIComponent(subAbility.header[head]);
         }
@@ -279,24 +279,24 @@ export default {
         }
       }
       if(newHeroBuffer.resource == 'Mana'){
-        for(let stat in newHeroBuffer.stats){
+        for(let stat of newHeroBuffer.stats){
           if(stat.name == 'Stamina' || stat.name == 'Stamina Regen' || stat.name == 'Secondary Bar'){
-            stat.base = null;
-            stat.growth = null;
+            stat.base = "";
+            stat.growth = "";
           }
         }
       } else if(newHeroBuffer.resource == 'Stamina'){
-        for(let stat in newHeroBuffer.stats){
+        for(let stat of newHeroBuffer.stats){
           if(stat.name == 'Mana' || stat.name == 'Mana Regen' || stat.name == 'Secondary Bar'){
-            stat.base = null;
-            stat.growth = null;
+            stat.base = "";
+            stat.growth = "";
           }
         }
-      } else if(newHeroBuffer.resource == 'Secondary Resource'){
-        for(let stat in newHeroBuffer.stats){
+      } else if(newHeroBuffer.resource == 'N/A'){
+        for(let stat of newHeroBuffer.stats){
           if(stat.name == 'Stamina Regen' || stat.name == 'Mana Regen' || stat.name == 'Stamina'){
-            stat.base = null;
-            stat.growth = null;
+            stat.base = "";
+            stat.growth = "";
           }
         }
       }

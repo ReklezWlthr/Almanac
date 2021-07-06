@@ -30,7 +30,8 @@
     <div v-if="loaded">
       <div class="text-paleViolet text-2xl font-bold mb-5">Abilities
         <button
-              class="ml-2 mb-2 font-bold bg-PB text-paleViolet text-base px-5 py-1 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100"
+              class="ml-2 mb-2 font-bold text-base px-5 py-1 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100"
+              :class="ability.slot != abilDis ? 'bg-PB text-paleViolet' : 'bg-lightPB text-darkPB'"
               @click="abilDis = ability.slot"
               v-for="ability in currentHero.abilities"
               :key="ability.name"
@@ -41,7 +42,7 @@
         <span class="absolute z-10 text-8xl font-black opacity-20 italic right-4 -top-3">{{ ability.slot }}</span>
         <div class="flex pb-2">
           <div class="font-bold text-2xl pr-6 whitespace-nowrap">{{ ability.name }}</div>
-          <div class="flex flex-wrap"><span v-for="(desc, head) in ability.header" :key="head" class="uppercase text-sm whitespace-nowrap"><span class="px-2" v-if="decodeURIComponent(desc).slice(3, -4) !== '<br>' && desc"><span class="font-bold">{{ head }}</span>: <span v-html="decodeURIComponent(desc).slice(3, -4)"></span></span></span></div>
+          <div class="flex flex-wrap"><span v-for="(desc, head) in ability.header" :key="head" class="uppercase text-sm"><span class="px-2" v-if="decodeURIComponent(desc).slice(3, -4).toLowerCase() !== '<br>' && desc"><span class="font-bold">{{ head }}</span>: <span v-html="decodeURIComponent(desc).slice(3, -4)"></span></span></span></div>
         </div>
         <div class="py-2 border-t-2" v-html="decodeURIComponent(ability.desc)"></div>
         <div class="py-2 border-t-2 flex flex-wrap text-sm gap-y-3" v-if="ability.slot != 'P' && ability.scaling.length">
@@ -54,10 +55,10 @@
         <div v-for="subAbility in ability.subAbility" :key="subAbility">
         <div class="flex pb-2 pt-5">
           <div class="font-bold text-2xl pr-6 whitespace-nowrap">{{ subAbility.name }}</div>
-          <div class="flex flex-wrap"><span v-for="(desc, head) in subAbility.header" :key="head" class="uppercase text-sm whitespace-nowrap"><span class="px-2" v-if="decodeURIComponent(desc).slice(3, -4) !== '<br>' && desc"><span class="font-bold">{{ head }}</span>: <span v-html="decodeURIComponent(desc).slice(3, -4)"></span></span></span></div>
+          <div class="flex flex-wrap"><span v-for="(desc, head) in subAbility.header" :key="head" class="uppercase text-sm whitespace-nowrap"><span class="px-2" v-if="decodeURIComponent(desc).slice(3, -4).toLowerCase() !== '<br>' && desc"><span class="font-bold">{{ head }}</span>: <span v-html="decodeURIComponent(desc).slice(3, -4)"></span></span></span></div>
         </div>
         <div class="py-2 border-t-2" v-html="decodeURIComponent(subAbility.desc)"></div>
-        <div class="pt-2 border-t-2 flex flex-wrap text-sm gap-y-3">
+        <div class="pt-2 border-t-2 flex flex-wrap text-sm gap-y-3" v-if="subAbility.scaling.length">
           <div v-for="item in subAbility.scaling" :key="item" class="w-1/2 px-1">
             <div class="uppercase font-bold">{{ item.key }}</div>
             <div v-html="decodeURIComponent(item.value)"></div>
