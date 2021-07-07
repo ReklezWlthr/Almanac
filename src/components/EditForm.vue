@@ -99,6 +99,7 @@
           <div class="font-bold text-2xl pr-6">
             <div class="mb-4 mr-4 inline-block">Ability Name</div>
             <input type="text" class="input" v-model="ability.name" />
+            <div>
             <button
               v-if="ability.slot != 'P'"
               class="ml-2 mb-2 font-bold bg-PB text-paleViolet text-base px-3 py-1 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100"
@@ -106,6 +107,14 @@
             >
               Add Sub Ability
             </button>
+            <button
+              v-if="ability.slot != 'P'"
+              class="ml-2 mb-2 font-bold bg-PB text-paleViolet text-base px-3 py-1 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100"
+              @click="addSummon(ability.slot)"
+            >
+              Add Summoned Unit
+            </button>
+            </div>
           </div>
           <div class="flex flex-wrap">
             <div
@@ -230,6 +239,37 @@
         </div>
         </div>
         </div>
+        <div v-for="unit in ability.summon" :key="unit">
+        <div class="flex flex-col py-2 border-t-2">
+          <div class="font-bold text-2xl pr-6">
+            <div class="mb-4 mr-4 inline-block">Unit Name</div>
+            <input type="text" class="input" v-model="unit.name" />
+          </div>
+          <div class="flex flex-wrap">
+            <div
+              v-for="(desc, head) in unit.header"
+              :key="head"
+              class="px-2 text-sm whitespace-nowrap py-1 w-1/2"
+              ><div class="font-bold inline-block w-1/2 uppercase">{{ head }}</div
+              ><QuillEditor
+              style="font-family: Dosis; font-size: 0.75rem; height: 2.65rem;"
+            class="text-paleViolet bg-lightPB bg-opacity-10 rounded-lg"
+            v-model:content="unit.header[head]"
+            contentType="html"
+            theme="bubble"
+          /></div>
+          </div>
+        </div>
+        <div class="py-2 border-t-2">
+          <QuillEditor
+          style="font-family: Dosis; font-size: 1rem"
+            class="text-paleViolet bg-lightPB bg-opacity-10 rounded-lg"
+            v-model:content="unit.desc"
+            contentType="html"
+            theme="bubble"
+          />
+        </div>
+        </div>
         </div>
       </div>
     </div>
@@ -326,6 +366,31 @@ export default {
         }
       }
     },
+    addSummon(slot){
+      for(let ability of this.baseHeroInfo.abilities){
+        if(ability.slot == slot){
+          if(!ability.summon){
+            ability.summon = [];
+          }
+          ability.summon.push({
+            "header": {
+              "health": "<span style=\"color: rgb(76, 175, 80);\">-</span>",
+              "attack damage": "<span style=\"color: rgb(255, 189, 0);\">-</span>",
+              "attack speed": "<span style=\"color: rgb(244, 67, 54);\">-</span>",
+              "critical strike chance": "<span style=\"color: rgb(229, 102, 43);\">-</span>",
+              "armor": "<span style=\"color: rgb(255, 235, 59);\">-</span>",
+              "magic resistance": "<span style=\"color: rgb(233, 48, 233);\">-</span>",
+              "movement speed": "<span style=\"color: rgb(243, 229, 171);\">-</span>",
+              "range": "-",
+              "lifespan": "-",
+            },
+            "name": "",
+            "desc": ""
+          });
+          console.log(ability)
+        }
+      }
+    },
     addSubAbilityScaling(slot, index){
       for(let ability of this.baseHeroInfo.abilities){
         if(ability.slot == slot){
@@ -412,6 +477,14 @@ export default {
       }
         }
       }
+      if(ability.summon){
+          for (let unit of ability.summon) {
+          for (let head in unit.header) {
+          unit.header[head] = decodeURIComponent(unit.header[head]);
+        }
+        unit.desc = decodeURIComponent(unit.desc);
+        }
+        }
     }
   },
 };

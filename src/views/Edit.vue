@@ -52,6 +52,14 @@ export default {
         }
         }
         }
+        if(ability.summon){
+          for (let unit of ability.summon) {
+          for (let head in unit.header) {
+          unit.header[head] = encodeURIComponent(unit.header[head]);
+        }
+        unit.desc = encodeURIComponent(unit.desc);
+        }
+        }
       }
       if(newHeroBuffer.resource == 'Mana'){
         for(let stat of newHeroBuffer.stats){

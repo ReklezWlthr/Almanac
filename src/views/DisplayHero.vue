@@ -66,6 +66,11 @@
         </div>
         </div>
         </div>
+        <div v-for="unit in ability.summon" :key="unit">
+          <div class="font-bold text-2xl pr-6 py-2 whitespace-nowrap">{{ unit.name }}</div>
+          <div class="flex flex-wrap border-t-2 py-2"><span v-for="(desc, head) in unit.header" :key="head" class="text-sm"><span class="px-2" v-if="decodeURIComponent(desc).slice(3, -4).toLowerCase() !== '<br>' && desc"><span class="font-bold uppercase">{{ head }}</span>: <span v-html="decodeURIComponent(desc).slice(3, -4)"></span></span></span></div>
+        <div class="py-2 border-t-2" v-html="decodeURIComponent(unit.desc)"></div>
+        </div>
         </div>
       </div>
     </div>
