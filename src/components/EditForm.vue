@@ -108,7 +108,6 @@
               Add Sub Ability
             </button>
             <button
-              v-if="ability.slot != 'P'"
               class="ml-2 mb-2 font-bold bg-PB text-paleViolet text-base px-3 py-1 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100"
               @click="addSummon(ability.slot)"
             >
