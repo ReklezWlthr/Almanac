@@ -34,6 +34,9 @@ module.exports = {
         lyrics: '28rem',
         showCase: '33rem',
         more: '18rem'
+      },
+      margin: {
+        ability: '22.5rem'
       }
     },
   },

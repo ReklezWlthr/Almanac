@@ -25,9 +25,7 @@
           ><button class="displayButton" @click="deleteHero">Delete</button>
       </div>
     </div>
-  <div class="w-full flex justify-center gap-x-16 mt-5">
-    <div class="w-1/6"></div>
-    <div v-if="loaded">
+    <div v-if="loaded" class="w-ability mt-5 mx-ability">
       <div class="text-paleViolet text-2xl font-bold mb-5">Abilities
         <button
               class="ml-2 mb-2 font-bold text-base px-5 py-1 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100"
@@ -42,7 +40,7 @@
         <span class="absolute z-10 text-8xl font-black opacity-20 italic right-4 -top-3">{{ ability.slot }}</span>
         <div class="flex pb-2">
           <div class="font-bold text-2xl pr-6 whitespace-nowrap">{{ ability.name }}</div>
-          <div class="flex flex-wrap"><span v-for="(desc, head) in ability.header" :key="head" class="uppercase text-sm"><div class="px-2 inline-block" v-if="decodeURIComponent(desc).slice(3, -4).toLowerCase() !== '<br>' && desc"><span class="font-bold">{{ head }}</span>: <span v-html="decodeURIComponent(desc).slice(3, -4)"></span></div></span></div>
+          <div class="flex flex-wrap relative z-20"><span v-for="(desc, head) in ability.header" :key="head" class="uppercase text-sm"><div class="px-2 inline-block" v-if="decodeURIComponent(desc).slice(3, -4).toLowerCase() !== '<br>' && desc"><span class="font-bold">{{ head }}</span>: <span v-html="decodeURIComponent(desc).slice(3, -4)"></span></div></span></div>
         </div>
         <div class="py-2 border-t-2" v-html="decodeURIComponent(ability.desc)"></div>
         <div class="py-2 border-t-2 flex flex-wrap text-sm gap-y-3" v-if="ability.slot != 'P' && ability.scaling.length">
@@ -74,7 +72,7 @@
         </div>
       </div>
     </div>
-    <div v-if="loaded" class="w-stat">
+    <div v-if="loaded" class="fixed w-stat top-20 right-16">
       <div class="text-paleViolet text-2xl font-bold mb-3">Base Statistics
         <button
               v-if="view"
@@ -118,7 +116,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
