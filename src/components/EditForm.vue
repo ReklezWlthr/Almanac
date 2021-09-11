@@ -92,7 +92,7 @@
       >
       <div v-if="ability.slot == abilDis" class="relative whitespace-pre-wrap text-paleViolet bg-darkViolet p-5 rounded-xl w-ability overflow-visible mb-5">
         <span
-          class="absolute z-10 text-8xl font-black opacity-20 italic right-4 -top-3"
+          class="absolute z-10 text-8xl font-black opacity-20 italic right-4 -top-3 noselect"
           >{{ ability.slot }}</span
         >
         <div class="flex flex-col pb-2">

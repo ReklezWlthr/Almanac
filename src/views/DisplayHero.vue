@@ -37,7 +37,7 @@
       </div>
       <div v-for="ability in currentHero.abilities" :key="ability.name">
         <div v-if="ability.slot == abilDis" class="relative whitespace-pre-wrap text-paleViolet bg-darkViolet p-5 rounded-xl w-ability overflow-auto mb-5" >
-        <span class="absolute z-10 text-8xl font-black opacity-20 italic right-4 -top-3">{{ ability.slot }}</span>
+        <span class="absolute z-10 text-8xl font-black opacity-20 italic right-4 -top-3 noselect">{{ ability.slot }}</span>
         <div class="flex pb-2">
           <div class="font-bold text-2xl pr-6 whitespace-nowrap">{{ ability.name }}</div>
           <div class="flex flex-wrap relative z-20"><span v-for="(desc, head) in ability.header" :key="head" class="uppercase text-sm"><div class="px-2 inline-block" v-if="decodeURIComponent(desc).slice(3, -4).toLowerCase() !== '<br>' && desc"><span class="font-bold">{{ head }}</span>: <span v-html="decodeURIComponent(desc).slice(3, -4)"></span></div></span></div>
@@ -75,15 +75,9 @@
     <div v-if="loaded" class="fixed w-stat top-20 right-16">
       <div class="text-paleViolet text-2xl font-bold mb-3">Base Statistics
         <button
-              v-if="view"
               class="ml-2 mb-2 font-bold bg-PB text-paleViolet text-base px-3 py-1 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100"
               @click="toggleView"
-            >Level 1 - 18</button>
-            <button
-              v-if="!view"
-              class="ml-2 mb-2 font-bold bg-PB text-paleViolet text-base px-3 py-1 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100"
-              @click="toggleView"
-            >Base + Growth</button>
+            >{{view ? 'Level 1 - 18' : 'Base + Growth'}}</button>
       </div>
       <div
         class="flex flex-wrap gap-y-1 overflow-auto bg-darkViolet rounded-xl py-3"
