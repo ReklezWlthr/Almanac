@@ -1,7 +1,8 @@
 <template>
-    <div class="fixed mt-14 ml-16">
+  <div class="grid grid-cols-5 mx-16">
+    <div class="pt-14 col-span-1 order-1 sticky top-16 mb-auto">
       <div class="w-full">
-        <img class="rounded-3xl w-56 h-56 mb-7 object-cover object-center" :src="heroId" />
+        <img class="rounded-3xl w-3/4 mb-7 object-cover object-center" :src="heroId" />
       </div>
       <ul v-if="loaded">
         <li class="text-paleViolet text-3xl font-bold uppercase">
@@ -20,12 +21,12 @@
           <span class="font-bold">Range Type:</span> {{ currentHero.attackType }}
         </li>
       </ul>
-      <div class="w-56 mx-auto flex justify-center mt-5">
+      <div class="w-3/4 flex justify-center mt-5">
           <button class="displayButton" @click="editHero">Edit</button
           ><button class="displayButton" @click="deleteHero">Delete</button>
       </div>
     </div>
-    <div v-if="loaded" class="w-ability mt-5 mx-ability">
+    <div v-if="loaded" class="w-full mt-5 col-span-2 order-2">
       <div class="text-paleViolet text-2xl font-bold mb-5">Abilities
         <button
               class="ml-2 mb-2 font-bold text-base px-5 py-1 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100"
@@ -36,7 +37,7 @@
             >{{ ability.slot }}</button>
       </div>
       <div v-for="ability in currentHero.abilities" :key="ability.name">
-        <div v-if="ability.slot == abilDis" class="relative whitespace-pre-wrap text-paleViolet bg-darkViolet p-5 rounded-xl w-ability overflow-auto mb-5" >
+        <div v-if="ability.slot == abilDis" class="relative whitespace-pre-wrap text-paleViolet bg-darkViolet p-5 rounded-xl w-full overflow-auto mb-5" >
         <span class="absolute z-10 text-8xl font-black opacity-20 italic right-4 -top-3 noselect">{{ ability.slot }}</span>
         <div class="flex pb-2">
           <div class="font-bold text-2xl pr-6 whitespace-nowrap">{{ ability.name }}</div>
@@ -72,7 +73,7 @@
         </div>
       </div>
     </div>
-    <div v-if="loaded" class="fixed w-stat top-20 right-16">
+    <div v-if="loaded" class="w-full pt-5 pl-11 col-span-2 order-3 sticky top-16 mb-auto">
       <div class="text-paleViolet text-2xl font-bold mb-3">Base Statistics
         <button
               class="ml-2 mb-2 font-bold bg-PB text-paleViolet text-base px-3 py-1 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100"
@@ -110,6 +111,7 @@
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>

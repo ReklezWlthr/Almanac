@@ -1,10 +1,10 @@
 <template>
-  <div class="fixed mt-5 ml-16">
-    <div class="w-full">
-      <div class="mt-10">
+  <div class="grid grid-cols-5 mx-16">
+    <div class="pt-14 col-span-1 order-1 sticky top-16 mb-auto">
+      <div class="w-full">
         <img
           :src="src"
-          class="rounded-3xl w-56 h-56 object-cover object-center"
+          class="rounded-3xl w-3/4 object-cover object-center"
         />
         <div class="ml-48 -mt-8 relative">
           <div @click="reloadCover" id="spin" class="h-14 w-14 rounded-full flex flex-wrap justify-center content-center border-darkViolet text-paleViolet cursor-pointer" style="border-width: 1.8rem"
@@ -12,7 +12,6 @@
             <i class="fas fa-sync-alt text-2xl"></i>
           </div>
         </div>
-      </div>
     </div>
     <div class="flex flex-col gap-y-3 mt-2">
       <div class="text-paleViolet text-xl">
@@ -56,27 +55,16 @@
           <option class="text-darkViolet" value="Ranged">Ranged</option>
         </select>
       </div>
-          <button
+      <div class="w-3/4 flex justify-center">
+        <button
       @click="$emit('save')"
-      class="
-        font-bold
-        bg-darkViolet
-        text-paleViolet text-xl
-        px-5
-        py-2
-        focus:outline-none
-        rounded-full
-        mx-auto
-        mt-2
-      "
-    >
+      class="font-bold bg-darkViolet text-paleViolet text-xl px-5 py-2 focus:outline-none rounded-full mx-auto mt-2">
       Save
     </button>
     </div>
-  </div>
-  <div class="flex justify-center gap-x-12 mt-10">
-    <div class="w-1/6"></div>
-    <div>
+    </div>
+    </div>
+    <div class="w-full mt-5 col-span-2 order-2">
       <div class="text-paleViolet text-2xl font-bold mb-5">Abilities
         <button
               class="ml-2 mb-2 font-bold text-base px-5 py-1 focus:outline-none rounded-full mx-auto hover:bg-lightPB hover:text-darkPB transition duration-100"
@@ -90,7 +78,7 @@
         v-for="ability in baseHeroInfo.abilities"
         :key="ability"
       >
-      <div v-if="ability.slot == abilDis" class="relative whitespace-pre-wrap text-paleViolet bg-darkViolet p-5 rounded-xl w-ability overflow-visible mb-5">
+      <div v-if="ability.slot == abilDis" class="relative whitespace-pre-wrap text-paleViolet bg-darkViolet p-5 rounded-xl w-full overflow-visible mb-5">
         <span
           class="absolute z-10 text-8xl font-black opacity-20 italic right-4 -top-3 noselect"
           >{{ ability.slot }}</span
@@ -272,7 +260,7 @@
         </div>
       </div>
     </div>
-    <div class="w-stat">
+    <div class="w-full mt-5 pl-11 col-span-2 order-3">
       <div class="text-paleViolet text-2xl font-bold mb-5">Base Statistics</div>
       <div
         class="flex flex-wrap gap-y-1 overflow-auto bg-darkViolet rounded-xl py-3"
